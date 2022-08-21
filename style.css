@@ -189,6 +189,11 @@ a:focus .card .overlay {
     max-width: 40%;
     max-height: 100%;
 }
+.corner {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
 .skip-nav {
     position: absolute;
     transform: translateY(-200%);
