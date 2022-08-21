@@ -183,19 +183,19 @@ a:focus .card .overlay {
 }
    */
 .hangman {
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     max-width: 40%;
     max-height: 100%;
 }
 .corner {
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
 }
 .skip-nav {
-    position: absolute;
+    position: fixed;
     transform: translateY(-200%);
     background-color: rgb(187, 0, 0);
 }
