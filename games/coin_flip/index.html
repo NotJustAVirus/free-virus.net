@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- what are you looking at -->
+<html>
+<head>
+    <title>Flip a coin</title>
+    <link rel="icon" href="coin.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="flipcoin()">
+    <ul>
+        <li><a class="menu" href="/">Home</a></li>
+        <li><a class="menu" href="/games">Games</a></li>
+        <li><a class="menu" href="/feedback">Feedback</a></li>
+        <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('flip').focus()">Skip To Flip</a></li>
+    </ul>
+    <div class="main">
+        <div class="coin-box">
+            <div class="coin">
+                <img src="tails.png" alt="tails" class="coin-front">
+                <img src="head.png" alt="head" class="coin-back">
+            </div>
+        </div>
+        <div id="coin"></div>
+        <button id="flip" type="button" onclick="flipcoin()">Flip the coin again!</button>
+        <script>
+        function flipcoin() {
+            const coin = document.getElementById("coin");
+            coin.classList.remove("head-ani");
+            coin.classList.remove("tail-ani");
+            var x = Math.random() * 2;
+            if (x > 1) {
+                coin.classList.add("head-ani");
+            } else {
+                coin.classList.add("tail-ani");
+            }
+        }
+        </script>
+    </div>
+</body>
+</html>

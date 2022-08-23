@@ -1,0 +1,35 @@
+.normal
+{
+    color:white;
+    font-family:Consolas;
+    font-size: 100%;
+}
+.marked
+{
+    color:#ec0006;
+    font-family:Consolas;
+    font-size: 100%;
+}
+.grey
+{
+    color:#696969;
+    font-family:Consolas;
+    font-size: 100%;
+}
+.good
+{
+    color:#00ff44;
+    font-family:Consolas;
+    font-size: 100%;
+}
+span {
+    font-family:Consolas;
+    color:#FFFFFF;
+}
+.hangman {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    max-width: 40%;
+    max-height: 100%;
+}

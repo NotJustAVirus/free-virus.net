@@ -5,6 +5,7 @@
     <title>Hangman</title>
     <link rel="icon" href="hangman.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="hangstyle.css">
 </head>
 <body>
     <ul>
@@ -90,21 +91,21 @@
         document.getElementById("myForm").submit();
         }
         </script>
-    </div>
-    <div>
-        <p>
-            <pre><?php include_once "keyboard.php"; ?></pre>
-        </p>
-    </div>
-    <div><img src="man/<?php
-    $out = 0;
-    foreach ($guesses as $val) {
-        if ($val == 1) {
-            $out++;
+        <div>
+            <p>
+                <pre><?php include_once "keyboard.php"; ?></pre>
+            </p>
+        </div>
+        <div class="hangman"><img src="man/<?php
+        $out = 0;
+        foreach ($guesses as $val) {
+            if ($val == 1) {
+                $out++;
+            }
         }
-    }
-    if ($out > 6) $out = 6;
-    echo $out;
-    ?>hang.png" alt="hangman" class="hangman"></div>
+        if ($out > 6) $out = 6;
+        echo $out;
+        ?>hang.png" alt="hangman"></div>
+    </div>
 </body>
 </html>
