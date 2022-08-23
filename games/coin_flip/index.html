@@ -16,24 +16,26 @@
     </ul>
     <div class="main">
         <div class="coin-box">
-            <div class="coin">
-                <img src="tails.png" alt="tails" class="coin-front">
-                <img src="head.png" alt="head" class="coin-back">
+            <div id="coin" class="coin">
+                <div class="coin-front">
+                    <img src="tails.png" alt="tails" style="width:300px;height:300px">
+                </div>
+                <div class="coin-back">
+                    <img src="head.png" alt="head" style="width:300px;height:300px">
+                </div>
             </div>
         </div>
-        <div id="coin"></div>
         <button id="flip" type="button" onclick="flipcoin()">Flip the coin again!</button>
         <script>
         function flipcoin() {
             const coin = document.getElementById("coin");
-            coin.classList.remove("head-ani");
-            coin.classList.remove("tail-ani");
             var x = Math.random() * 2;
             if (x > 1) {
-                coin.classList.add("head-ani");
+                coin.className = "head-ani";
             } else {
-                coin.classList.add("tail-ani");
+                coin.className = "tail-ani"
             }
+            console.log("a");
         }
         </script>
     </div>
