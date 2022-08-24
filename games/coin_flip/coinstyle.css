@@ -1,0 +1,59 @@
+.coin {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+@keyframes tail {
+    0%   {transform: rotateX(0deg);}
+    100% {transform: rotateX(3240deg);}
+}
+@keyframes head {
+    0%   {transform: rotateX(180deg);}
+    100% {transform: rotateX(3240deg);}
+}
+.head-ani {
+    animation-name: head;
+    animation-duration: 5s;
+}
+.head .coin-back{
+    content:url("tails.png");
+}
+.head .coin-front{
+    content:url("head.png");
+}
+.tail-ani {
+    animation-name: tail;
+    animation-duration: 5s;
+}
+.tail .coin-back{
+    content:url("head.png");
+}
+.tail .coin-front{
+    content:url("tails.png");
+}
+.coin-box {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 300px;
+    perspective: 1000px;
+}
+.coin-front, .coin-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.coin-back {
+    transform: rotateZ(180deg) rotateY(180deg);
+}
+.align {
+    margin-top: 50px;
+    text-align: center;
+}
+button {
+    background-color: black;
+    border-color: white;
+}

@@ -1357,6 +1357,7 @@ question
 quickly
 tequila
 quietly
+holocaust
 racial
 radical
 rapidly
@@ -1960,7 +1961,6 @@ fuckwhit
 fuckwit
 fudge-packer
 fudgepacker
-fukker
 fukkin
 fukwhit
 fukwit

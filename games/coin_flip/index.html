@@ -5,7 +5,7 @@
     <title>Flip a coin</title>
     <link rel="icon" href="coin.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/style.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="coinstyle.css">
 </head>
 <body onload="flipcoin()">
     <ul>
@@ -17,25 +17,32 @@
     <div class="main">
         <div class="coin-box">
             <div id="coin" class="coin">
-                <div class="coin-front">
-                    <img src="tails.png" alt="tails" style="width:300px;height:300px">
-                </div>
-                <div class="coin-back">
-                    <img src="head.png" alt="head" style="width:300px;height:300px">
-                </div>
+                <img src="tails.png" alt="tails" class="coin-front">
+                <img src="head.png" alt="head" class="coin-back">
             </div>
         </div>
-        <button id="flip" type="button" onclick="flipcoin()">Flip the coin again!</button>
+        <div class="align">
+            <button id="flip" type="button" onclick="flipcoin()">Flip the coin again!</button>
+        </div>
         <script>
         function flipcoin() {
             const coin = document.getElementById("coin");
+            coin.classList.remove("head");
+            coin.classList.remove("tail");
             var x = Math.random() * 2;
             if (x > 1) {
-                coin.className = "head-ani";
+                coin.classList.add("head-ani");
+                coin.classList.add("head");
+                setTimeout(function(){
+                    coin.classList.remove("head-ani");
+                }, 5000);
             } else {
-                coin.className = "tail-ani"
+                coin.classList.add("tail-ani");
+                coin.classList.add("tail");
+                setTimeout(function(){
+                    coin.classList.remove("tail-ani");
+                }, 5000);
             }
-            console.log("a");
         }
         </script>
     </div>
