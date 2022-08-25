@@ -96,3 +96,7 @@ li a:focus:not(.active) {
 .skip-nav:focus {
     transform: translateY(0);
 }
+button {
+    background-color: black;
+    border-color: white;
+}
