@@ -14,7 +14,7 @@
 }
 .head-ani {
     animation-name: head;
-    animation-duration: 5s;
+    animation-duration: 4s;
 }
 .head .coin-back{
     content:url("tails.png");
@@ -24,7 +24,7 @@
 }
 .tail-ani {
     animation-name: tail;
-    animation-duration: 5s;
+    animation-duration: 4s;
 }
 .tail .coin-back{
     content:url("head.png");
