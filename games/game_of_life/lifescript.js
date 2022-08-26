@@ -1,18 +1,55 @@
 const canvas = document.getElementById("canvas");
+const slider = document.getElementById("speed");
+const playbutton = document.getElementById("play");
 const size = 20;
-
+let speed = 200;
 var game = new gameoflife();
-game.newrandom(70,30);
+var playing = false;
 // for (let i = 0; i < 25; i++) {
-//     game.nextgen();
-// }
-
-// game.board = [[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0], [0,0,1,1,1,1,0,0,0,0], [0,1,0,0,0,1,0,0,0,0], [0,0,0,0,0,1,0,0,0,0], [0,0,0,0,1,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0]];
-setInterval(() => {
+    //     game.nextgen();
+    // }
+    
+    // game.board = [[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0], [0,0,1,1,1,1,0,0,0,0], [0,1,0,0,0,1,0,0,0,0], [0,0,0,0,0,1,0,0,0,0], [0,0,0,0,1,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0]];
+canvas.addEventListener('click', function(event) {
+    var xVal = event.pageX - this.offsetLeft,
+    yVal = event.pageY - this.offsetTop;
+    console.log(xVal, yVal);
+    x = Math.floor(xVal/20);
+    y = Math.floor(yVal/20);
+    game.paint(x,y);
     game.draw();
-    game.nextgen();
-}, 200);
-
+}, false);
+game.newrandom(70,30);
+let id = null;
+clearInterval(id);
+play();
+function play() {
+    if (playing) {
+        clearInterval(id);
+        playbutton.textContent = "Play";
+        playing = false;
+    } else {
+        id = setInterval(() => {
+            game.nextgen();
+            game.draw();
+        }, speed);
+        playbutton.textContent = "Pause";
+        playing = true;
+    }
+}
+function randomcanvas() {
+    game.newrandom(70,30);
+    game.draw();
+}
+function cleancanvas() {
+    game.newclean(70,30);
+    game.draw();
+}
+function changespeed() {
+    speed = Math.pow(45-slider.value,2);
+    play();
+    play();
+}
 function gameoflife() {
     this.newrandom = function (width,height) {
         this.board = new Array(height);
@@ -86,6 +123,13 @@ function gameoflife() {
                     context.fillRect(x*size, y*size,size,size);
                 }
             }
+        }
+    }
+    this.paint = function (x,y) {
+        if (this.board[y][x]) {
+            this.board[y][x] = 0;
+        } else {
+            this.board[y][x] = 1;
         }
     }
 }

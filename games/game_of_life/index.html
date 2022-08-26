@@ -18,10 +18,11 @@
     <div class="canvas">
         <canvas id="canvas" width="1400" height="600"></canvas>
     </div>
-    <button id="clear" onclick="game.newclean(70,30)">Clear canvas</button>
-    <button id="random" onclick="game.newrandom(70,30);">New random canvas</button>
-    <button id="play">Pause</button>
-    <input type="range" name="Speed" id="speed">
+    <button id="clear" onclick="cleancanvas();">Clear canvas</button>
+    <button id="random" onclick="randomcanvas();">New random canvas</button>
+    <button id="play" onclick="play();">Pause</button>
+    <input type="range" name="speed" id="speed" min="0" max="44" value="30" onchange="changespeed();">
+    <label for="speed">Speed</label>
     <script src="lifescript.js"></script>
 </body>
 </html>
