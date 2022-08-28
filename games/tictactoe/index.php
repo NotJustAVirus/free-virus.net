@@ -15,7 +15,7 @@
     <div class="main">
     <?php
     include "class.php";
-    include "mysqlforttt.php";
+    
     $board = [
         [$empty,$empty,$empty],
         [$empty,$empty,$empty],
