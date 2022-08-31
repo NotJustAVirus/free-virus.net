@@ -19,14 +19,15 @@ VALUES
 INSERT INTO tags (name, color)
 VALUES
     -- ("Javascript","eee170");
-    ("PHP","525d91");
+    -- ("PHP","525d91");
+    ("Scratch","f8aa36");
 
 -- @block
 INSERT INTO game_tags (game_id, tag_id)
 VALUES
     -- (6,1);
-    (1,2),
-    (2,2);
+    -- (1,2),
+    -- (2,2);
 
 -- @block
 SELECT * FROM games
@@ -45,11 +46,14 @@ SELECT games.title, tags.name
 FROM games INNER JOIN game_tags ON games.id = game_tags.game_id;
 
 -- @block
-SELECT tags.name
-FROM (game_tags inner join )
+SELECT tags.name, tags.color
+FROM (game_tags INNER join tags on game_tags.tag_id = tags.id)
+where game_id LiKE '2'
+
 
 -- @block
 ALTER TABLE `tags` ADD `color` VARCHAR(6) NOT NULL AFTER `name`;
 
 -- @block
-SELECT * FROM games
+SELECT * FROM game_tags
+-- where game_id LiKE '1'

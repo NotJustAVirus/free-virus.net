@@ -38,20 +38,31 @@
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                $title = $row["title"];
-                $path = $row["path"];
-                echo '<div class="column">
-                    <a href="'.$path.'">
-                        <div class="card">
-                            <img src="'.$path.'/icon.png" alt="'.$title.' icon">
-                            <div class="title">'.$title.'</div>
-                            <div class="overlay"></div>
-                        </div>
-                    </a>
-                </div>';
-            }
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                    $title = $row["title"];
+                    $path = $row["path"];
+                    $id = $row["id"];
+                    $sql = "SELECT tags.name, tags.color
+                    FROM (game_tags INNER join tags on game_tags.tag_id = tags.id)
+                    where game_id LiKE '$id'";
+                    $tags = $conn->query($sql);
+                    echo '<div class="column">
+                        <a href="'.$path.'">
+                            <div class="card">
+                                <img src="'.$path.'/icon.png" alt="'.$title.' icon">
+                                <div class="title">'.$title.'</div>
+                                <div class="overlay"></div>';
+                                while ($tag = $tags->fetch_assoc()) {
+                                    $tag_name = $tag["name"];
+                                    $tag_color = $tag["color"];
+                                    echo '<div style="color: #'.$tag_color.';">'.$tag_name.'</div>';
+                                }
+                                echo '
+                            </div>
+                        </a>
+                    </div>';
+                }
             }
 
             $conn->close;

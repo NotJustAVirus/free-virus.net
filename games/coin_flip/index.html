@@ -17,7 +17,7 @@
     <div class="main">
         <div class="coin-box">
             <div id="coin" class="coin">
-                <img src="tails.png" alt="tails" class="coin-front">
+                <img src="tail.png" alt="tails" class="coin-front">
                 <img src="head.png" alt="head" class="coin-back">
             </div>
         </div>
@@ -27,21 +27,27 @@
         <script>
         function flipcoin() {
             const coin = document.getElementById("coin");
-            coin.classList.remove("head");
-            coin.classList.remove("tail");
-            var x = Math.random() * 2;
-            if (x > 1) {
-                coin.classList.add("head-ani");
-                coin.classList.add("head");
-                setTimeout(function(){
-                    coin.classList.remove("head-ani");
-                }, 4000);
-            } else {
-                coin.classList.add("tail-ani");
-                coin.classList.add("tail");
-                setTimeout(function(){
-                    coin.classList.remove("tail-ani");
-                }, 5000);
+            if (!(coin.classList.contains("head-ani") || coin.classList.contains("tail-ani"))) {
+                coin.classList.remove("head");
+                coin.classList.remove("tail");
+                coin.classList.remove("balls");
+                var x = Math.random() * 2;
+                if (x > 1) {
+                    coin.classList.add("head-ani");
+                    coin.classList.add("head");
+                    setTimeout(function(){
+                        coin.classList.remove("head-ani");
+                    }, 4000);
+                } else {
+                    coin.classList.add("tail-ani");
+                    coin.classList.add("tail");
+                    if (Math.random() < 0.001) {
+                        coin.classList.add("balls");
+                    }
+                    setTimeout(function(){
+                        coin.classList.remove("tail-ani");
+                    }, 5000);
+                }
             }
         }
         </script>

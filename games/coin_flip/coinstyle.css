@@ -17,7 +17,7 @@
     animation-duration: 4s;
 }
 .head .coin-back{
-    content:url("tails.png");
+    content:url("tail.png");
 }
 .head .coin-front{
     content:url("head.png");
@@ -29,14 +29,17 @@
 .tail .coin-back{
     content:url("head.png");
 }
-.tail .coin-front{
+.tail:not(.balls) .coin-front{
+    content:url("tail.png");
+}
+.tail.balls .coin-front{
     content:url("tails.png");
 }
 .coin-box {
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
     perspective: 1000px;
 }
 .coin-front, .coin-back {
