@@ -20,7 +20,7 @@ INSERT INTO tags (name, color)
 VALUES
     -- ("Javascript","eee170");
     -- ("PHP","525d91");
-    ("Scratch","f8aa36");
+    -- ("Scratch","f8aa36");
 
 -- @block
 INSERT INTO game_tags (game_id, tag_id)
@@ -28,6 +28,8 @@ VALUES
     -- (6,1);
     -- (1,2),
     -- (2,2);
+    -- (3,3);
+    -- (4,3);
 
 -- @block
 SELECT * FROM games
@@ -54,6 +56,9 @@ where game_id LiKE '2'
 -- @block
 ALTER TABLE `tags` ADD `color` VARCHAR(6) NOT NULL AFTER `name`;
 
+
+-- @block 
+delete from game_tags where game_id=3;
 -- @block
 SELECT * FROM game_tags
 -- where game_id LiKE '1'
