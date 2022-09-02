@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- what are you looking at -->
+<html>
+<head>
+    <title>Slot Machine</title>
+    <link rel="icon" href="icon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="slotstyle.css">
+    <script src="slotscript.js"></script>
+    
+</head>
+<body>
+    <ul>
+        <li><a class="menu" href="/">Home</a></li>
+        <li><a class="menu" href="/games">Games</a></li>
+        <li><a class="menu" href="/feedback">Feedback</a></li>
+        <!-- <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('flip').focus()">Skip To Flip</a></li> -->
+    </ul>
+    <div class="slot">
+        <div id="wheel-1"><img src="Images/row2.png" alt="wheel"></div>
+        <div id="wheel-2"><img src="Images/row2.png" alt="wheel"></div>
+        <div id="wheel-3"><img src="Images/row2.png" alt="wheel"></div>
+        <div class="machine">
+            <img src="Images/machine.png" alt="slot machine">
+        </div>
+    </div>
+    <p><button onclick="spin()">spin</button></p>
+</body>
+</html>

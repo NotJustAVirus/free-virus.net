@@ -1,0 +1,24 @@
+.slot div img {
+    position: absolute;
+}
+.slot div {
+    position: relative;
+}
+.slot {
+    position: relative;
+}
+[id*="wheel-"] img{
+    width: 100px;
+}
+#wheel-1 {
+    margin-left: 375px;
+}
+#wheel-2 {
+    margin-left: 490px;
+}
+#wheel-3 {
+    margin-left: 600px;
+}
+p {
+    padding-top: 800px;
+}
