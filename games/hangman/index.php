@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Hangman</title>
-    <link rel="icon" href="hangman.png" type="image/x-icon">
+    <link rel="icon" href="icon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="stylesheet" type="text/css" href="hangstyle.css">
 </head>
