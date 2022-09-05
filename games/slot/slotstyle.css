@@ -9,6 +9,8 @@
 }
 [id*="wheel-"] img{
     width: 100px;
+    margin-top: 200px;
+    top: 1px;
 }
 #wheel-1 {
     margin-left: 375px;
