@@ -26,7 +26,7 @@
                 </a>
             </div> -->
             <?php
-            include $_SERVER['DOCUMENT_ROOT']."/sqlinfo.php";
+            include "../sqlinfo.php";//$_SERVER['DOCUMENT_ROOT']."/sqlinfo.php";
             
             
             $conn = new mysqli($servername,$username,$password,$databasename);

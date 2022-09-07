@@ -4,8 +4,9 @@
 -- @block
 INSERT INTO games (title, path, description)
 VALUES 
-    ("Hangman","hangman",""),
-    ("Tic Tac Toe","tictactoe","");
+    -- ("Hangman","hangman",""),
+    -- ("Tic Tac Toe","tictactoe","");
+    ("Slot Machine","slot","");
 
 -- @block
 INSERT INTO games (title, path, description)
@@ -25,7 +26,7 @@ VALUES
 -- @block
 INSERT INTO game_tags (game_id, tag_id)
 VALUES
-    -- (6,1);
+    (7,1);
     -- (1,2),
     -- (2,2);
     -- (3,3);
@@ -59,6 +60,10 @@ ALTER TABLE `tags` ADD `color` VARCHAR(6) NOT NULL AFTER `name`;
 
 -- @block 
 delete from game_tags where game_id=3;
+-- @block
+SELECT * FROM games
+-- @block
+SELECT * FROM tags
 -- @block
 SELECT * FROM game_tags
 -- where game_id LiKE '1'

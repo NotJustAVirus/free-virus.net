@@ -2,25 +2,38 @@
     position: absolute;
 }
 .slot div {
-    position: relative;
+    position: absolute;
 }
 .slot {
     position: relative;
+    margin-left: min(50% - 250px);
+    margin-top: 100px;
+    width: 500px;
 }
 [id*="wheel-"] img{
-    width: 100px;
-    margin-top: 200px;
-    top: 1px;
+    width: 100%;
+}
+[id*="wheel-"] {
+    margin-top: 100px;
+    width: 20%;
+    overflow: hidden;
+    height: 300px;
 }
 #wheel-1 {
-    margin-left: 375px;
+    margin-left: 15%;
 }
 #wheel-2 {
-    margin-left: 490px;
+    margin-left: 40%;
 }
 #wheel-3 {
-    margin-left: 600px;
+    margin-left: 65%;
 }
-p {
-    padding-top: 800px;
+.machine {
+    width: 100%;
+}
+.machine img{
+    width: 100%;
+}
+button {
+    margin-top: 100px;
 }

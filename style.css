@@ -60,13 +60,18 @@ ul {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 100;
 }
 
-li {
+li:not(.casino) {
     float: left;
 }
+li.casino {
+    float: right;
+}
 
-li a.menu {
+li .menu {
+    font-size: 16px;
     display: block;
     color: white;
     text-align: center;
@@ -74,6 +79,16 @@ li a.menu {
     text-decoration: none;
 }
 
+.casino .menu {
+    padding: 14px 0px;
+}
+.casino img {
+    display: block;
+    text-align: center;
+    width: 34px;
+    float: left;
+    padding: 5px 10px 5px 5px;
+}
 li a:hover:not(.active) {
     background-color: rgb(187, 0, 0);
 }

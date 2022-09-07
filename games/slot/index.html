@@ -14,16 +14,20 @@
         <li><a class="menu" href="/">Home</a></li>
         <li><a class="menu" href="/games">Games</a></li>
         <li><a class="menu" href="/feedback">Feedback</a></li>
-        <!-- <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('flip').focus()">Skip To Flip</a></li> -->
+        <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('spin').focus()">Skip to Spin</a></li>
+        <li class="casino"><img src="Images/coin.png" alt="coin"></li>
+        <li class="casino"><div class="menu" id="money">1000</div></li>
     </ul>
-    <div class="slot">
-        <div id="wheel-1"><img src="Images/row4.png" alt="wheel"></div>
-        <div id="wheel-2"><img src="Images/row2.png" alt="wheel"></div>
-        <div id="wheel-3"><img src="Images/row2.png" alt="wheel"></div>
-        <div class="machine">
-            <img src="Images/machine.png" alt="slot machine">
+    <div class="contain">
+        <div class="slot">
+            <div id="wheel-1"><img id="wheel.1" src="Images/row4.png" alt="wheel"></div>
+            <div id="wheel-2"><img id="wheel.2" src="Images/row4.png" alt="wheel"></div>
+            <div id="wheel-3"><img id="wheel.3" src="Images/row4.png" alt="wheel"></div>
+            <div class="machine">
+                <img src="Images/machine base.png" alt="slot machine">
+            </div>
         </div>
     </div>
-    <p><button onclick="spin()">Spin</button></p>
+    <button id="spin" onclick="spin()">Spin</button>
 </body>
 </html>
