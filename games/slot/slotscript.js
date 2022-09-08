@@ -1,5 +1,22 @@
 var spinning = false;
-var money = 1000;
+var money = getmoney();
+
+
+function getmoney() {
+    $.ajax(
+        'casino.php?type=money',
+        {
+            success: function(data) {
+                return data;
+            },
+            error: function() {
+                alert('tell the developer his code sucks');
+            }
+        }
+    );
+}
+
+
 
 function spin() {
     if (spinning) {
@@ -87,6 +104,7 @@ function spin() {
 
     }
 }
+
 function updatemoney() {
     document.getElementById("money").textContent = money;
 }
