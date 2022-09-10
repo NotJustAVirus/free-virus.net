@@ -1,5 +1,6 @@
 var spinning = false;
-var money = getmoney();
+var money;
+getmoney();
 
 
 function getmoney() {
@@ -7,7 +8,8 @@ function getmoney() {
         'casino.php?type=money',
         {
             success: function(data) {
-                return data;
+                money = data;
+                updatemoney();
             },
             error: function() {
                 alert('tell the developer his code sucks');
@@ -16,28 +18,57 @@ function getmoney() {
     );
 }
 
-
-
 function spin() {
     if (spinning) {
         return;
-    } else {
-        spinning = true;
-        money -= 100;
-        updatemoney();
     }
+    spinning = true;
+    $.ajax(
+        'casino.php?type=play_slot',
+        {
+            success: function(data) {
+                roll = data;
+                spinto(roll);
+            },
+            error: function() {
+                alert('tell the developer his code sucks');
+            }
+        }
+    );
+}
+
+function spinto(result) {
+    
+    money -= 100;
+    updatemoney();
+    
     const wheel1 = document.getElementById("wheel.1");
     const wheel2 = document.getElementById("wheel.2");
     const wheel3 = document.getElementById("wheel.3");
 
-    // test = Math.floor(Math.random()*4);
-    landon1 = Math.floor(Math.random()*4);
-    if (Math.random() < 0.5) {
-        landon2 = Math.floor(Math.random()*4);
-        landon3 = Math.floor(Math.random()*4);
+    if (result == 2) {
+        landon1 = 3;
+        landon2 = 3;
+        landon3 = 3;
+    } else if (result == 1) {
+        var land = Math.floor(Math.random()*3);
+        landon1 = land;
+        landon2 = land;
+        landon3 = land;
     } else {
-        landon2 = landon1;
-        landon3 = Math.floor(Math.random()*4);
+        landon1 = Math.floor(Math.random()*3);
+        landon3 = Math.floor(Math.random()*3);
+        if (landon1 == landon3) {
+            if (landon1 == 3) {
+                landon2 = 0;
+            } else {
+                landon2 = landon1+1;
+            }
+        } else if (Math.random() < 0.5) {
+            landon2 = landon1;
+        } else {
+            landon2 = Math.floor(Math.random()*3);
+        }
     }
 
     spinwheel(wheel1,landon1);
@@ -48,13 +79,16 @@ function spin() {
         spinwheel(wheel3,landon3);
     }, 1000);
     setTimeout(() => {
-        if (landon1 == landon2 && landon1 == landon3) {
-            console.log("you win!");
-            money += 500;
+        if (result == 2) {
+            // console.log("you win!");
+            money += 1000;
+            updatemoney();
+        } else if (result == 1) {
+            money += 250;
             updatemoney();
         }
         spinning = false;
-    }, 5700);
+    }, 6000);
     
 
     function spinwheel(wheel,landon) {
