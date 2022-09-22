@@ -38,12 +38,12 @@ if ($request == "money") {
     $win = 250;
     $cost = 100;
 
-    $roll = rand(1,30);
+    $roll = rand(1,100);
     $money -= $cost;
-    if ($roll == 30) {
+    if ($roll == 100) {
         $money += $jackpot;
         echo 2;
-    } elseif ($roll > 20) {
+    } elseif ($roll > 70) {
         $money += $win;
         echo 1;
     } else {

@@ -5,7 +5,7 @@ getmoney();
 
 function getmoney() {
     $.ajax(
-        'casino.php?type=money',
+        '/games/casino.php?type=money',
         {
             success: function(data) {
                 money = data;
@@ -24,7 +24,7 @@ function spin() {
     }
     spinning = true;
     $.ajax(
-        'casino.php?type=play_slot',
+        '/games/casino.php?type=play_slot',
         {
             success: function(data) {
                 roll = data;

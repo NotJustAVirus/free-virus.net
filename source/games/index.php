@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Games</title>
-    <!-- <link rel="icon" href="jam.png" type="image/x-icon"> -->
+    <link rel="icon" href="icon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="stylesheet" type="text/css" href="cardstyle.css">
 </head>
@@ -16,17 +16,8 @@
     </ul>
     <div class="main" id="main">
         <div class="row">
-            <!-- <div class="column">
-                <a href="hangman" id="first">
-                    <div class="card">
-                        <img src="hangman/hangman.png" alt="Hangman">
-                        <div class="title">Hangman</div>
-                        <div class="overlay"></div>
-                    </div>
-                </a>
-            </div> -->
             <?php
-            include "../sqlinfo.php";//$_SERVER['DOCUMENT_ROOT']."/sqlinfo.php";
+            include $_SERVER['DOCUMENT_ROOT']."/sqlinfo.php";
             
             
             $conn = new mysqli($servername,$username,$password,$databasename);
