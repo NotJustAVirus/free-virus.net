@@ -35,5 +35,7 @@
     width: 100%;
 }
 button {
-    margin-top: 100px;
+    margin-top: 500px;
+    width: 200px;
+    margin-left: min(50% - 100px);
 }

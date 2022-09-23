@@ -23,7 +23,11 @@ if (!isset($_COOKIE["gambler"])) {
     $sql = "INSERT INTO `casino_user` () VALUES ()";
     $conn->query($sql);
     $id = $conn->insert_id;
-    setcookie("gambler",$id);
+    setcookie(
+        "gambler",
+        $id,
+        time() + (365 * 24 * 60 * 60) // 1 year
+    );
 } else {
     $id = $_COOKIE["gambler"];
 }
@@ -43,7 +47,7 @@ if ($request == "money") {
     if ($roll == 100) {
         $money += $jackpot;
         echo 2;
-    } elseif ($roll > 70) {
+    } elseif ($roll > 64) {
         $money += $win;
         echo 1;
     } else {

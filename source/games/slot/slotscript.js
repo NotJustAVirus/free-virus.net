@@ -73,7 +73,7 @@ function spinto(result) {
 
     spinwheel(wheel1,landon1);
     setTimeout(() => {
-        spinwheel(wheel2,landon2);    
+        spinwheel(wheel2,landon2);
     }, 500);
     setTimeout(() => {
         spinwheel(wheel3,landon3);
