@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- what are you looking at -->
+<html>
+<head>
+    <title>Slot Machine</title>
+    <link rel="icon" href="icon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="slotstyle.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="slotscript.js"></script>
+    
+</head>
+<body>
+    <ul>
+        <li><a class="menu" href="/">Home</a></li>
+        <li><a class="menu" href="/games">Games</a></li>
+        <li><a class="menu" href="/feedback">Feedback</a></li>
+        <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('spin').focus()">Skip to Spin</a></li>
+        <li class="casino"><img src="/Images/coin.png" alt="coin"></li>
+        <li class="casino"><div class="menu" id="money">1000</div></li>
+    </ul>
+    <div class="contain">
+        <div class="slot">
+            <div id="wheel-1"><img id="wheel.1" src="Images/row4.png" alt="wheel"></div>
+            <div id="wheel-2"><img id="wheel.2" src="Images/row4.png" alt="wheel"></div>
+            <div id="wheel-3"><img id="wheel.3" src="Images/row4.png" alt="wheel"></div>
+            <div class="machine">
+                <img src="Images/machine base.png" alt="slot machine">
+            </div>
+        </div>
+    </div>
+    <button id="spin" onclick="spin()">Spin</button>
+</body>
+</html>

@@ -1,0 +1,94 @@
+
+.card {
+    position: relative;
+    box-shadow: 7px 7px 0px 0px rgb(255, 0, 0);
+    width: 300px;
+    border: 1px solid;
+}
+.taglist {
+    padding: 5px 0px;
+    width: 100%;
+    /* border: 1px solid; */
+}
+.card .description{
+    padding: 1px 0;
+}
+.card .text {
+    width: 50%;
+    float: left;
+}
+.card .icon {
+    width: 50%;
+    position: relative;
+    float: left;
+}
+.card .title{
+    /* float: left; */
+    /* display: inline-block; */
+    text-align: center;
+    padding: 1px 0;
+    /* background-color: rgb(25, 25, 25); */
+    /* margin-top: -4px; */
+}
+.card img{
+    /* display: inline-block; */
+    /* filter: invert(10%); */
+    /* vertical-align: top; */
+    width: 100%;
+    margin-bottom: -4px;
+}
+.top {
+    width: 100%;
+    clear: both;
+    display: table;
+}
+
+.tag {
+    /* border-radius: 0px; */
+    margin: 3px 7px;
+    padding: 0 5px 1px;
+    display: inline-block;
+    border: 1px solid;
+}
+.row {
+    clear: both;
+    display: table;
+}
+.column {
+    float: left;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 100%;
+    width: 100%;
+    opacity:0;
+    transition: .5s ease;
+    background-color: #e40000;
+}
+.icon:hover .overlay {
+    opacity: 0.2;
+}
+a:focus .icon .overlay {
+    opacity: 0.5;
+}
+
+.overlaytext {
+    text-align: center;
+    opacity: 0;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+.icon:hover .overlaytext {
+    opacity: 1;
+}
