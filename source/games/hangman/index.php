@@ -6,6 +6,7 @@
     <link rel="icon" href="icon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="stylesheet" type="text/css" href="hangstyle.css">
+    <meta charset="utf-8">
 </head>
 <body>
     <ul>

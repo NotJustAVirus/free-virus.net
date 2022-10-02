@@ -1,18 +1,54 @@
+
 .card {
     position: relative;
     box-shadow: 7px 7px 0px 0px rgb(255, 0, 0);
-    max-width: 120px;
-    /* border: none; */
+    width: 300px;
+    border: 1px solid;
+}
+.taglist {
+    padding: 5px 0px;
+    width: 100%;
+    /* border: 1px solid; */
+}
+.card .description{
+    padding: 1px 0;
+}
+.card .text {
+    width: 50%;
+    float: left;
+}
+.card .icon {
+    width: 50%;
+    position: relative;
+    float: left;
 }
 .card .title{
+    /* float: left; */
+    /* display: inline-block; */
     text-align: center;
-    padding: 12px 0;
+    padding: 1px 0;
     /* background-color: rgb(25, 25, 25); */
     /* margin-top: -4px; */
 }
 .card img{
+    /* display: inline-block; */
     /* filter: invert(10%); */
+    /* vertical-align: top; */
     width: 100%;
+    margin-bottom: -4px;
+}
+.top {
+    width: 100%;
+    clear: both;
+    display: table;
+}
+
+.tag {
+    /* border-radius: 0px; */
+    margin: 3px 7px;
+    padding: 0 5px 1px;
+    display: inline-block;
+    border: 1px solid;
 }
 .row {
     clear: both;
@@ -35,14 +71,15 @@
     transition: .5s ease;
     background-color: #e40000;
 }
-.card:hover .overlay {
-    opacity: 0.5;
+.icon:hover .overlay {
+    opacity: 0.2;
 }
-a:focus .card .overlay {
+a:focus .icon .overlay {
     opacity: 0.5;
 }
 
 .overlaytext {
+    text-align: center;
     opacity: 0;
     color: white;
     font-size: 20px;
@@ -52,6 +89,6 @@ a:focus .card .overlay {
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
 }
-.card:hover .overlaytext {
+.icon:hover .overlaytext {
     opacity: 1;
 }

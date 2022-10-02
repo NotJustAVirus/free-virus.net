@@ -4,6 +4,7 @@
     <title>Tic Tac Toe</title>
     <link rel="icon" href="icon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/style.css">
+    <meta charset="utf-8">
 </head>
 <body>
     <ul>
