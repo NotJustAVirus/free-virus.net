@@ -21,7 +21,7 @@
     <button id="clear" onclick="cleancanvas();">Clear canvas</button>
     <button id="random" onclick="randomcanvas();">New random canvas</button>
     <button id="play" onclick="play();">Pause</button>
-    <input type="range" name="speed" id="speed" min="0" max="44" value="30" onchange="changespeed();">
+    <input type="range" name="speed" id="speed" min="0" max="44" value="30" oninput="changespeed()" onchange="changespeed();">
     <label for="speed">Speed</label>
     <script src="lifescript.js"></script>
 </body>

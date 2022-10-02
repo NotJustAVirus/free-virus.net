@@ -42,7 +42,8 @@ ON game_tags.game_id = games.id;
 SELECT games.path, tags.name 
 FROM ((game_tags
 INNER join games on game_tags.game_id = games.id)
-INNER join tags on game_tags.tag_id = tags.id);
+INNER join tags on game_tags.tag_id = tags.id)
+where LOWER(tags.name) LIKE "php";
 
 -- @block maybe not
 SELECT games.title, tags.name

@@ -2,31 +2,40 @@
 .card {
     position: relative;
     box-shadow: 7px 7px 0px 0px rgb(255, 0, 0);
-    width: 300px;
+    width: 350px;
     border: 1px solid;
 }
 .taglist {
     padding: 5px 0px;
+    min-height: 28px;
     width: 100%;
-    /* border: 1px solid; */
+    border-top: 1px solid;
 }
 .card .description{
     padding: 1px 0;
 }
+/* .card:hover {
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); 
+} */
 .card .text {
-    width: 50%;
+    width: min(50% - 1px);
     float: left;
 }
 .card .icon {
     width: 50%;
     position: relative;
     float: left;
+    border-left: 1px solid;
+    overflow: hidden;
 }
 .card .title{
     /* float: left; */
     /* display: inline-block; */
     text-align: center;
     padding: 1px 0;
+    font-size: 17px;
     /* background-color: rgb(25, 25, 25); */
     /* margin-top: -4px; */
 }
@@ -36,6 +45,11 @@
     /* vertical-align: top; */
     width: 100%;
     margin-bottom: -4px;
+}
+.icon:hover img {
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); 
 }
 .top {
     width: 100%;
@@ -50,14 +64,19 @@
     display: inline-block;
     border: 1px solid;
 }
+.tag:hover {
+    /* box-shadow: inset 0px 0px 0px 1px; */
+    box-shadow: 0px 0px 0px 2px;
+}
+
 .row {
     clear: both;
     display: table;
 }
 .column {
     float: left;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    margin-right: 50px;
+    margin-bottom: 50px;
 }
 .overlay {
     position: absolute;
@@ -68,14 +87,19 @@
     max-height: 100%;
     width: 100%;
     opacity:0;
-    transition: .5s ease;
+    transition: .1s ease;
     background-color: #e40000;
 }
 .icon:hover .overlay {
-    opacity: 0.2;
+    opacity: 0.5;
 }
 a:focus .icon .overlay {
     opacity: 0.5;
+}
+a:focus .icon img{
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); 
 }
 
 .overlaytext {
