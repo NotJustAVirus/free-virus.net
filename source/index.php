@@ -1,3 +1,25 @@
+<?php
+function get_title($url){
+    $str = file_get_contents($url);
+    if(strlen($str)>0){
+        $str = trim(preg_replace('/\s+/', ' ', $str)); // supports line breaks inside <title>
+        preg_match("/\<title\>(.*)\<\/title\>/i",$str,$title); // ignore case
+        return $title[1];
+    }
+}
+
+$sites = [
+    "the-web.42web.io",
+    "torweb.dk",
+    "tvs2.dk",
+    "acki.dk",
+    "echochamber.dk",
+    "ottersofficial.dk",
+    "ceo-hansenberg.dk",
+    "tv11.dk"
+];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,14 +38,14 @@
     <div class="main">
         <div>
             <span>Links to other awsome sites:</span><br>
-            <a id="first" target="_blank" href="http://www.the-web.42web.io/" >The-Web</a><br>
-            <a target="_blank" href="http://torweb.dk/" >Portfolio</a><br>
-            <a target="_blank" href="http://tvs2.dk/" >Document</a><br>
-            <a href="http://acki.dk" target="_blank" rel="noopener noreferrer">Acki - Login</a><br>
-            <a target="_blank" href="http://echochamber.dk" >Echochamber | Homepage</a><br>
-            <a target="_blank" href="http://ottersofficial.dk/" >Pineapple Blackberries</a><br>
-            <a target="_blank" href="http://ceo-hansenberg.dk/" >CEO-Hansenberg-xD</a><br>
-            <a target="_blank" href="http://tv11.dk/" >Skole programmering</a><br>
+            <?php
+            for ($i=0; $i < count($sites); $i++) { 
+                $url = "http://".$sites[$i];
+                $title = get_title($url);
+                if (!$title || $title == "") $title = $sites[$i];
+                echo "<a href='$url' target='_blank' rel='noopener noreferrer'>$title</a><br>\n";
+            }
+            ?>
             <br>
         </div>
         <div>
