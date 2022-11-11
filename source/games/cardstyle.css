@@ -64,6 +64,10 @@
     display: inline-block;
     border: 1px solid;
 }
+.tag.hidden {
+    display: none;
+}
+
 .tag:hover {
     /* box-shadow: inset 0px 0px 0px 1px; */
     box-shadow: 0px 0px 0px 2px;
@@ -77,6 +81,9 @@
     float: left;
     margin-right: 50px;
     margin-bottom: 50px;
+}
+.column.hidden {
+    display: none;
 }
 .overlay {
     position: absolute;
