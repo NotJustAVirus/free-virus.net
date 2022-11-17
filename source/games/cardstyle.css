@@ -59,14 +59,24 @@
 
 .tag {
     /* border-radius: 0px; */
+    font-size: 16px;
     margin: 3px 7px;
     padding: 0 5px 1px;
     display: inline-block;
     border: 1px solid;
 }
+.tag.selected {
+    /* display: none; */
+    box-shadow: 0px 0px 0px 2px;
+}
+
 .tag:hover {
     /* box-shadow: inset 0px 0px 0px 1px; */
-    box-shadow: 0px 0px 0px 2px;
+    box-shadow: 0px 0px 0px 1px;
+}
+
+.tag.tag.selected:hover {
+    box-shadow: 0px 0px 0px 3px;
 }
 
 .row {
@@ -77,6 +87,9 @@
     float: left;
     margin-right: 50px;
     margin-bottom: 50px;
+}
+.column.hidden {
+    display: none;
 }
 .overlay {
     position: absolute;
