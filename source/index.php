@@ -16,7 +16,8 @@ $sites = [
     "echochamber.dk",
     "ottersofficial.dk",
     "ceo-hansenberg.dk",
-    "tv11.dk"
+    "tv11.dk",
+    "ddu-hbgym.dk"
 ];
 ?>
 
