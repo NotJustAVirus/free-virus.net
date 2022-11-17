@@ -4,8 +4,7 @@ $(document).ready(function(){
     
 function loadsite() {
 
-    //load cards
-    $.get("getcards.php", function(data){
+    $.get("getcards.php", function(data){ //load cards
         // const main = $("#main");
         const card_contain = $("#card_container");
         data = JSON.parse(data);
@@ -15,7 +14,7 @@ function loadsite() {
             var tags_data = [];
             for (const tag of card_data.tags) {
                 const name_lower = tag.name.toLowerCase();
-                tags += `<div style="color: #${tag.color};" class="tag" data-tag="${name_lower}">${tag.name}</div>`;
+                tags += `<button style="color: #${tag.color};" class="tag" data-tag="${name_lower}">${tag.name}</button>`;
                 tags_data.push(name_lower);
             }
             var card = `<div class='column' data-tags="${tags_data.toString()}">
@@ -43,26 +42,19 @@ function loadsite() {
         });
     });
     
-    //load tags
-    $.get("gettags.php", function(data){
+    $.get("gettags.php", function(data){ //load tags
         const avalible_tags = $("#avalible_tags");
         // const selected_tags = $("#selected_tags");
         data = JSON.parse(data);
         var alltags = "";
         for (const tag_data of data) {
-            var tag = `<div style="color: #${tag_data.color};" class="tag" data-tag="${tag_data.name.toLowerCase()}">${tag_data.name}</div>`;
+            var tag = `<button style="color: #${tag_data.color};" class="tag" data-tag="${tag_data.name.toLowerCase()}">${tag_data.name}</button>`;
             alltags += tag;
         }
         avalible_tags.append(alltags);
         avalible_tags.children(".tag").click(function() {
             togglesearchtag($(this).attr("data-tag"));
         });
-
-        // selected_tags.append(alltags);
-        // selected_tags.children(".tag").addClass("hidden");
-        // selected_tags.children(".tag").click(function() {
-        //     removesearchtag($(this).attr("data-tag"));
-        // });
     });
 }
 
@@ -75,12 +67,6 @@ function togglesearchtag(tag) {
     }
     updatecards();
 }
-
-// function removesearchtag(tag) {
-//     const selected_tags = $("#selected_tags");
-//     selected_tags.children(`[data-tag='${tag}']`).addClass("hidden");
-//     updatecards();
-// }
 
 function updatecards() {
     var selected = [];
@@ -97,7 +83,6 @@ function updatecards() {
     } else {
         $(".column").each(function () {
             this_tags = $(this).attr("data-tags").split(",");
-            // console.log(this_tags);
             for (const this_tag of this_tags) {
                 if (selected.includes(this_tag)) {
                     $(this).removeClass("hidden");
