@@ -10,14 +10,14 @@ function get_title($url){
 
 $sites = [
     "the-web.42web.io",
-    "torweb.dk",
-    "tvs2.dk",
-    "acki.dk",
-    "echochamber.dk",
-    "ottersofficial.dk",
-    "ceo-hansenberg.dk",
-    "tv11.dk",
-    "ddu-hbgym.dk"
+    // "torweb.dk",
+    // "tvs2.dk",
+    // "acki.dk",
+    // "echochamber.dk",
+    // "ottersofficial.dk",
+    // "ceo-hansenberg.dk",
+    // "tv11.dk",
+    // "ddu-hbgym.dk"
 ];
 ?>
 
