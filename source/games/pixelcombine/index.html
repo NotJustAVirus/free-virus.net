@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- what are you looking at -->
+<html>
+<head>
+    <title>Scale pixel</title>
+    <link rel="icon" href="icon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="coinstyle.css"> -->
+    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <ul>
+        <li><a class="menu" href="/">Home</a></li>
+        <li><a class="menu" href="/games">Games</a></li>
+        <li><a class="menu" href="/feedback">Feedback</a></li>
+    </ul>
+    <div class="main">
+        <a href="/games/pixelartscale">scale</a>
+        <div class="coin-box">
+            <input type="text" name="url" id="url" placeholder="https://raw.githubusercontent.com/MeblIkea/NordicPlace/main/datas.json" style="width: 700px;"><br>
+            <button id="addImg" onclick="generate(false)">Generate from link</button> <br>
+            <button id="addImg" onclick="generate(true)">Generate with no flag</button> <br>
+        </div>
+        <canvas id="canvas"></canvas>
+        <canvas id="canvas2"></canvas>
+    </div>
+    <form action="upload.php" method="post" enctype="multipart/form-data" style="display: none;">
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit" id="submit">
+    </form>
+</body>
+</html>

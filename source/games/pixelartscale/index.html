@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- what are you looking at -->
+<html>
+<head>
+    <title>Scale pixel</title>
+    <link rel="icon" href="icon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="coinstyle.css"> -->
+    <script src="script.js"></script>
+</head>
+<body>
+    <ul>
+        <li><a class="menu" href="/">Home</a></li>
+        <li><a class="menu" href="/games">Games</a></li>
+        <li><a class="menu" href="/feedback">Feedback</a></li>
+        <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('flip').focus()">Skip To Flip</a></li>
+    </ul>
+    <div class="main">
+        <a href="/games/pixelcombine">gettemp</a>
+        <div class="coin-box">
+            <input type="file" name="art" id="img"><br>
+            x:<input type="number" name="x" id="x" placeholder="0"><br>
+            y:<input type="number" name="y" id="y" placeholder="0"><br>
+            w:<input type="number" name="w" id="w" placeholder="0"><br>
+            h:<input type="number" name="h" id="h" placeholder="0"><br>
+            <button id="generate" onclick="genArt()">Generate!</button>
+        </div>
+        <canvas id="canvas"></canvas>
+    </div>
+</body>
+</html>
