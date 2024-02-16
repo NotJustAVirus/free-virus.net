@@ -22,6 +22,7 @@
         
         $allwordsfile = "onlylong.txt";
         $cooked = $_COOKIE["guesses"];
+        $guesses = [];
         for ($i=0; $i < strlen($cooked); $i+=2) { 
             $key = substr($cooked,$i,1);
             $value = substr($cooked,$i+1,1);
@@ -36,7 +37,7 @@
             $letters = str_split("qwertyuiopasdfghjklzxcvbnm");
             while (!(count($guesses) >= 6)) {
                 $rnd = $letters[array_rand($letters)];
-                if (!array_key_exists($rnd,$gusses) && !in_array($rnd,str_split($word))) {
+                if (!array_key_exists($rnd,$guesses) && !in_array($rnd,str_split($word))) {
                     $guesses[$rnd] = 2;
                 }
             }
@@ -47,7 +48,7 @@
             $letters = str_split("qwertyuiopasdfghjklzxcvbnm");
             while (!(count($guesses) >= 6)) {
                 $rnd = $letters[array_rand($letters)];
-                if (!array_key_exists($rnd,$gusses) && !in_array($rnd,str_split($word))) {
+                if (!array_key_exists($rnd,$guesses) && !in_array($rnd,str_split($word))) {
                     $guesses[$rnd] = 2;
                 }
             }
@@ -71,7 +72,7 @@
             foreach ($guesses as $key => $value) {
                 $cookie.=$key.$value;
             }
-            //var_dump($cookie);
+            // var_dump($cookie);
             setcookie("guesses",$cookie);
         }
         
