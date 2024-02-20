@@ -44,31 +44,15 @@ function spinto(result) {
     money -= 100;
     updatemoney();
     
-    const wheel = document.getElementById("wheel.1");
+    const wheel = document.getElementById("wheelImg");
 
     if (result == 2) {
         landon1 = 3;
-        landon2 = 3;
-        landon3 = 3;
     } else if (result == 1) {
         var land = Math.floor(Math.random()*3);
         landon1 = land;
-        landon2 = land;
-        landon3 = land;
     } else {
         landon1 = Math.floor(Math.random()*3);
-        landon3 = Math.floor(Math.random()*3);
-        if (landon1 == landon3) {
-            if (landon1 == 3) {
-                landon2 = 0;
-            } else {
-                landon2 = landon1+1;
-            }
-        } else if (Math.random() < 0.5) {
-            landon2 = landon1;
-        } else {
-            landon2 = Math.floor(Math.random()*3);
-        }
     }
 
     spinwheel(wheel,landon1);
