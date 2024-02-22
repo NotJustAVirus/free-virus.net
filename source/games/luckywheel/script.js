@@ -38,10 +38,9 @@ function spin() {
         return;
     }
     spinning = true;
-    spinto(wheelResults[Math.floor(Math.random()*wheelResults.length)]);
-    return;
+    // spinto(wheelResults[Math.floor(Math.random()*wheelResults.length)]);
     $.ajax(
-        'casino.php?type=play_luckywheel',
+        '/games/casino.php?type=play_luckywheel',
         {
             success: function(data) {
                 roll = data;
@@ -76,16 +75,19 @@ function spinto(result) {
         console.log(result);
         if (result == "red") {
             // console.log("you win!");
-            money += 1000;
+            // money += 0;
             updatemoney();
         } else if (result == "green") {
-            money += 250;
+            money += 50;
             updatemoney();
         } else if (result == "yellow") {
-            money += 150;
+            money += 200;
             updatemoney();
         } else if (result == "blue") {
-            money += 50;
+            money += 100;
+            updatemoney();
+        } else if (result == "black") {
+            money += 1000;
             updatemoney();
         }
         spinning = false;

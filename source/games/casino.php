@@ -56,6 +56,34 @@ if ($request == "money") {
     
     $sql = "UPDATE `casino_user` SET `money`"."="."$money WHERE `id`=$id";
     $conn->query($sql);
+} elseif ($request == "play_luckywheel") {
+    $black = 1000;
+    $yellow = 200;
+    $blue = 100;
+    $green = 50;
+    $red = 0;
+    $cost = 100;
+
+    $roll = rand(1,100);
+    $money -= $cost;
+    if ($roll > 96) {
+        $money += $black;
+        echo "black";
+    } elseif ($roll > 64) {
+        $money += $yellow;
+        echo "yellow";
+    } elseif ($roll > 32) {
+        $money += $blue;
+        echo "blue";
+    } elseif ($roll > 10) {
+        $money += $green;
+        echo "green";
+    } else {
+        echo "red";
+    }
+    
+    $sql = "UPDATE `casino_user` SET `money`"."="."$money WHERE `id`=$id";
+    $conn->query($sql);
 }
 
 $conn->close;
