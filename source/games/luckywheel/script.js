@@ -16,6 +16,33 @@ const wheelResults = [
     "green",
     "red",
 ];
+const rustWheelResults = [
+    "red",
+    "yellow",
+    "green",
+    "yellow",
+    "blue",
+    "yellow",
+    "green",
+    "yellow",
+    "purple",
+    "yellow",
+    "green",
+    "yellow",
+    "blue",
+    "yellow",
+    "blue",
+    "green",
+    "yellow",
+    "purple",
+    "yellow",
+    "green",
+    "yellow",
+    "blue",
+    "yellow",
+    "green",
+    "yellow",
+];
 
 
 function getmoney() {
@@ -38,7 +65,9 @@ function spin() {
         return;
     }
     spinning = true;
-    // spinto(wheelResults[Math.floor(Math.random()*wheelResults.length)]);
+    // spinto("blue");
+    spinto(rustWheelResults[Math.floor(Math.random()*rustWheelResults.length)]);
+    return;
     $.ajax(
         '/games/casino.php?type=play_luckywheel',
         {
@@ -61,8 +90,8 @@ function spinto(result) {
     const wheel = document.getElementById("wheelImg");
 
     var options = [];
-    for (var i = 0; i < wheelResults.length; i++) {
-        if (wheelResults[i] == result) {
+    for (var i = 0; i < rustWheelResults.length; i++) {
+        if (rustWheelResults[i] == result) {
             options.push(i);
         }
     }
@@ -110,7 +139,7 @@ function spinto(result) {
         id = setInterval(accelerate, 5);
         function accelerate() {
             if (ticks <= 0) {
-                pos = -22 + (landon*30) + 5 + Math.floor(Math.random()*20);
+                pos = -22 - 7.2 + (landon*14.4) + 2.2 + Math.floor(Math.random()*10);
                 id2 = setInterval(decelerate, 5);
                 clearInterval(id);
             }
