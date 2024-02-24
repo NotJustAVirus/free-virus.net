@@ -17,3 +17,7 @@
 button {
     margin-top: 50px;
 }
+#rust_wheel_checkbox_div {
+    position: absolute;
+    margin-top: 50px;
+}

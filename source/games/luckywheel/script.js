@@ -66,10 +66,10 @@ function spin() {
     }
     spinning = true;
     // spinto("blue");
-    spinto(rustWheelResults[Math.floor(Math.random()*rustWheelResults.length)]);
-    return;
+    // spinto(rustWheelResults[Math.floor(Math.random()*rustWheelResults.length)]);
+    // return;
     $.ajax(
-        '/games/casino.php?type=play_luckywheel',
+        '/games/casino.php?type=play_rustwheel',
         {
             success: function(data) {
                 roll = data;
@@ -103,20 +103,19 @@ function spinto(result) {
     doneSpinng.then(() => {
         console.log(result);
         if (result == "red") {
-            // console.log("you win!");
-            // money += 0;
+            money += 21 * 100;
             updatemoney();
         } else if (result == "green") {
-            money += 50;
+            money += 3 * 100;
             updatemoney();
         } else if (result == "yellow") {
-            money += 200;
+            money += 2 * 100;
             updatemoney();
         } else if (result == "blue") {
-            money += 100;
+            money += 6 * 100;
             updatemoney();
-        } else if (result == "black") {
-            money += 1000;
+        } else if (result == "purple") {
+            money += 11 * 100;
             updatemoney();
         }
         spinning = false;
