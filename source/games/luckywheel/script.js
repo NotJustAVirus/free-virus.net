@@ -1,4 +1,5 @@
 var spinning = false;
+var BET = "yellow";
 var money;
 getmoney();
 
@@ -69,7 +70,7 @@ function spin() {
     // spinto(rustWheelResults[Math.floor(Math.random()*rustWheelResults.length)]);
     // return;
     $.ajax(
-        '/games/casino.php?type=play_rustwheel',
+        '/games/casino.php?type=play_rustwheel&bet=' + BET,
         {
             success: function(data) {
                 roll = data;
@@ -102,11 +103,15 @@ function spinto(result) {
     });
     doneSpinng.then(() => {
         console.log(result);
+        spinning = false;
+        if (result != BET) {
+            return;
+        }
         if (result == "red") {
             money += 21 * 100;
             updatemoney();
         } else if (result == "green") {
-            money += 3 * 100;
+            money += 4 * 100;
             updatemoney();
         } else if (result == "yellow") {
             money += 2 * 100;
@@ -118,7 +123,6 @@ function spinto(result) {
             money += 11 * 100;
             updatemoney();
         }
-        spinning = false;
     });
 
     function spinwheel(wheel, landon, resolve) {
@@ -174,4 +178,10 @@ function spinto(result) {
 
 function updatemoney() {
     document.getElementById("money").textContent = money;
+}
+
+function bet(bet) {
+    BET = bet;
+    document.getElementsByClassName("chosen")[0].classList.remove("chosen");
+    document.getElementById(bet).classList.add("chosen");
 }

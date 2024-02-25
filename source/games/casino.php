@@ -85,6 +85,7 @@ if ($request == "money") {
     $sql = "UPDATE `casino_user` SET `money`"."="."$money WHERE `id`=$id";
     $conn->query($sql);
 } elseif ($request == "play_rustwheel") {
+    $bet = $_GET['bet'];
     $red = 20;
     $purple = 10;
     $blue = 5;
@@ -94,21 +95,21 @@ if ($request == "money") {
 
     $roll = rand(1,25);
     $money -= $cost;
+    $rolled = "";
     if ($roll == 25) {
-        $money += $cost * ($red + 1);
-        echo "red";
+        $rolled = "red";
     } elseif ($roll > 22) {
-        $money += $cost * ($purple + 1);
-        echo "purple";
+        $rolled = "purple";
     } elseif ($roll > 18) {
-        $money += $cost * ($blue + 1);
-        echo "blue";
+        $rolled = "blue";
     } elseif ($roll > 12) {
-        $money += $cost * ($green + 1);
-        echo "green";
+        $rolled = "green";
     } else {
-        $money += $cost * ($yellow + 1);
-        echo "yellow";
+        $rolled = "yellow";
+    }
+    echo $rolled;
+    if ($bet == $rolled) {
+        $money += $cost * ($$bet + 1);
     }
 
     $sql = "UPDATE `casino_user` SET `money`"."="."$money WHERE `id`=$id";
