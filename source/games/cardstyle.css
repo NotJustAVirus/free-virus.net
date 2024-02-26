@@ -29,6 +29,7 @@
     float: left;
     border-left: 1px solid;
     overflow: hidden;
+    height: 175px;
 }
 .card .title{
     /* float: left; */
@@ -47,9 +48,9 @@
     margin-bottom: -4px;
 }
 .icon:hover img {
-    -ms-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1); 
+    -ms-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03); 
 }
 .top {
     width: 100%;
