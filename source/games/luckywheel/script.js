@@ -1,4 +1,5 @@
 var spinning = false;
+var rustVersionActive = true;
 var BET = "yellow";
 var money;
 getmoney();
@@ -69,8 +70,14 @@ function spin() {
     // spinto("blue");
     // spinto(rustWheelResults[Math.floor(Math.random()*rustWheelResults.length)]);
     // return;
+    var url;
+    if (rustVersionActive) {
+        url = '/games/casino.php?type=play_rustwheel&bet=' + BET;
+    } else {
+        url = '/games/casino.php?type=play_luckywheel';
+    }
     $.ajax(
-        '/games/casino.php?type=play_rustwheel&bet=' + BET,
+        url,
         {
             success: function(data) {
                 roll = data;
@@ -78,6 +85,7 @@ function spin() {
             },
             error: function() {
                 alert('tell the developer his code sucks');
+                spinning = false;
             }
         }
     );
@@ -91,8 +99,9 @@ function spinto(result) {
     const wheel = document.getElementById("wheelImg");
 
     var options = [];
-    for (var i = 0; i < rustWheelResults.length; i++) {
-        if (rustWheelResults[i] == result) {
+    var wheelResults = getWheel();
+    for (var i = 0; i < wheelResults.length; i++) {
+        if (wheelResults[i] == result) {
             options.push(i);
         }
     }
@@ -104,24 +113,42 @@ function spinto(result) {
     doneSpinng.then(() => {
         console.log(result);
         spinning = false;
-        if (result != BET) {
-            return;
-        }
-        if (result == "red") {
-            money += 21 * 100;
-            updatemoney();
-        } else if (result == "green") {
-            money += 4 * 100;
-            updatemoney();
-        } else if (result == "yellow") {
-            money += 2 * 100;
-            updatemoney();
-        } else if (result == "blue") {
-            money += 6 * 100;
-            updatemoney();
-        } else if (result == "purple") {
-            money += 11 * 100;
-            updatemoney();
+        if (rustVersionActive) {
+            if (result != BET) {
+                return;
+            }
+            if (result == "red") {
+                money += 21 * 100;
+                updatemoney();
+            } else if (result == "green") {
+                money += 4 * 100;
+                updatemoney();
+            } else if (result == "yellow") {
+                money += 2 * 100;
+                updatemoney();
+            } else if (result == "blue") {
+                money += 6 * 100;
+                updatemoney();
+            } else if (result == "purple") {
+                money += 11 * 100;
+                updatemoney();
+            }
+        } else {
+            if (result == "red") {
+                updatemoney();
+            } else if (result == "black") {
+                money += 1000;
+                updatemoney();
+            } else if (result == "yellow") {
+                money += 200;
+                updatemoney();
+            } else if (result == "blue") {
+                money += 100;
+                updatemoney();
+            } else if (result == "green") {
+                money += 50;
+                updatemoney();
+            }
         }
     });
 
@@ -142,7 +169,8 @@ function spinto(result) {
         id = setInterval(accelerate, 5);
         function accelerate() {
             if (ticks <= 0) {
-                pos = -22 - 7.2 + (landon*14.4) + 2.2 + Math.floor(Math.random()*10);
+                var ang = 360 / getWheel().length;
+                pos = -22 - (ang/2) + (landon*ang) + 2.2 + Math.floor(Math.random()*(ang-4.4));
                 id2 = setInterval(decelerate, 5);
                 clearInterval(id);
             }
@@ -184,4 +212,12 @@ function bet(bet) {
     BET = bet;
     document.getElementsByClassName("chosen")[0].classList.remove("chosen");
     document.getElementById(bet).classList.add("chosen");
+}
+
+function getWheel() {
+    if (rustVersionActive) {
+        return rustWheelResults;
+    } else {
+        return wheelResults;
+    }
 }
