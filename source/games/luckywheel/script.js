@@ -170,7 +170,10 @@ function spinto(result) {
         function accelerate() {
             if (ticks <= 0) {
                 var ang = 360 / getWheel().length;
-                pos = -22 - (ang/2) + (landon*ang) + 2.2 + Math.floor(Math.random()*(ang-4.4));
+                pos = -22 + (landon*ang) + 2.2 + Math.floor(Math.random()*(ang-4.4));
+                if (rustVersionActive) {
+                    pos -= (ang/2);
+                }
                 id2 = setInterval(decelerate, 5);
                 clearInterval(id);
             }
@@ -219,5 +222,16 @@ function getWheel() {
         return rustWheelResults;
     } else {
         return wheelResults;
+    }
+}
+
+function toggleRust() {
+    rustVersionActive = !rustVersionActive;
+    if (rustVersionActive) {
+        document.getElementById("wheelImg").src = "images/rust_wheel2.png";
+        document.getElementsByClassName("spinOptionsBox")[0].style.display = "block";
+    } else {
+        document.getElementById("wheelImg").src = "images/base.png";
+        document.getElementsByClassName("spinOptionsBox")[0].style.display = "none";
     }
 }
