@@ -1,6 +1,16 @@
 var spinning = false;
+var rustVersionActive = true;
+var BET = "yellow";
 var money;
 getmoney();
+
+var isRustCookie = getCookie("isRust");
+if (isRustCookie == "true") {
+} else {
+    window.addEventListener("load", function() {
+        toggleRust();
+    });
+}
 
 const wheelResults = [
     "blue",
@@ -15,6 +25,33 @@ const wheelResults = [
     "yellow",
     "green",
     "red",
+];
+const rustWheelResults = [
+    "red",
+    "yellow",
+    "green",
+    "yellow",
+    "blue",
+    "yellow",
+    "green",
+    "yellow",
+    "purple",
+    "yellow",
+    "green",
+    "yellow",
+    "blue",
+    "yellow",
+    "blue",
+    "green",
+    "yellow",
+    "purple",
+    "yellow",
+    "green",
+    "yellow",
+    "blue",
+    "yellow",
+    "green",
+    "yellow",
 ];
 
 
@@ -38,9 +75,17 @@ function spin() {
         return;
     }
     spinning = true;
-    // spinto(wheelResults[Math.floor(Math.random()*wheelResults.length)]);
+    // spinto("blue");
+    // spinto(rustWheelResults[Math.floor(Math.random()*rustWheelResults.length)]);
+    // return;
+    var url;
+    if (rustVersionActive) {
+        url = '/games/casino.php?type=play_rustwheel&bet=' + BET;
+    } else {
+        url = '/games/casino.php?type=play_luckywheel';
+    }
     $.ajax(
-        '/games/casino.php?type=play_luckywheel',
+        url,
         {
             success: function(data) {
                 roll = data;
@@ -48,6 +93,7 @@ function spin() {
             },
             error: function() {
                 alert('tell the developer his code sucks');
+                spinning = false;
             }
         }
     );
@@ -61,6 +107,7 @@ function spinto(result) {
     const wheel = document.getElementById("wheelImg");
 
     var options = [];
+    var wheelResults = getWheel();
     for (var i = 0; i < wheelResults.length; i++) {
         if (wheelResults[i] == result) {
             options.push(i);
@@ -73,24 +120,44 @@ function spinto(result) {
     });
     doneSpinng.then(() => {
         console.log(result);
-        if (result == "red") {
-            // console.log("you win!");
-            // money += 0;
-            updatemoney();
-        } else if (result == "green") {
-            money += 50;
-            updatemoney();
-        } else if (result == "yellow") {
-            money += 200;
-            updatemoney();
-        } else if (result == "blue") {
-            money += 100;
-            updatemoney();
-        } else if (result == "black") {
-            money += 1000;
-            updatemoney();
-        }
         spinning = false;
+        if (rustVersionActive) {
+            if (result != BET) {
+                return;
+            }
+            if (result == "red") {
+                money += 21 * 100;
+                updatemoney();
+            } else if (result == "green") {
+                money += 4 * 100;
+                updatemoney();
+            } else if (result == "yellow") {
+                money += 2 * 100;
+                updatemoney();
+            } else if (result == "blue") {
+                money += 6 * 100;
+                updatemoney();
+            } else if (result == "purple") {
+                money += 11 * 100;
+                updatemoney();
+            }
+        } else {
+            if (result == "red") {
+                updatemoney();
+            } else if (result == "black") {
+                money += 1000;
+                updatemoney();
+            } else if (result == "yellow") {
+                money += 200;
+                updatemoney();
+            } else if (result == "blue") {
+                money += 100;
+                updatemoney();
+            } else if (result == "green") {
+                money += 50;
+                updatemoney();
+            }
+        }
     });
 
     function spinwheel(wheel, landon, resolve) {
@@ -110,7 +177,11 @@ function spinto(result) {
         id = setInterval(accelerate, 5);
         function accelerate() {
             if (ticks <= 0) {
-                pos = -22 + (landon*30) + 5 + Math.floor(Math.random()*20);
+                var ang = 360 / getWheel().length;
+                pos = -22 + (landon*ang) + 2.2 + Math.floor(Math.random()*(ang-4.4));
+                if (rustVersionActive) {
+                    pos -= (ang/2);
+                }
                 id2 = setInterval(decelerate, 5);
                 clearInterval(id);
             }
@@ -147,3 +218,49 @@ function spinto(result) {
 function updatemoney() {
     document.getElementById("money").textContent = money;
 }
+
+function bet(bet) {
+    BET = bet;
+    document.getElementsByClassName("chosen")[0].classList.remove("chosen");
+    document.getElementById(bet).classList.add("chosen");
+}
+
+function getWheel() {
+    if (rustVersionActive) {
+        return rustWheelResults;
+    } else {
+        return wheelResults;
+    }
+}
+
+function toggleRust() {
+    rustVersionActive = !rustVersionActive;
+    document.cookie = "isRust=" + rustVersionActive;
+    if (rustVersionActive) {
+        document.getElementById("wheelImg").src = "images/rust_wheel2.png";
+        document.getElementsByClassName("spinOptionsBox")[0].style.display = "block";
+        document.getElementsByClassName("contain")[0].classList.add("rust");
+        document.getElementById("rust_wheel_checkbox").checked = true;
+    } else {
+        document.getElementById("wheelImg").src = "images/base.png";
+        document.getElementsByClassName("spinOptionsBox")[0].style.display = "none";
+        document.getElementsByClassName("contain")[0].classList.remove("rust");
+        document.getElementById("rust_wheel_checkbox").checked = false;
+    }
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
