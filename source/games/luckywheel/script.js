@@ -7,7 +7,7 @@ getmoney();
 var isRustCookie = getCookie("isRust");
 if (isRustCookie == "true") {
 } else {
-    window.addEventListener("load", function() {
+    window.addEventListener("DOMContentLoaded", function() {
         toggleRust();
     });
 }
@@ -143,19 +143,16 @@ function spinto(result) {
             }
         } else {
             if (result == "red") {
+                money += 250;
                 updatemoney();
             } else if (result == "black") {
-                money += 1000;
+                money += 350;
                 updatemoney();
             } else if (result == "yellow") {
-                money += 200;
-                updatemoney();
-            } else if (result == "blue") {
                 money += 100;
                 updatemoney();
+            } else if (result == "blue") {
             } else if (result == "green") {
-                money += 50;
-                updatemoney();
             }
         }
     });
@@ -237,12 +234,14 @@ function toggleRust() {
     rustVersionActive = !rustVersionActive;
     document.cookie = "isRust=" + rustVersionActive;
     if (rustVersionActive) {
-        document.getElementById("wheelImg").src = "images/rust_wheel2.png";
+        document.getElementById("wheelImg").src = "images/rust_wheel.png";
+        document.getElementById("arrow").childNodes[0].src = "images/rust_arrow.png";
         document.getElementsByClassName("spinOptionsBox")[0].style.display = "block";
         document.getElementsByClassName("contain")[0].classList.add("rust");
         document.getElementById("rust_wheel_checkbox").checked = true;
     } else {
         document.getElementById("wheelImg").src = "images/base.png";
+        document.getElementById("arrow").childNodes[0].src = "images/arrow.png";
         document.getElementsByClassName("spinOptionsBox")[0].style.display = "none";
         document.getElementsByClassName("contain")[0].classList.remove("rust");
         document.getElementById("rust_wheel_checkbox").checked = false;

@@ -7,7 +7,7 @@
     width: 100%;
     max-height: 500px;
 }
-#rust_arrow {
+#arrow {
     position: relative;
     top: 50px;
     margin-bottom: 0;
@@ -51,7 +51,7 @@ button.chosen {
     background-color: #cf0000;
 }
 .contain.rust {
-    background-image: url('images/rust_background2.jpg');
+    background-image: url('images/rust_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
