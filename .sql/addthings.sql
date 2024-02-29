@@ -1,7 +1,7 @@
 -- @block
 INSERT INTO games (title, path, description)
 VALUES 
-    
+    ("Lucky Wheel","luckywheel","");
     -- ("Game of Life","game_of_life","");
 
 -- @block
@@ -22,7 +22,7 @@ VALUES
 INSERT INTO game_tags (game_id, tag_id) 
 SELECT games.id, tags.id
 FROM games, tags
-WHERE games.path = "slot" AND tags.name = "Casino";
+WHERE games.path = "luckywheel" AND tags.name = "PHP";
 WHERE games.path = "hangman" AND tags.name = "PHP";
 WHERE games.path = "tictactoe" AND tags.name = "PHP";
 WHERE games.path = "coin_flip" AND tags.name = "Javascript";
