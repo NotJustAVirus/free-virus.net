@@ -4,6 +4,14 @@ var BET = "yellow";
 var money;
 getmoney();
 
+var isRustCookie = getCookie("isRust");
+if (isRustCookie == "true") {
+} else {
+    window.addEventListener("load", function() {
+        toggleRust();
+    });
+}
+
 const wheelResults = [
     "blue",
     "yellow",
@@ -227,11 +235,32 @@ function getWheel() {
 
 function toggleRust() {
     rustVersionActive = !rustVersionActive;
+    document.cookie = "isRust=" + rustVersionActive;
     if (rustVersionActive) {
         document.getElementById("wheelImg").src = "images/rust_wheel2.png";
         document.getElementsByClassName("spinOptionsBox")[0].style.display = "block";
+        document.getElementsByClassName("contain")[0].classList.add("rust");
+        document.getElementById("rust_wheel_checkbox").checked = true;
     } else {
         document.getElementById("wheelImg").src = "images/base.png";
         document.getElementsByClassName("spinOptionsBox")[0].style.display = "none";
+        document.getElementsByClassName("contain")[0].classList.remove("rust");
+        document.getElementById("rust_wheel_checkbox").checked = false;
     }
 }
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }

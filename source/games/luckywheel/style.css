@@ -50,3 +50,8 @@ button.chosen {
     /* border: 2px solid #ff0000; */
     background-color: #cf0000;
 }
+.contain.rust {
+    background-image: url('images/rust_background2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
