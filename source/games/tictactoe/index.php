@@ -25,7 +25,7 @@
     $gameend = 0;
     $player = $cross;
     $player2 = $circel;
-    $fileplace = "tictactoe.txt";
+    $fileplace = $path."tictactoe.txt";
 
     $shapes = file($fileplace);
     for ($i=0,$h=0; $i < 3; $i++) { 

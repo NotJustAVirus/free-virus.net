@@ -1,7 +1,8 @@
-php_value display_errors Off
+php_value display_errors On
 php_value mbstring.http_input auto
 php_value date.timezone Europe/Copenhagen
 RewriteEngine On
+RewriteRule . main.php
 ErrorDocument 404 http://www.free-virus.net/404
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteCond %{HTTPS} off

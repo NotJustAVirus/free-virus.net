@@ -116,6 +116,4 @@ if ($request == "money") {
     $sql = "UPDATE `casino_user` SET `money`"."="."$money WHERE `id`=$id";
     $conn->query($sql);
 }
-
-$conn->close;
 ?>

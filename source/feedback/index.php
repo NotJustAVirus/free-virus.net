@@ -20,7 +20,7 @@
             <input type="submit" value="Send feedback">
             <?php
             if (isset($_POST["feedback"])) {
-                $fileplace = "feedback.txt";
+                $fileplace = $path."feedback.txt";
                 $input = $_POST["feedback"];
                 $file = fopen($fileplace,"a");
                 // date_default_timezone_set("Europe/Copenhagen");

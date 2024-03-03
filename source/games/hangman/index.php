@@ -20,7 +20,7 @@
         include "functions.php";
         
         
-        $allwordsfile = "onlylong.txt";
+        $allwordsfile = $path."/onlylong.txt";
         $cooked = $_COOKIE["guesses"];
         $guesses = [];
         for ($i=0; $i < strlen($cooked); $i+=2) { 
