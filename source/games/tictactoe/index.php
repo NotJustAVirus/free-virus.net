@@ -171,7 +171,6 @@
             [$empty,$empty,$empty],
         ];
         saveboard($board,$fileplace);
-        $conn->close;
     }
     ?>
 <form method="post" action="">
