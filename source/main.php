@@ -15,17 +15,17 @@ switch ($fileExt) {
         header("Content-Type: text/html");
         $phpurl = $_SERVER['DOCUMENT_ROOT'].$url."/index.php";
         $htmlurl = $_SERVER['DOCUMENT_ROOT'].$url."/index.html";
+        $path = $_SERVER['DOCUMENT_ROOT'].$url; // this is for php files to include other files
         if (file_exists($phpurl)) {
-            $path = $_SERVER['DOCUMENT_ROOT'].$url; // this is for php files to include other files
-            include_once "head.php";
-            include_once "header.php";
-            include_once $phpurl;
+            $index = $phpurl;
         } elseif (file_exists($htmlurl)) {
-            readFileRoot($url."/index.html");
+            $index = $htmlurl;
         } else {
             echo "404";
             header("HTTP/1.0 404 Not Found");
+            exit();
         }
+        include_once "servePage.php"; // this is for the head and stuff
         exit();
     case 'php':
         header("Content-Type: text/html");
