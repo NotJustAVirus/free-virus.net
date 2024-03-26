@@ -1,41 +1,18 @@
-<!DOCTYPE html>
-<!-- what are you looking at -->
-<html>
-<head>
-    <title>Lucky Wheel</title>
-    <link rel="icon" href="icon.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/style.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    
-</head>
-<body>
-    <ul>
-        <li><a class="menu" href="/">Home</a></li>
-        <li><a class="menu" href="/games">Games</a></li>
-        <li><a class="menu" href="/feedback">Feedback</a></li>
-        <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('spin').focus()">Skip to Spin</a></li>
-        <li class="casino"><img src="/Images/coin.png" alt="coin"></li>
-        <li class="casino"><div class="menu" id="money">1000</div></li>
-    </ul>
-    <div class="contain rust">
-        <div id="rust_wheel_checkbox_div">
-            <input type="checkbox" name="rust_wheel" id="rust_wheel_checkbox" checked onchange="toggleRust()">
-            <label for="rust_wheel_checkbox">Rust Wheel</label>
-        </div>
-        <center class="wheel">
-            <div id="arrow"><img src="images/rust_arrow.png" alt="rust_arrow"></div>
-            <div id="wheel"><img id="wheelImg" src="images/rust_wheel.png" alt="wheel"></div>
-            <button id="spin" onclick="spin()">Spin</button>
-            <div class="spinOptionsBox">
-                <button id="yellow" onclick="bet('yellow')" type="button" class="chosen"><img src="images/bet_yellow.png" alt="bet yellow 1"></button>
-                <button id="green" onclick="bet('green')" type="button"><img src="images/bet_green.png" alt="bet green 3"></button>
-                <button id="blue" onclick="bet('blue')" type="button"><img src="images/bet_blue.png" alt="bet blue 5"></button>
-                <button id="purple" onclick="bet('purple')" type="button"><img src="images/bet_purple.png" alt="bet purple 10"></button>
-                <button id="red" onclick="bet('red')" type="button"><img src="images/bet_red.png" alt="bet red 20"></button>
-            </div>
-        </center>
+<div class="contain rust">
+    <div id="rust_wheel_checkbox_div">
+        <input type="checkbox" name="rust_wheel" id="rust_wheel_checkbox" checked onchange="toggleRust()">
+        <label for="rust_wheel_checkbox">Rust Wheel</label>
     </div>
-</body>
-</html>
+    <center class="wheel">
+        <div id="arrow"><img src="images/rust_arrow.png" alt="rust_arrow"></div>
+        <div id="wheel"><img id="wheelImg" src="images/rust_wheel.png" alt="wheel"></div>
+        <button id="spin" onclick="spin()">Spin</button>
+        <div class="spinOptionsBox">
+            <button id="yellow" onclick="bet('yellow')" type="button" class="chosen"><img src="images/bet_yellow.png" alt="bet yellow 1"></button>
+            <button id="green" onclick="bet('green')" type="button"><img src="images/bet_green.png" alt="bet green 3"></button>
+            <button id="blue" onclick="bet('blue')" type="button"><img src="images/bet_blue.png" alt="bet blue 5"></button>
+            <button id="purple" onclick="bet('purple')" type="button"><img src="images/bet_purple.png" alt="bet purple 10"></button>
+            <button id="red" onclick="bet('red')" type="button"><img src="images/bet_red.png" alt="bet red 20"></button>
+        </div>
+    </center>
+</div>

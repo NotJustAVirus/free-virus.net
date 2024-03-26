@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<!-- what are you looking at -->
-<html>
-<head>
-    <title>Game of Life</title>
-    <link rel="icon" href="icon.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/style.css">
-    <link rel="stylesheet" type="text/css" href="lifestyle.css">
-    
-</head>
-<body>
-    <ul>
-        <li><a class="menu" href="/">Home</a></li>
-        <li><a class="menu" href="/games">Games</a></li>
-        <li><a class="menu" href="/feedback">Feedback</a></li>
-        <!-- <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('flip').focus()">Skip To Flip</a></li> -->
-    </ul>
-    <div class="canvas">
-        <canvas id="canvas" width="1400" height="600"></canvas>
-    </div>
-    <button id="clear" onclick="cleancanvas();">Clear canvas</button>
-    <button id="random" onclick="randomcanvas();">New random canvas</button>
-    <button id="play" onclick="play();">Pause</button>
-    <input type="range" name="speed" id="speed" min="0" max="44" value="30" oninput="changespeed()" onchange="changespeed();">
-    <label for="speed">Speed</label>
-    <script src="lifescript.js"></script>
-</body>
-</html>
+<div class="canvas">
+    <canvas id="canvas" width="1400" height="600"></canvas>
+</div>
+<button id="clear" onclick="cleancanvas();">Clear canvas</button>
+<button id="random" onclick="randomcanvas();">New random canvas</button>
+<button id="play" onclick="play();">Pause</button>
+<input type="range" name="speed" id="speed" min="0" max="44" value="30" oninput="changespeed()" onchange="changespeed();">
+<label for="speed">Speed</label>
+<script src="lifescript.js"></script>

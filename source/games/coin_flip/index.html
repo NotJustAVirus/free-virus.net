@@ -1,56 +1,38 @@
-<!DOCTYPE html>
-<!-- what are you looking at -->
-<html>
-<head>
-    <title>Flip a coin</title>
-    <link rel="icon" href="icon.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/style.css">
-    <link rel="stylesheet" type="text/css" href="coinstyle.css">
-</head>
-<body onload="flipcoin()">
-    <ul>
-        <li><a class="menu" href="/">Home</a></li>
-        <li><a class="menu" href="/games">Games</a></li>
-        <li><a class="menu" href="/feedback">Feedback</a></li>
-        <li class="nav"><a tabindex="1" class="menu skip-nav" href="javascript:document.getElementById('flip').focus()">Skip To Flip</a></li>
-    </ul>
-    <div class="main">
-        <div class="coin-box">
-            <div id="coin" class="coin">
-                <img src="tail.png" alt="tails" class="coin-front">
-                <img src="head.png" alt="head" class="coin-back">
-            </div>
+<div class="main">
+    <div class="coin-box">
+        <div id="coin" class="coin">
+            <img src="tail.png" alt="tails" class="coin-front">
+            <img src="head.png" alt="head" class="coin-back">
         </div>
-        <div class="align">
-            <button id="flip" type="button" onclick="flipcoin()">Flip the coin again!</button>
-        </div>
-        <script>
-        function flipcoin() {
-            const coin = document.getElementById("coin");
-            if (!(coin.classList.contains("head-ani") || coin.classList.contains("tail-ani"))) {
-                coin.classList.remove("head");
-                coin.classList.remove("tail");
-                coin.classList.remove("balls");
-                var x = Math.random() * 2;
-                if (x > 1) {
-                    coin.classList.add("head-ani");
-                    coin.classList.add("head");
-                    setTimeout(function(){
-                        coin.classList.remove("head-ani");
-                    }, 4000);
-                } else {
-                    coin.classList.add("tail-ani");
-                    coin.classList.add("tail");
-                    if (Math.random() < 0.001) {
-                        coin.classList.add("balls");
-                    }
-                    setTimeout(function(){
-                        coin.classList.remove("tail-ani");
-                    }, 5000);
+    </div>
+    <div class="align">
+        <button id="flip" type="button" onclick="flipcoin()">Flip the coin again!</button>
+    </div>
+    <script>
+    function flipcoin() {
+        const coin = document.getElementById("coin");
+        if (!(coin.classList.contains("head-ani") || coin.classList.contains("tail-ani"))) {
+            coin.classList.remove("head");
+            coin.classList.remove("tail");
+            coin.classList.remove("balls");
+            var x = Math.random() * 2;
+            if (x > 1) {
+                coin.classList.add("head-ani");
+                coin.classList.add("head");
+                setTimeout(function(){
+                    coin.classList.remove("head-ani");
+                }, 4000);
+            } else {
+                coin.classList.add("tail-ani");
+                coin.classList.add("tail");
+                if (Math.random() < 0.001) {
+                    coin.classList.add("balls");
                 }
+                setTimeout(function(){
+                    coin.classList.remove("tail-ani");
+                }, 5000);
             }
         }
-        </script>
-    </div>
-</body>
-</html>
+    }
+    </script>
+</div>
