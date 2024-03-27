@@ -58,6 +58,15 @@ switch ($fileExt) {
     case 'gif':
         header("Content-Type: image/gif");
         break;
+    case 'svg':
+        header("Content-Type: image/svg+xml");
+        break;
+    case 'ico':
+        header("Content-Type: image/x-icon");
+        break;
+    case 'json':
+        header("Content-Type: application/json");
+        break;
     default:
         header("Content-Type: text/plain");
         break;
