@@ -42,6 +42,9 @@ if (file_exists($path."config")) {
             case "casino":
                 $iscasino = true;
                 break;
+            case "icon":
+                $icon = $line[1];
+                break;
         }
     }
 }
@@ -92,7 +95,7 @@ foreach ($tabs as $tab => $taburl) {
     echo "<li><a class='menu$active' href='$taburl'>$tab</a></li>\n";
 }
 
-echo "<li class='nav'><a tabindex='1' class='menu skip-nav' href='javascript:document.getElementById('first').focus()'>Skip Navigation</a></li>\n";
+echo "<li class='nav'><a tabindex='1' class='menu skip-nav' href='javascript:document.getElementById(\"first\").focus()'>Skip Navigation</a></li>\n";
 
 if (isset($iscasino) && $iscasino) {
     echo "<li class='casino'><img src='/Images/coin.png' alt='coin'></li>\n";
