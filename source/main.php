@@ -51,18 +51,22 @@ switch ($fileExt) {
         break;
     case 'jpg':
         header("Content-Type: image/jpg");
+        header("Cache-Control: max-age=31536000");
         break;
     case 'png':
         header("Content-Type: image/png");
+        header("Cache-Control: max-age=31536000");
         break;
     case 'gif':
         header("Content-Type: image/gif");
+        header("Cache-Control: max-age=31536000");
         break;
     case 'svg':
         header("Content-Type: image/svg+xml");
         break;
     case 'ico':
         header("Content-Type: image/x-icon");
+        header("Cache-Control: max-age=31536000");
         break;
     case 'json':
         header("Content-Type: application/json");

@@ -76,6 +76,8 @@ if (file_exists($path."config")) {
     <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
+<ul>
+    <li><img class="icon" src="/Images/redskull.png" alt="skull icon"></li>
 <?php
 
 $selected = "/".explode("/", $url)[1];
@@ -86,7 +88,6 @@ $tabs = [
     "Feedback" => "/feedback",
     // "About" => "/about",
 ];
-echo "<ul>\n";
 foreach ($tabs as $tab => $taburl) {
     $active = "";
     if ($selected == $taburl) {
@@ -103,8 +104,8 @@ if (isset($iscasino) && $iscasino) {
     // include_once "games/casino.php?type=money";
     echo "</div></li>\n";
 }
-echo "</ul>\n";
 ?>
+</ul>
 <div class="main-content">
 <?php
 include_once $index;

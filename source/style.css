@@ -76,6 +76,10 @@ ul {
     z-index: 100;
 }
 
+li {
+    height: 47px;
+}
+
 li:not(.casino) {
     float: left;
 }
@@ -108,8 +112,12 @@ li a:hover:not(.active) {
 li a:focus:not(.active) {
     background-color: rgb(187, 0, 0);
 }
-li.active {
+li .active {
     background-color: #000000;
+}
+li .icon {
+    height: 47px;
+    filter: brightness(0);
 }
 .skip-nav {
     position: fixed;
@@ -146,6 +154,10 @@ li.active {
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(187, 0, 0);
+}
+
+::-webkit-scrollbar-corner {
+    background: black;
 }
 
 
@@ -192,10 +204,9 @@ footer {
     background-color: rgba(255, 0, 0, 0.5);
     border-radius: 50%;
     filter: blur(25px);
-    transform: translateY(-60px) !important; 
+    transform: translateY(-60%) !important; 
     animation: hover 15s infinite;
     animation-timing-function: ease-in-out;
-    --shadow: 25px;
 }
 
 @keyframes hover {
@@ -236,8 +247,8 @@ footer {
         background-color: rgba(255, 0, 0, 0.55);
     }
     90% {
-        transform: translateY(25px);
-        background-color: rgba(255, 0, 0, 0.8);
+        transform: translateY(20px);
+        background-color: rgba(255, 0, 0, 0.75);
     }
     100% {
         transform: translateY(0px);
@@ -257,9 +268,6 @@ footer {
     }
     4% {
         opacity: 1;
-    }
-    70% {
-        opacity: 0.7;
     }
     100% {
         opacity: 1;
