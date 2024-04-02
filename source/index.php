@@ -42,16 +42,19 @@ $sites = [
     <div class="corner">
         <a href="https://github.com/ActuallyJustAVirus/free-virus.net/">View source code</a>
     </div> -->
-    <h1>hi o/</h1>
-    <h1>hi :D</h1>
-    <h1>hi :)</h1>
-    <div class="skull-container">
-        <div class="top-skull">
-            <img class="skull-img" src="Images/redskull.png" alt="skull logo">
-        </div>
-        <div class="skull">
-            <img class="skull-img" src="Images/redskull.png" alt="skull logo">
-            <div class="shadow"></div>
+    <div class="center">
+        <br>
+        <h1>hi o/</h1>
+        <!-- <h1>hi :D</h1> -->
+        <!-- <h1>hi :)</h1> -->
+        <div class="skull-container">
+            <div class="top-skull">
+                <img class="skull-img" src="Images/redskull.png" alt="skull logo">
+            </div>
+            <div class="skull">
+                <img class="skull-img" src="Images/redskull.png" alt="skull logo">
+                <div class="shadow"></div>
+            </div>
         </div>
     </div>
     <img tabindex="0" src="Images/hotdog.png" alt="hotdog" id="hotdog">
