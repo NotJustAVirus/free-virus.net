@@ -10,6 +10,8 @@ if (!isset($url)) {
     die("\$url not set for in servePage.php");
 }
 
+session_start();
+
 $title = "Free-virus.net";
 $icon = "icon.png";
 $style = ["style.css"];
@@ -44,6 +46,17 @@ if (file_exists($path."config")) {
                 break;
             case "icon":
                 $icon = $line[1];
+                break;
+            case "auth":
+                if (!isset($_SESSION['authLevel'])) {
+                    header("Location: /login");
+                    exit();
+                }
+                if ($_SESSION['authLevel'] < $line[1]) {
+                    header("HTTP/1.0 403 Forbidden");
+                    echo "You do not have permission to view this page";
+                    exit();
+                }
                 break;
         }
     }
