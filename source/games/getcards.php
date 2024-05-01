@@ -1,10 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT']."/sqlinfo.php";
-
-$conn = new mysqli($servername,$username,$password,$databasename);
-if ($conn->connect_error) {
-    die("Failed lol: " . $conn->connect_error);
-}
+include $_SERVER['DOCUMENT_ROOT']."/dbConnect.php";
 
 $sql = "SELECT * FROM games";
 $result = $conn->query($sql);

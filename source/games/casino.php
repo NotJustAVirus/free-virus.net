@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT']."/sqlinfo.php";  
+include $_SERVER['DOCUMENT_ROOT']."/dbConnect.php";
 
 function getmoney($id, $conn){
     $sql = "SELECT `money` FROM `casino_user` WHERE `id`=$id";
@@ -10,12 +10,6 @@ function getmoney($id, $conn){
         $money = $row["money"];
         return $money;
     }
-}
-
-//conect
-$conn = new mysqli($servername,$username,$password,$databasename);
-if ($conn->connect_error) {
-    die("Failed lol: " . $conn->connect_error);
 }
 
 //make sure there is an id
