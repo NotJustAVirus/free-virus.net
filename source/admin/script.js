@@ -22,8 +22,42 @@ window.onload = function() {
 
     for (var i = 0; i < testData.length; i++) {
         var gameElement = game.clone();
-        gameElement.find('.title').text(testData[i].title);
-        gameElement.find('.description').text(testData[i].description);
+
+        let titleEditing = true;
+        gameElement.find('#title').val(testData[i].title);
+        gameElement.find('.titleBtn').on('click', function() {
+            if (titleEditing) {
+                $(this).parent().find('#title').attr('disabled', true);
+                $(this).text('Edit');
+                titleEditing = false;
+            } else {
+                $(this).parent().find('#title').attr('disabled', false);
+                $(this).text('Save');
+                $.post('update.php', {
+                    title: $(this).parent().find('#title').val(),
+                    description: $(this).parent().find('#description').val(),
+                    path: $(this).parent().find('.path').text()
+                });
+                titleEditing = true;
+            }
+        });
+        gameElement.find('.titleBtn').click();
+
+        let descriptionEditing = true;
+        gameElement.find('#description').val(testData[i].description);
+        gameElement.find('.descriptionBtn').on('click', function() {
+            if (descriptionEditing) {
+                $(this).parent().find('#description').attr('disabled', true);
+                $(this).text('Edit');
+                descriptionEditing = false;
+            } else {
+                $(this).parent().find('#description').attr('disabled', false);
+                $(this).text('Save');
+                descriptionEditing = true;
+            }
+        });
+        gameElement.find('.descriptionBtn').click();
+
         gameElement.find('.path').text(testData[i].path);
 
         $('.list').append(gameElement);
