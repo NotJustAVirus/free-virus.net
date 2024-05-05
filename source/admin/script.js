@@ -18,7 +18,7 @@ window.onload = function() {
 function addGameCard(data) {
     var gameElement = gameCardDummy.clone();
 
-    let titleEditing = true;
+    let titleEditing = false;
     gameElement.find('#title').val(data.title);
     gameElement.find('.titleBtn').on('click', function() {
         if (titleEditing) {
@@ -36,9 +36,10 @@ function addGameCard(data) {
             titleEditing = true;
         }
     });
-    gameElement.find('.titleBtn').click();
+    $(this).parent().find('#title').attr('disabled', true);
+    $(this).text('Edit');
 
-    let descriptionEditing = true;
+    let descriptionEditing = false;
     gameElement.find('#description').val(data.description);
     gameElement.find('.descriptionBtn').on('click', function() {
         if (descriptionEditing) {
@@ -56,7 +57,8 @@ function addGameCard(data) {
             descriptionEditing = true;
         }
     });
-    gameElement.find('.descriptionBtn').click();
+    $(this).parent().find('#description').attr('disabled', true);
+    $(this).text('Edit');
 
     gameElement.find('.path').text(data.path);
 
