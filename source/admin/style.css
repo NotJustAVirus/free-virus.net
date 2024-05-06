@@ -15,11 +15,18 @@
 }
 
 .list {
-    display: flex;
+    width: 100%;
+    height: fit-content;
 }
 
 .game {
-    margin-right: 1em;
+    position: relative;
+    float: left;
+}
+
+.game * {
+    display: flex;
+    float: none;
 }
 
 #dummy {
