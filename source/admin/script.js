@@ -1,18 +1,27 @@
 var gameCardDummy;
 
+var gameData = $.get('getGameData.php');
+
+var gameFolders = $.get('getGameFolders.php');
+
 window.onload = function() {
     gameCardDummy = $('#dummy .game');
 
-    $.get('getGameData.php', function(data) {
+    gameData.done(function(data) {
         data = JSON.parse(data);
-        for (var i = 0; i < data.length; i++) {
-            addGameCard(data[i]);
-        }
+        gameFolders.done(function(folders) {
+            folders = JSON.parse(folders);
+            for (let i = 0; i < data.length; i++) {
+                if (folders.includes(data[i].path)) {
+                    folders.splice(folders.indexOf(data[i].path), 1);
+                    addGameCard(data[i]);
+                }
+            }
+            for (let i = 0; i < folders.length; i++) {
+                console.log(folders[i]);
+            }
+        });
     });
-
-    // for (var i = 0; i < testData.length; i++) {
-    //     addGameCard(testData[i]);
-    // }
 }
 
 function addGameCard(data) {
