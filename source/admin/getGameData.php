@@ -4,6 +4,35 @@ include $_SERVER['DOCUMENT_ROOT']."/dbConnect.php";
 $sql = "SELECT * FROM games";
 $result = $conn->query($sql);
 
-echo json_encode($result->fetch_all(MYSQLI_ASSOC));
+$gameFolder = $_SERVER['DOCUMENT_ROOT']."/games/";
+$gameFolders = glob($gameFolder."*", GLOB_ONLYDIR);
+
+for ($i = 0; $i < count($gameFolders); $i++) {
+    $gameFolders[$i] = str_replace($gameFolder,"",$gameFolders[$i]);
+}
+
+$games = $result->fetch_all(MYSQLI_ASSOC);
+
+for ($i = 0; $i < count($games); $i++) {
+    $games[$i]['inDatabase'] = true;
+    if (in_array($games[$i]['path'], $gameFolders)) {
+        unset($gameFolders[array_search($games[$i]['path'], $gameFolders)]);
+        $games[$i]['exists'] = true;
+    } else {
+        $games[$i]['exists'] = false;
+    }
+}
+
+foreach ($gameFolders as $folder) {
+    $games[] = [
+        'path' => $folder,
+        'title' => '',
+        'description' => '',
+        'inDatabase' => false,
+        'exists' => true
+    ];
+}
+
+echo json_encode($games);
 
 ?>
