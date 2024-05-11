@@ -16,58 +16,42 @@ window.onload = function() {
 function addGameCard(data) {
     var gameElement = gameCardDummy.clone();
 
-    let titleEditing = false;
+    let editing = false;
+    gameElement.find('.path').text(data.path);
     gameElement.find('#title').val(data.title);
-    gameElement.find('.titleBtn').on('click', function() {
-        if (titleEditing) {
+    gameElement.find('#description').val(data.description);
+    gameElement.find('.gameicon').attr('src', "../games/" + data.path + "/icon.png");
+
+    gameElement.find('.editBtn').on('click', function() {
+        if (editing) {
             $(this).parent().find('#title').attr('disabled', true);
+            $(this).parent().find('#description').attr('disabled', true);
             $(this).text('Edit');
-            titleEditing = false;
+            editing = false;
             if (confirm('Are you sure you want to update this game?')) {
+                data.title = $(this).parent().find('#title').val();
+                data.description = $(this).parent().find('#description').val();
                 $.post('update.php?type=update', {
-                    title: $(this).parent().find('#title').val(),
-                    description: $(this).parent().find('#description').val(),
-                    path: $(this).parent().find('.path').text()
+                    title: data.title,
+                    description: data.description,
+                    path: data.path
                 });
             } else {
                 $(this).parent().find('#title').val(data.title);
-            }
-        } else {
-            $(this).parent().find('#title').attr('disabled', false);
-            $(this).text('Save');
-            titleEditing = true;
-        }
-    });
-
-    let descriptionEditing = false;
-    gameElement.find('#description').val(data.description);
-    gameElement.find('.descriptionBtn').on('click', function() {
-        if (descriptionEditing) {
-            $(this).parent().find('#description').attr('disabled', true);
-            $(this).text('Edit');
-            descriptionEditing = false;
-            if (confirm('Are you sure you want to update this game?')) {
-                $.post('update.php?type=update', {
-                    title: $(this).parent().find('#title').val(),
-                    description: $(this).parent().find('#description').val(),
-                    path: $(this).parent().find('.path').text()
-                });
-            } else {
                 $(this).parent().find('#description').val(data.description);
             }
         } else {
+            $(this).parent().find('#title').attr('disabled', false);
             $(this).parent().find('#description').attr('disabled', false);
             $(this).text('Save');
-            descriptionEditing = true;
+            editing = true;
         }
     });
 
-    gameElement.find('.path').text(data.path);
 
     if (!data.inDatabase) {
         gameElement.find('.createBtn').text('Create');
-        gameElement.find('.descriptionBtn').attr('disabled', true);
-        gameElement.find('.titleBtn').attr('disabled', true);
+        gameElement.find('.editBtn').attr('disabled', true);
         gameElement.find('.createBtn').on('click', function() {
             if (confirm('Are you sure you want to create this game?')) {
                 $.post('update.php?type=create', {
