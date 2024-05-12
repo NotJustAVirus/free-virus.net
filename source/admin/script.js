@@ -1,14 +1,24 @@
 var gameCardDummy;
+var tagDummy;
 
+var tagData = $.get('getTagData.php');
 var gameData = $.get('getGameData.php');
 
 window.onload = function() {
     gameCardDummy = $('#dummy .game');
+    tagDummy = $('#dummy .tag');
 
     gameData.done(function(data) {
         data = JSON.parse(data);
         for (let i = 0; i < data.length; i++) {
             addGameCard(data[i]);
+        }
+    });
+
+    tagData.done(function(data) {
+        data = JSON.parse(data);
+        for (let i = 0; i < data.length; i++) {
+            addTag(data[i]);
         }
     });
 }
@@ -73,5 +83,14 @@ function addGameCard(data) {
         });
     }
 
-    $('.list').append(gameElement);
+    $('.gameList').append(gameElement);
+}
+
+function addTag(tagData) {
+    var tagElement = tagDummy.clone();
+
+    tagElement.text(tagData.name);
+    tagElement.attr('style', 'color: #' + tagData.color);
+
+    $('.tagList').append(tagElement);
 }
