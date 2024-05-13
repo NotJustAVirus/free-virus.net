@@ -99,8 +99,17 @@ function addGameCard(data) {
 function addTag(tagData) {
     var tagElement = tagDummy.clone();
 
-    tagElement.text(tagData.name);
+    tagElement.find('.name').text(tagData.name);
     tagElement.attr('style', 'color: #' + tagData.color);
+
+    tagElement.find('.deleteBtn').on('click', function() {
+        if (confirm('Are you sure you want to delete this tag?')) {
+            $.post('update.php?type=deleteTag', {
+                name: tagData.name
+            });
+            window.location.reload();
+        }
+    });
 
     $('.tagList').append(tagElement);
 }

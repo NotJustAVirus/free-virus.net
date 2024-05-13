@@ -50,3 +50,11 @@
     padding: 2px;
     float: left;
 }
+
+.tag * {
+    display: inline-block;
+    color: inherit;
+}
+.tag .deleteBtn {
+    border: inherit;
+}

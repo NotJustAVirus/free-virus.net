@@ -58,6 +58,14 @@ switch ($_GET['type']) {
         $sql = "INSERT INTO tags (name, color) VALUES (?, ?)";
         $conn->execute_query($sql, [$name, $color]);
         break;
+    case 'deleteTag':
+        requirePostFields(['name']);
+
+        $name = $_POST['name'];
+
+        $sql = "DELETE FROM tags WHERE name = ?";
+        $conn->execute_query($sql, [$name]);
+        break;
     default:
         header('http/1.1 400 Bad Request');
         echo 'Invalid type';
