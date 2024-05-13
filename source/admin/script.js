@@ -21,6 +21,16 @@ window.onload = function() {
             addTag(data[i]);
         }
     });
+
+    $('.createTag').on('click', function() {
+        var name = $('#tagName').val();
+        var color = $('#tagColor').val();
+        $.post('update.php?type=createTag', {
+            name: name,
+            color: color
+        });
+        window.location.reload();
+    });
 }
 
 function addGameCard(data) {
