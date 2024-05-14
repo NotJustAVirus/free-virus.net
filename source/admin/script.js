@@ -1,26 +1,26 @@
 var gameCardDummy;
 var tagDummy;
 
-var tagData = $.get('getTagData.php');
+var tagsData = $.get('getTagData.php');
 var gameData = $.get('getGameData.php');
 
-window.onload = function() {
+window.onload = async function() {
     gameCardDummy = $('#dummy .game');
     tagDummy = $('#dummy .tag');
 
-    gameData.done(function(data) {
-        data = JSON.parse(data);
-        for (let i = 0; i < data.length; i++) {
-            addGameCard(data[i]);
-        }
-    });
+    await gameData;
+    await tagsData;
+    gameData = JSON.parse(gameData.responseText);
+    tagsData = JSON.parse(tagsData.responseText);
 
-    tagData.done(function(data) {
-        data = JSON.parse(data);
-        for (let i = 0; i < data.length; i++) {
-            addTag(data[i]);
-        }
-    });
+    for (let i = 0; i < gameData.length; i++) {
+        addGameCard(gameData[i]);
+    }
+
+    for (let i = 0; i < tagsData.length; i++) {
+        addTag(tagsData[i]);
+    }
+
 
     $('.createTag').on('click', function() {
         var name = $('#tagName').val();
@@ -41,6 +41,13 @@ function addGameCard(data) {
     gameElement.find('#title').val(data.title);
     gameElement.find('#description').val(data.description);
     gameElement.find('.gameicon').attr('src', "../games/" + data.path + "/icon.png");
+
+    if (data.inDatabase) {
+        for (let i = 0; i < data.tags.length; i++) {
+            var tagData = tagsData.find(tag => tag.id == data.tags[i].tag_id);
+            addTagToGame(tagData, gameElement);
+        }
+    }
 
     gameElement.find('.editBtn').on('click', function() {
         if (editing) {
@@ -93,7 +100,7 @@ function addGameCard(data) {
         });
     }
 
-    $('.gameList').append(gameElement);
+    $('#gameList').append(gameElement);
 }
 
 function addTag(tagData) {
@@ -111,5 +118,24 @@ function addTag(tagData) {
         }
     });
 
-    $('.tagList').append(tagElement);
+    $('#tagList').append(tagElement);
+}
+
+function addTagToGame(tagData, gameElement) {
+    var tagElement = tagDummy.clone();
+
+    tagElement.find('.name').text(tagData.name);
+    tagElement.attr('style', 'color: #' + tagData.color);
+
+    tagElement.find('.deleteBtn').on('click', function() {
+        if (confirm('Are you sure you want to remove this tag from this game?')) {
+            $.post('update.php?type=deleteTagFromGame', {
+                name: tagData.name,
+                path: gameElement.find('.path').text()
+            });
+            tagElement.remove();
+        }
+    });
+
+    gameElement.find('.tagList').append(tagElement);
 }

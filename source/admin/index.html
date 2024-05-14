@@ -1,6 +1,7 @@
 <div id="dummy">
     <div class="game">
         <div class="path">path</div>
+        <div class="tagList"></div>
         <input type="text" name="title" id="title" disabled>
         <textarea name="description" id="description" cols="30" rows="10" disabled></textarea>
         <img class="gameicon" src="">
@@ -10,12 +11,14 @@
     <div class="tag"><div class="name"></div><button class="deleteBtn">x</button></div>
 </div>
 <div id="container">
-    <div class="list tagList">
-        <input type="text" name="tagName" id="tagName">
-        <input type="color" name="tagColor" id="tagColor">
-        <button class="createTag">Create Tag</button>
+    <div class="list" id="tagList">
+        <div class="createTagBox">
+            <input type="text" name="tagName" id="tagName" autocomplete="off">
+            <input type="color" name="tagColor" id="tagColor">
+            <button class="createTag">Create Tag</button>
+        </div>
     </div>
-    <div class="list gameList">
+    <div class="list" id="gameList">
 
     </div>
 </div>
