@@ -7,7 +7,13 @@ var gameData = $.get('getGameData.php');
 window.onload = async function() {
     gameCardDummy = $('#dummy .game');
     tagDummy = $('#dummy .tag');
-
+    $('#dummy').remove();
+    
+    $('.popup').hide();
+    $('.popup .close').on('click', function() {
+        $('.popup').hide();
+    });
+    
     await gameData;
     await tagsData;
     gameData = JSON.parse(gameData.responseText);
@@ -48,6 +54,29 @@ function addGameCard(data) {
             addTagToGame(tagData, gameElement);
         }
     }
+    gameElement.find('.addTag').on('click', function() {
+        var popup = $('.popup');
+        popup.show();
+        popup.find('.tagselect').empty();
+        for (let i = 0; i < tagsData.length; i++) {
+            if (data.tags.find(tag => tag.tag_id == tagsData[i].id)) {
+                continue;
+            }
+            var tagElement = $('<option>');
+            tagElement.text(tagsData[i].name);
+            tagElement.attr('style', 'color: #' + tagsData[i].color);
+            tagElement.attr('value', tagsData[i].id);
+            popup.find('.tagselect').append(tagElement);
+        }
+        popup.find('.addTag').on('click', function() {
+            $.post('update.php?type=addTagToGame', {
+                tag: $(this).parent().find('.tagselect').val(),
+                game: data.id
+            });
+            addTagToGame(tagsData.find(tag => tag.id == $(this).parent().find('.tagselect').val()), gameElement);
+            popup.hide();
+        });
+    });
 
     gameElement.find('.editBtn').on('click', function() {
         if (editing) {
@@ -129,7 +158,7 @@ function addTagToGame(tagData, gameElement) {
 
     tagElement.find('.deleteBtn').on('click', function() {
         if (confirm('Are you sure you want to remove this tag from this game?')) {
-            $.post('update.php?type=deleteTagFromGame', {
+            $.post('update.php?type=removeTagFromGame', {
                 name: tagData.name,
                 path: gameElement.find('.path').text()
             });
@@ -137,5 +166,5 @@ function addTagToGame(tagData, gameElement) {
         }
     });
 
-    gameElement.find('.tagList').append(tagElement);
+    gameElement.find('.tagList').prepend(tagElement);
 }

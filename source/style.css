@@ -26,6 +26,11 @@ input {
     padding: 2px;
     border: 1px solid #ffffff;
 }
+select {
+    background-color:black;
+    padding: 2px;
+    border: 1px solid #ffffff;
+}
 a:link {
     text-decoration: none;
     color: var(--main-red);

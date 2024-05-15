@@ -66,6 +66,24 @@ switch ($_GET['type']) {
         $sql = "DELETE FROM tags WHERE name = ?";
         $conn->execute_query($sql, [$name]);
         break;
+    case 'addTagToGame':
+        requirePostFields(['game', 'tag']);
+
+        $game = $_POST['game'];
+        $tag = $_POST['tag'];
+
+        $sql = "INSERT INTO game_tags (game_id, tag_id) VALUES (?, ?)";
+        $conn->execute_query($sql, [$game, $tag]);
+        break;
+    case 'removeTagFromGame':
+        requirePostFields(['name', 'path']);
+
+        $name = $_POST['name'];
+        $path = $_POST['path'];
+
+        $sql = "DELETE FROM game_tags WHERE game_id = (SELECT id FROM games WHERE path = ?) AND tag_id = (SELECT id FROM tags WHERE name = ?)";
+        $conn->execute_query($sql, [$path, $name]);
+        break;
     default:
         header('http/1.1 400 Bad Request');
         echo 'Invalid type';

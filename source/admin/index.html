@@ -1,7 +1,7 @@
 <div id="dummy">
     <div class="game">
         <div class="path">path</div>
-        <div class="tagList"></div>
+        <div class="tagList"><button class="addTag">+</button></div>
         <input type="text" name="title" id="title" disabled>
         <textarea name="description" id="description" cols="30" rows="10" disabled></textarea>
         <img class="gameicon" src="">
@@ -19,6 +19,13 @@
         </div>
     </div>
     <div class="list" id="gameList">
-
+        
+    </div>
+    <div class="popup tagSelectBox" id="tagchoice">
+        <button class="topright close">x</button>
+        <select name="tag" id="selectedTag" class="tagselect">
+            <option value="0">Select Tag</option>
+        </select>
+        <button class="addTag">Add Tag</button>
     </div>
 </div>
