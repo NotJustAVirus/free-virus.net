@@ -1,0 +1,18 @@
+<div class="contain rust">
+    <div id="rust_wheel_checkbox_div">
+        <input type="checkbox" name="rust_wheel" id="rust_wheel_checkbox" checked onchange="toggleRust()">
+        <label for="rust_wheel_checkbox">Rust Wheel</label>
+    </div>
+    <center class="wheel">
+        <div id="arrow"><img src="images/rust_arrow.png" alt="rust_arrow"></div>
+        <div id="wheel"><img id="wheelImg" src="images/rust_wheel.png" alt="wheel"></div>
+        <button id="spin" onclick="spin()">Spin</button>
+        <div class="spinOptionsBox">
+            <button id="yellow" onclick="bet('yellow')" type="button" class="chosen"><img src="images/bet_yellow.png" alt="bet yellow 1"></button>
+            <button id="green" onclick="bet('green')" type="button"><img src="images/bet_green.png" alt="bet green 3"></button>
+            <button id="blue" onclick="bet('blue')" type="button"><img src="images/bet_blue.png" alt="bet blue 5"></button>
+            <button id="purple" onclick="bet('purple')" type="button"><img src="images/bet_purple.png" alt="bet purple 10"></button>
+            <button id="red" onclick="bet('red')" type="button"><img src="images/bet_red.png" alt="bet red 20"></button>
+        </div>
+    </center>
+</div>

@@ -1,0 +1,5 @@
+php_value mbstring.http_input auto
+php_value date.timezone Europe/Copenhagen
+RewriteEngine On
+RewriteRule . main.php
+php_value display_errors On

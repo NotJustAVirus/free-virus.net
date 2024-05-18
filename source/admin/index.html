@@ -1,0 +1,31 @@
+<div id="dummy">
+    <div class="game">
+        <div class="path">path</div>
+        <div class="tagList"><button class="addTag">+</button></div>
+        <input type="text" name="title" id="title" disabled>
+        <textarea name="description" id="description" cols="30" rows="10" disabled></textarea>
+        <img class="gameicon" src="">
+        <button class="editBtn">Edit</button>
+        <button class="createBtn deleteBtn">Delete</button>
+    </div>
+    <div class="tag"><div class="name"></div><button class="deleteBtn">x</button></div>
+</div>
+<div id="container">
+    <div class="list" id="tagList">
+        <div class="createTagBox">
+            <input type="text" name="tagName" id="tagName" autocomplete="off">
+            <input type="color" name="tagColor" id="tagColor">
+            <button class="createTag">Create Tag</button>
+        </div>
+    </div>
+    <div class="list" id="gameList">
+        
+    </div>
+    <div class="popup tagSelectBox" id="tagchoice">
+        <button class="topright close">x</button>
+        <select name="tag" id="selectedTag" class="tagselect">
+            <option value="0">Select Tag</option>
+        </select>
+        <button class="addTag">Add Tag</button>
+    </div>
+</div>

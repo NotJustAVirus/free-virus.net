@@ -1,0 +1,57 @@
+#wheel img{
+    max-height: 100%;
+    max-width: 80%;
+}
+#wheel {
+    margin-top: 70px;
+    width: 100%;
+    max-height: 500px;
+}
+#arrow {
+    position: relative;
+    top: 50px;
+    margin-bottom: 0;
+    height: 0;
+    z-index: 1;
+}
+button {
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+#rust_wheel_checkbox_div {
+    position: absolute;
+    margin-top: 50px;
+}
+.spinOptionsBox {
+    margin-top: 20px;
+    width: fit-content;
+    background-color: #72727296;
+    padding: 11px;
+}
+.spinOptionsBox button img {
+    width: 60px;
+    height: 60px;
+}
+.spinOptionsBox button {
+    margin: 3px 6px;
+    padding: 8px 9px;
+    background-color: #2a2925;
+    border: none;
+}
+.spinOptionsBox button:hover {
+    /* background-color: #3a3a3a; */
+    scale: 1.05;
+}
+.spinOptionsBox button:active {
+    scale: 0.95;
+}
+button.chosen {
+    /* border: 2px solid #ff0000; */
+    background-color: #cf0000;
+}
+.contain.rust {
+    background-image: url('images/rust_background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
