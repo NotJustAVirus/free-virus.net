@@ -27,32 +27,34 @@ if (file_exists($path."config")) {
     $configContent = file_get_contents($path."config");
     $config = explode("\n",$configContent);
     foreach ($config as $line) {
-        $line = explode(":",$line);
-        switch ($line[0]) {
+        $firstColon = strpos($line,":");
+        $configName = substr($line,0,$firstColon);
+        $value = substr($line,$firstColon+1);
+        switch ($configName) {
             case "style":
-                $style[] = $line[1];
+                $style[] = $value;
                 break;
             case "script":
-                $script[] = $line[1];
+                $script[] = $value;
                 break;
             case "title":
-                $title = $line[1];
+                $title = $value;
                 break;
             case "header":
-                $header[] = $line[1];
+                $header[] = $value;
                 break;
             case "casino":
                 $iscasino = true;
                 break;
             case "icon":
-                $icon = $line[1];
+                $icon = $value;
                 break;
             case "auth":
                 if (!isset($_SESSION['authLevel'])) {
                     header("Location: /login");
                     exit();
                 }
-                if ($_SESSION['authLevel'] < $line[1]) {
+                if ($_SESSION['authLevel'] < $value) {
                     header("HTTP/1.0 403 Forbidden");
                     echo "You do not have permission to view this page";
                     exit();
