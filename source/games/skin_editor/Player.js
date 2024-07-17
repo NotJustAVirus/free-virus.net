@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 export class Player extends THREE.Object3D {
 
-    constructor() {
+    constructor(skincanvas) {
         super();
         // var cube = this;
         // cube.position.set(position.x, position.y, position.z);
@@ -16,6 +16,27 @@ export class Player extends THREE.Object3D {
         //     cube.mesh = new THREE.Mesh(cube.geometry, cube.material);
         //     cube.add(cube.mesh);
         // });
+
+        var canvasTexture = new THREE.CanvasTexture(skincanvas);
+        canvasTexture.colorSpace = THREE.SRGBColorSpace;
+        canvasTexture.magFilter = THREE.NearestFilter;
+
+        var plane = new THREE.PlaneGeometry(8, 8);
+        // plane.rotateX(-Math.PI / 2);
+        // plane.translate(0, 0, 0);
+        plane.attributes.uv.array[0] = 8/64;
+        plane.attributes.uv.array[1] = (64 - 8)/64;
+        plane.attributes.uv.array[2] = 16/64;
+        plane.attributes.uv.array[3] = (64 - 8)/64;
+        plane.attributes.uv.array[4] = 8/64;
+        plane.attributes.uv.array[5] = (64 - 16)/64;
+        plane.attributes.uv.array[6] = 16/64;
+        plane.attributes.uv.array[7] = (64 - 16)/64;
+        var material = new THREE.MeshBasicMaterial({ map: canvasTexture, side: THREE.DoubleSide });
+        // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        var mesh = new THREE.Mesh(plane, material);
+        this.add(mesh);
+
         var rightArm = new THREE.Object3D();
         var leftArm = new THREE.Object3D();
         var rightLeg = new THREE.Object3D();
@@ -62,7 +83,7 @@ export class Player extends THREE.Object3D {
         cube.position.set(-6, 6 + 12, 0);
         leftArm.add(cube);
 
-        this.add(player);
+        // this.add(player);
 
         player.position.set(0, -6 - 12, 0);
 
