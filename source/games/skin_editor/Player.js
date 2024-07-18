@@ -50,44 +50,110 @@ export class Player extends THREE.Object3D {
         player.add(leftLeg);
         player.add(head);
         player.add(body);
-        
-        var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
-        var geometry = new THREE.BoxGeometry(8, 8, 8);
-        var cube = new THREE.Mesh(geometry, material);
+        var cube = new PlayerPart(8, 8, 8, material);
+        cube.addUVmapping(64, 64, 0, 48);
         cube.position.set(0, 4 + 12 + 12, 0);
         head.add(cube);
 
-        var geometry = new THREE.BoxGeometry(8, 12, 4);
-        var cube = new THREE.Mesh(geometry, material);
+        var cube = new PlayerPart(8, 12, 4, material);
+        cube.addUVmapping(64, 64, 16, 32);
         cube.position.set(0, 6 + 12, 0);
         body.add(cube);
 
-        var geometry = new THREE.BoxGeometry(4, 12, 4);
-        var cube = new THREE.Mesh(geometry, material);
+        var cube = new PlayerPart(4, 12, 4, material);
+        cube.addUVmapping(64, 64, 0, 0);
         cube.position.set(2, 6, 0);
         rightLeg.add(cube);
-
-        var geometry = new THREE.BoxGeometry(4, 12, 4);
-        var cube = new THREE.Mesh(geometry, material);
+        
+        var cube = new PlayerPart(4, 12, 4, material);
+        cube.addUVmapping(64, 64, 16, 0);
         cube.position.set(-2, 6, 0);
         leftLeg.add(cube);
-
-        var geometry = new THREE.BoxGeometry(4, 12, 4);
-        var cube = new THREE.Mesh(geometry, material);
+        
+        var cube = new PlayerPart(4, 12, 4, material);
+        cube.addUVmapping(64, 64, 16+24, 32);
         cube.position.set(6, 6 + 12, 0);
+        // cube.scale.set(2, 2, 2);
         rightArm.add(cube);
-
-        var geometry = new THREE.BoxGeometry(4, 12, 4);
-        var cube = new THREE.Mesh(geometry, material);
+        
+        var cube = new PlayerPart(4, 12, 4, material);
+        cube.addUVmapping(64, 64, 32, 0);
         cube.position.set(-6, 6 + 12, 0);
         leftArm.add(cube);
 
-        // this.add(player);
+        this.add(player);
 
         player.position.set(0, -6 - 12, 0);
 
         this.position.set(0, 0, 0);
 
     }
+}
+
+class PlayerPart extends THREE.Object3D {
+    constructor(h, w, d, material) {
+        super();
+        this.h = h;
+        this.w = w;
+        this.d = d;
+        this.pxPlane = new THREE.PlaneGeometry(d, w);
+        this.nxPlane = new THREE.PlaneGeometry(d, w);
+        this.pyPlane = new THREE.PlaneGeometry(h, d);
+        this.nyPlane = new THREE.PlaneGeometry(h, d);
+        this.pzPlane = new THREE.PlaneGeometry(h, w);
+        this.nzPlane = new THREE.PlaneGeometry(h, w);
+        this.pxPlane.rotateY(Math.PI / 2);
+        this.nxPlane.rotateY(-Math.PI / 2);
+        this.pyPlane.rotateX(-Math.PI / 2);
+        this.nyPlane.rotateX(Math.PI / 2);
+        this.pzPlane.rotateX(0);
+        this.nzPlane.rotateX(Math.PI);
+        this.pxPlane.translate(h / 2, 0, 0);
+        this.nxPlane.translate(-h / 2, 0, 0);
+        this.pyPlane.translate(0, w / 2, 0);
+        this.nyPlane.translate(0, -w / 2, 0);
+        this.pzPlane.translate(0, 0, d / 2);
+        this.nzPlane.translate(0, 0, -d / 2);
+        var px = new THREE.Mesh(this.pxPlane, material);
+        var nx = new THREE.Mesh(this.nxPlane, material);
+        var py = new THREE.Mesh(this.pyPlane, material);
+        var ny = new THREE.Mesh(this.nyPlane, material);
+        var pz = new THREE.Mesh(this.pzPlane, material);
+        var nz = new THREE.Mesh(this.nzPlane, material);
+        this.add(px);
+        this.add(nx);
+        this.add(py);
+        this.add(ny);
+        this.add(pz);
+        this.add(nz);
+    }
+
+    addUVmapping(sizeX, sizeY, offsetX, offsetY) {
+        this.calculateUVs(this.nxPlane, sizeX, sizeY, offsetX, offsetY);
+        offsetX += this.d;
+        this.calculateUVs(this.pzPlane, sizeX, sizeY, offsetX, offsetY);
+
+        this.calculateUVs(this.nyPlane, sizeX, sizeY, offsetX, offsetY + this.w);
+        this.calculateUVs(this.pyPlane, sizeX, sizeY, offsetX + this.d, offsetY + this.w);
+
+        offsetX += this.h;
+        this.calculateUVs(this.pxPlane, sizeX, sizeY, offsetX, offsetY);
+        offsetX += this.d;
+        this.calculateUVs(this.nzPlane, sizeX, sizeY, offsetX, offsetY);
+    }
+
+    calculateUVs(geometry, sizeX, sizeY, offsetX, offsetY) {
+        var uvs = geometry.attributes.uv.array;
+        var d = geometry.parameters.width;
+        var w = geometry.parameters.height;
+        uvs[0] = offsetX / sizeX;
+        uvs[1] = offsetY / sizeY;
+        uvs[2] = (offsetX + d) / sizeX;
+        uvs[3] = offsetY / sizeY;
+        uvs[4] = offsetX / sizeX;
+        uvs[5] = (offsetY + w) / sizeY;
+        uvs[6] = (offsetX + d) / sizeX;
+        uvs[7] = (offsetY + w) / sizeY;
+    } 
 }
