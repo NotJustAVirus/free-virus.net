@@ -20,30 +20,53 @@ export class Player extends THREE.Object3D {
         var canvasTexture = new THREE.CanvasTexture(skincanvas);
         canvasTexture.colorSpace = THREE.SRGBColorSpace;
         canvasTexture.magFilter = THREE.NearestFilter;
+        canvasTexture.minFilter = THREE.NearestFilter;
 
-        var plane = new THREE.PlaneGeometry(8, 8);
-        // plane.rotateX(-Math.PI / 2);
-        // plane.translate(0, 0, 0);
-        plane.attributes.uv.array[0] = 8/64;
-        plane.attributes.uv.array[1] = (64 - 8)/64;
-        plane.attributes.uv.array[2] = 16/64;
-        plane.attributes.uv.array[3] = (64 - 8)/64;
-        plane.attributes.uv.array[4] = 8/64;
-        plane.attributes.uv.array[5] = (64 - 16)/64;
-        plane.attributes.uv.array[6] = 16/64;
-        plane.attributes.uv.array[7] = (64 - 16)/64;
-        var material = new THREE.MeshBasicMaterial({ map: canvasTexture, side: THREE.DoubleSide });
-        // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        var mesh = new THREE.Mesh(plane, material);
-        this.add(mesh);
+        var material = new THREE.MeshBasicMaterial({ map: canvasTexture });
+        material.transparent = true;
 
-        var rightArm = new THREE.Object3D();
-        var leftArm = new THREE.Object3D();
-        var rightLeg = new THREE.Object3D();
-        var leftLeg = new THREE.Object3D();
         var head = new THREE.Object3D();
+        head.position.set(0, 4 + 12 + 12, 0);
         var body = new THREE.Object3D();
+        body.position.set(0, 6 + 12, 0);
+        var rightLeg = new THREE.Object3D();
+        rightLeg.position.set(2, 6, 0);
+        var leftLeg = new THREE.Object3D();
+        leftLeg.position.set(-2, 6, 0);
+        var rightArm = new THREE.Object3D();
+        rightArm.position.set(6, 6 + 12, 0);
+        var leftArm = new THREE.Object3D();
+        leftArm.position.set(-6, 6 + 12, 0);
+        
+        var headPart = new PlayerPart(8, 8, 8, material);
+        headPart.addUVmapping(64, 64, 0, 48);
+        // var hat = new PlayerPart(8, 8, 8, material);
+        // hat.addUVmapping(64, 64, 32, 48);
+        head.add(headPart);
+        // head.add(hat);
+        
+        var bodyPart = new PlayerPart(8, 12, 4, material);
+        bodyPart.addUVmapping(64, 64, 16, 32);
+        body.add(bodyPart);
+        
+        var rightLegPart = new PlayerPart(4, 12, 4, material);
+        rightLegPart.addUVmapping(64, 64, 16, 0);
+        rightLeg.add(rightLegPart);
+        
+        var leftLegPart = new PlayerPart(4, 12, 4, material);
+        leftLegPart.addUVmapping(64, 64, 0, 32);
+        leftLeg.add(leftLegPart);
+        
+        var rightArmPart = new PlayerPart(4, 12, 4, material);
+        rightArmPart.addUVmapping(64, 64, 32, 0);
+        rightArm.add(rightArmPart);
+        
+        var leftArmPart = new PlayerPart(4, 12, 4, material);
+        leftArmPart.addUVmapping(64, 64, 16+24, 32);
+        leftArm.add(leftArmPart);
+        
         var player = new THREE.Object3D();
+        
         player.add(rightArm);
         player.add(leftArm);
         player.add(rightLeg);
@@ -51,43 +74,11 @@ export class Player extends THREE.Object3D {
         player.add(head);
         player.add(body);
 
-        var cube = new PlayerPart(8, 8, 8, material);
-        cube.addUVmapping(64, 64, 0, 48);
-        cube.position.set(0, 4 + 12 + 12, 0);
-        head.add(cube);
-
-        var cube = new PlayerPart(8, 12, 4, material);
-        cube.addUVmapping(64, 64, 16, 32);
-        cube.position.set(0, 6 + 12, 0);
-        body.add(cube);
-
-        var cube = new PlayerPart(4, 12, 4, material);
-        cube.addUVmapping(64, 64, 0, 0);
-        cube.position.set(2, 6, 0);
-        rightLeg.add(cube);
-        
-        var cube = new PlayerPart(4, 12, 4, material);
-        cube.addUVmapping(64, 64, 16, 0);
-        cube.position.set(-2, 6, 0);
-        leftLeg.add(cube);
-        
-        var cube = new PlayerPart(4, 12, 4, material);
-        cube.addUVmapping(64, 64, 16+24, 32);
-        cube.position.set(6, 6 + 12, 0);
-        // cube.scale.set(2, 2, 2);
-        rightArm.add(cube);
-        
-        var cube = new PlayerPart(4, 12, 4, material);
-        cube.addUVmapping(64, 64, 32, 0);
-        cube.position.set(-6, 6 + 12, 0);
-        leftArm.add(cube);
-
         this.add(player);
-
+        
         player.position.set(0, -6 - 12, 0);
-
-        this.position.set(0, 0, 0);
-
+        
+        // this.position.set(0, 0, 0);
     }
 }
 
@@ -130,30 +121,46 @@ class PlayerPart extends THREE.Object3D {
     }
 
     addUVmapping(sizeX, sizeY, offsetX, offsetY) {
-        this.calculateUVs(this.nxPlane, sizeX, sizeY, offsetX, offsetY);
+        this.calculateUVs(this.nxPlane, sizeX, sizeY, offsetX, offsetY, true, false);
         offsetX += this.d;
-        this.calculateUVs(this.pzPlane, sizeX, sizeY, offsetX, offsetY);
+        this.calculateUVs(this.pzPlane, sizeX, sizeY, offsetX, offsetY, true, false);
 
-        this.calculateUVs(this.nyPlane, sizeX, sizeY, offsetX, offsetY + this.w);
-        this.calculateUVs(this.pyPlane, sizeX, sizeY, offsetX + this.d, offsetY + this.w);
+        this.calculateUVs(this.pyPlane, sizeX, sizeY, offsetX, offsetY + this.w, true, false);
+        this.calculateUVs(this.nyPlane, sizeX, sizeY, offsetX + this.d, offsetY + this.w, false, false);
 
         offsetX += this.h;
-        this.calculateUVs(this.pxPlane, sizeX, sizeY, offsetX, offsetY);
+        this.calculateUVs(this.pxPlane, sizeX, sizeY, offsetX, offsetY, true, false);
         offsetX += this.d;
-        this.calculateUVs(this.nzPlane, sizeX, sizeY, offsetX, offsetY);
+        this.calculateUVs(this.nzPlane, sizeX, sizeY, offsetX, offsetY, false, true);
     }
 
-    calculateUVs(geometry, sizeX, sizeY, offsetX, offsetY) {
+    calculateUVs(geometry, sizeX, sizeY, offsetX, offsetY, flipV, flipH) {
         var uvs = geometry.attributes.uv.array;
-        var d = geometry.parameters.width;
-        var w = geometry.parameters.height;
+        var w = geometry.parameters.width;
+        var h = geometry.parameters.height;
         uvs[0] = offsetX / sizeX;
         uvs[1] = offsetY / sizeY;
-        uvs[2] = (offsetX + d) / sizeX;
+        uvs[2] = (offsetX + w) / sizeX;
         uvs[3] = offsetY / sizeY;
         uvs[4] = offsetX / sizeX;
-        uvs[5] = (offsetY + w) / sizeY;
-        uvs[6] = (offsetX + d) / sizeX;
-        uvs[7] = (offsetY + w) / sizeY;
+        uvs[5] = (offsetY + h) / sizeY;
+        uvs[6] = (offsetX + w) / sizeX;
+        uvs[7] = (offsetY + h) / sizeY;
+        if (flipV) {
+            var tmp = uvs[1];
+            uvs[1] = uvs[5];
+            uvs[5] = tmp;
+            tmp = uvs[3];
+            uvs[3] = uvs[7];
+            uvs[7] = tmp;
+        }
+        if (flipH) {
+            var tmp = uvs[0];
+            uvs[0] = uvs[2];
+            uvs[2] = tmp;
+            tmp = uvs[4];
+            uvs[4] = uvs[6];
+            uvs[6] = tmp;
+        }
     } 
 }
