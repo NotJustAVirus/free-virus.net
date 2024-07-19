@@ -22,7 +22,7 @@ export class Player extends THREE.Object3D {
         canvasTexture.magFilter = THREE.NearestFilter;
         canvasTexture.minFilter = THREE.NearestFilter;
 
-        var material = new THREE.MeshBasicMaterial({ map: canvasTexture });
+        var material = new THREE.MeshBasicMaterial({ map: canvasTexture, side: THREE.DoubleSide });
         material.transparent = true;
 
         var head = new THREE.Object3D();
@@ -40,30 +40,51 @@ export class Player extends THREE.Object3D {
         
         var headPart = new PlayerPart(8, 8, 8, material);
         headPart.addUVmapping(64, 64, 0, 48);
-        // var hat = new PlayerPart(8, 8, 8, material);
-        // hat.addUVmapping(64, 64, 32, 48);
+        var hat = new PlayerPart(8, 8, 8, material);
+        hat.addUVmapping(64, 64, 32, 48);
+        hat.scale.set(1.125, 1.125, 1.125);
         head.add(headPart);
-        // head.add(hat);
+        head.add(hat);
         
         var bodyPart = new PlayerPart(8, 12, 4, material);
         bodyPart.addUVmapping(64, 64, 16, 32);
+        var jacket = new PlayerPart(8, 12, 4, material);
+        jacket.addUVmapping(64, 64, 16, 16);
+        jacket.scale.set(1.0625, 1.0625, 1.0625);
         body.add(bodyPart);
+        body.add(jacket);
         
         var rightLegPart = new PlayerPart(4, 12, 4, material);
         rightLegPart.addUVmapping(64, 64, 16, 0);
+        var rightPants = new PlayerPart(4, 12, 4, material);
+        rightPants.addUVmapping(64, 64, 0, 0);
+        rightPants.scale.set(1.0625, 1.0625, 1.0625);
         rightLeg.add(rightLegPart);
+        rightLeg.add(rightPants);
         
         var leftLegPart = new PlayerPart(4, 12, 4, material);
         leftLegPart.addUVmapping(64, 64, 0, 32);
+        var leftPants = new PlayerPart(4, 12, 4, material);
+        leftPants.addUVmapping(64, 64, 0, 16);
+        leftPants.scale.set(1.0625, 1.0625, 1.0625);
         leftLeg.add(leftLegPart);
+        leftLeg.add(leftPants);
         
         var rightArmPart = new PlayerPart(4, 12, 4, material);
         rightArmPart.addUVmapping(64, 64, 32, 0);
+        var rightSleeve = new PlayerPart(4, 12, 4, material);
+        rightSleeve.addUVmapping(64, 64, 48, 0);
+        rightSleeve.scale.set(1.0625, 1.0625, 1.0625);
         rightArm.add(rightArmPart);
+        rightArm.add(rightSleeve);
         
         var leftArmPart = new PlayerPart(4, 12, 4, material);
         leftArmPart.addUVmapping(64, 64, 16+24, 32);
+        var leftSleeve = new PlayerPart(4, 12, 4, material);
+        leftSleeve.addUVmapping(64, 64, 16+24, 16);
+        leftSleeve.scale.set(1.0625, 1.0625, 1.0625);
         leftArm.add(leftArmPart);
+        leftArm.add(leftSleeve);
         
         var player = new THREE.Object3D();
         
