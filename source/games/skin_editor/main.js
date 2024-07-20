@@ -39,3 +39,15 @@ function animate() {
 	renderer.render( scene, camera );
 
 }
+
+window.addEventListener('resize', onWindowResize, false);
+onWindowResize();
+
+function onWindowResize() {
+	camera.aspect = (window.innerWidth - 10) / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize((window.innerWidth - 10), window.innerHeight);
+
+	controls.handleResize();
+}
