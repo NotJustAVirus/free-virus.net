@@ -17,12 +17,12 @@ export class Player extends THREE.Object3D {
         //     cube.add(cube.mesh);
         // });
 
-        var canvasTexture = new THREE.CanvasTexture(skincanvas);
-        canvasTexture.colorSpace = THREE.SRGBColorSpace;
-        canvasTexture.magFilter = THREE.NearestFilter;
-        canvasTexture.minFilter = THREE.NearestFilter;
+        this.canvasTexture = new THREE.CanvasTexture(skincanvas);
+        this.canvasTexture.colorSpace = THREE.SRGBColorSpace;
+        this.canvasTexture.magFilter = THREE.NearestFilter;
+        this.canvasTexture.minFilter = THREE.NearestFilter;
 
-        var material = new THREE.MeshBasicMaterial({ map: canvasTexture, side: THREE.DoubleSide, alphaTest: 0.1 });
+        this.material = new THREE.MeshBasicMaterial({ map: this.canvasTexture, side: THREE.DoubleSide, alphaTest: 0.1 });
 
         var head = new THREE.Object3D();
         head.position.set(0, 4 + 12 + 12, 0);
@@ -37,49 +37,49 @@ export class Player extends THREE.Object3D {
         var leftArm = new THREE.Object3D();
         leftArm.position.set(-6, 6 + 12, 0);
         
-        var headPart = new PlayerPart(8, 8, 8, material);
+        var headPart = new PlayerPart(8, 8, 8, this.material);
         headPart.addUVmapping(64, 64, 0, 48);
-        var hat = new PlayerPart(8, 8, 8, material);
+        var hat = new PlayerPart(8, 8, 8, this.material);
         hat.addUVmapping(64, 64, 32, 48);
         hat.scale.set(1.1, 1.1, 1.1);
         head.add(headPart);
         head.add(hat);
         
-        var bodyPart = new PlayerPart(8, 12, 4, material);
+        var bodyPart = new PlayerPart(8, 12, 4, this.material);
         bodyPart.addUVmapping(64, 64, 16, 32);
-        var jacket = new PlayerPart(8, 12, 4, material);
+        var jacket = new PlayerPart(8, 12, 4, this.material);
         jacket.addUVmapping(64, 64, 16, 16);
         jacket.scale.set(1.1, 1.1, 1.1);
         body.add(bodyPart);
         body.add(jacket);
         
-        var rightLegPart = new PlayerPart(4, 12, 4, material);
+        var rightLegPart = new PlayerPart(4, 12, 4, this.material);
         rightLegPart.addUVmapping(64, 64, 16, 0);
-        var rightPants = new PlayerPart(4, 12, 4, material);
+        var rightPants = new PlayerPart(4, 12, 4, this.material);
         rightPants.addUVmapping(64, 64, 0, 0);
         rightPants.scale.set(1.1, 1.1, 1.1);
         rightLeg.add(rightLegPart);
         rightLeg.add(rightPants);
         
-        var leftLegPart = new PlayerPart(4, 12, 4, material);
+        var leftLegPart = new PlayerPart(4, 12, 4, this.material);
         leftLegPart.addUVmapping(64, 64, 0, 32);
-        var leftPants = new PlayerPart(4, 12, 4, material);
+        var leftPants = new PlayerPart(4, 12, 4, this.material);
         leftPants.addUVmapping(64, 64, 0, 16);
         leftPants.scale.set(1.1, 1.1, 1.1);
         leftLeg.add(leftLegPart);
         leftLeg.add(leftPants);
         
-        var rightArmPart = new PlayerPart(4, 12, 4, material);
+        var rightArmPart = new PlayerPart(4, 12, 4, this.material);
         rightArmPart.addUVmapping(64, 64, 32, 0);
-        var rightSleeve = new PlayerPart(4, 12, 4, material);
+        var rightSleeve = new PlayerPart(4, 12, 4, this.material);
         rightSleeve.addUVmapping(64, 64, 48, 0);
         rightSleeve.scale.set(1.1, 1.1, 1.1);
         rightArm.add(rightArmPart);
         rightArm.add(rightSleeve);
         
-        var leftArmPart = new PlayerPart(4, 12, 4, material);
+        var leftArmPart = new PlayerPart(4, 12, 4, this.material);
         leftArmPart.addUVmapping(64, 64, 16+24, 32);
-        var leftSleeve = new PlayerPart(4, 12, 4, material);
+        var leftSleeve = new PlayerPart(4, 12, 4, this.material);
         leftSleeve.addUVmapping(64, 64, 16+24, 16);
         leftSleeve.scale.set(1.1, 1.1, 1.1);
         leftArm.add(leftArmPart);
@@ -99,6 +99,10 @@ export class Player extends THREE.Object3D {
         player.position.set(0, -6 - 12, 0);
         
         // this.position.set(0, 0, 0);
+    }
+
+    updateTexture() {
+        this.canvasTexture.needsUpdate = true;
     }
 }
 

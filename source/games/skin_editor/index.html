@@ -1,2 +1,36 @@
-<div id="game"></div>
+<div id="dummy">
+    <div class="layer">
+        <div class="layer-header">
+            <button class="button delete-layer">Delete</button>
+            <h3>Layer 1</h3>
+        </div>
+        <div class="canvas-container">
+            <canvas class="layer-canvas" height="64" width="64"></canvas>
+        </div>
+        <div class="layer-content">
+            <div class="layer-content-row">
+                <label for="layer-opacity">Opacity</label>
+                <input type="range" id="layer-opacity" min="0" max="1" step="0.01" value="1">
+            </div>
+            <div class="layer-content-row">
+                <label for="layer-visibility">Visibility</label>
+                <input type="checkbox" id="layer-visibility" checked>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="container">
+    <div id="game"></div>
+    <div class="overlay">
+        <div class="panel layerlist">
+            <div class="panel-header">
+                <h2>Layers</h2>
+                <button class="button" id="add-layer">Add Layer</button>
+            </div>
+            <div class="panel-content" id="layer-list-content">
+                
+            </div>
+        </div>
+    </div>
+</div>
 <canvas class="hidden" id="skin"></canvas>
