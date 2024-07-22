@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Player } from './Player.js';
 import { LayerList } from './Layer.js';
+import { MouseListener } from './MouseListener.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -56,3 +57,5 @@ function onWindowResize() {
 
 	renderer.setSize((window.innerWidth - 10), window.innerHeight);
 }
+
+new MouseListener(renderer.domElement, camera, scene);
