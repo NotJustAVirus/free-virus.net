@@ -59,8 +59,9 @@ export class Layer {
         // create html element
         this.element = $('#dummy').find('.layer').clone();
         this.element.find('.layer-name').text('Layer ' + ($('#layer-list-content').children().length + 1));
+        let temp = this;
         this.element.find('.delete-layer').click(function() {
-            layerList.removeLayer(this);
+            layerList.removeLayer(temp);
         });
         this.canvas = this.element.find('canvas')[0];
     }
