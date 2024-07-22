@@ -38,10 +38,10 @@
     border: 1px solid #ccc;
 }
 .layer-canvas {
-    scale: 2;
+    transform-origin: 0 0;
+    transform: scale(2);
+    image-rendering: pixelated;
 }
-/* .canvas-container {
-    position: relative;
-    width: fit-content;
-    height: fit-content;
-} */
+.canvas-container {
+    height: 128px;
+}
