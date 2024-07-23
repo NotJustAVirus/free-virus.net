@@ -12,7 +12,7 @@ export class Player extends THREE.Object3D {
         this.canvasTexture.magFilter = THREE.NearestFilter;
         this.canvasTexture.minFilter = THREE.NearestFilter;
 
-        this.material = new THREE.MeshBasicMaterial({ map: this.canvasTexture, side: THREE.DoubleSide, alphaTest: 0.1 });
+        this.material = new THREE.MeshBasicMaterial({ map: this.canvasTexture, side: THREE.DoubleSide, alphaTest: 0.1, transparent: true });
 
         var head = new THREE.Object3D();
         head.position.set(0, 4 + 12 + 12, 0);

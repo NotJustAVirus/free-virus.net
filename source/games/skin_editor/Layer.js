@@ -43,10 +43,13 @@ export class LayerList {
 
     onLayerUdated() {
         var g2d = $('#skin')[0].getContext('2d');
+        g2d.globalAlpha = 1;
         g2d.clearRect(0, 0, 64, 64);
         this.layers.forEach(layer => {
             g2d.drawImage(layer.canvas, 0, 0);
         });
+        g2d.globalAlpha = 0.2;
+        g2d.drawImage($('#selection')[0], 0, 0);
         if (this.callOnUpdate) {
             this.callOnUpdate();
         }
