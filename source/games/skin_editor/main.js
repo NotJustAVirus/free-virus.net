@@ -59,3 +59,11 @@ function onWindowResize() {
 }
 
 new MouseListener(renderer.domElement, camera, scene);
+
+$('.part-select').toggleClass('active', true);
+$('.part-select').click(function(event) {
+	event.stopPropagation();
+	$(this).toggleClass('active');
+	var part = $(this).data('part');
+	player.togglePart(part);
+});

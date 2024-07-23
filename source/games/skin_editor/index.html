@@ -22,7 +22,40 @@
 <div id="container">
     <div id="game"></div>
     <div class="overlay">
-        <div class="panel layerlist">
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Parts</h2>
+            </div>
+            <div class="panel-content" id="parts-content">
+                <div>
+                    <div class="part-row">
+                        <div class="part-head part-select" data-part="hat-part">
+                            <div class="inner-part part-select" data-part="head-part"></div>
+                        </div>
+                    </div>
+                    <div class="part-row">
+                        <div class="part-long active part-select" data-part="right-sleeve-part">
+                            <div class="inner-part part-select" data-part="right-arm-part"></div>
+                        </div>
+                        <div class="part-body part-select" data-part="jacket-part">
+                            <div class="inner-part part-select" data-part="body-part"></div>
+                        </div>
+                        <div class="part-long part-select" data-part="left-sleeve-part">
+                            <div class="inner-part part-select active" data-part="left-arm-part"></div>
+                        </div>
+                    </div>
+                    <div class="part-row">  
+                        <div class="part-long part-select" data-part="right-pants-part">
+                            <div class="inner-part part-select" data-part="right-leg-part"></div>
+                        </div>
+                        <div class="part-long part-select" data-part="left-pants-part">
+                            <div class="inner-part part-select" data-part="left-leg-part"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel layerlist right-panel">
             <div class="panel-header">
                 <h2>Layers</h2>
                 <button class="button" id="add-layer">Add Layer</button>

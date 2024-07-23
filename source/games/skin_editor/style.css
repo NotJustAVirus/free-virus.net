@@ -21,13 +21,17 @@
 .panel {
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
     width: 300px;
     height: fit-content;
     background-color: rgba(0, 0, 0, 0);
     pointer-events: auto;
     border: 1px solid #ccc;
     padding: 10px;
+}
+.right-panel {
+    right: 10px;
+    left: auto;
 }
 .panel-content {
     overflow: auto;
@@ -44,4 +48,52 @@
 }
 .canvas-container {
     height: 128px;
+}
+
+.part-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.part-row > div {
+    padding: 6px;
+    margin: 3px;
+}
+
+.part-select:hover:not(:has(*:hover)) {
+    border-color: #c22222;
+    border-width: 3px;
+}
+
+.part-select {
+    border: 2px solid #ccc;
+    background-color: black;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.inner-part {
+    position: relative;
+    height: 100%;
+}
+
+.active {
+    background-color: #ccc;
+}
+
+.part-head {
+    height: 64px;
+    width: 64px;
+}
+
+.part-body {
+    height: 96px;
+    width: 64px;
+}
+
+.part-long {
+    height: 96px;
+    width: 32px;
 }

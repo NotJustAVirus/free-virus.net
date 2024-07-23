@@ -5,17 +5,7 @@ export class Player extends THREE.Object3D {
 
     constructor(skincanvas) {
         super();
-        // var cube = this;
-        // cube.position.set(position.x, position.y, position.z);
-        // this.type = material.name;
-        // this.state = material.state;
-        // this.geometry = new THREE.BoxGeometry(1, 1, 1);
-        // var texture = World.loadTexture(this.type);
-        // texture.then((texture) => {
-        //     cube.material = new THREE.MeshStandardMaterial({ map: texture });
-        //     cube.mesh = new THREE.Mesh(cube.geometry, cube.material);
-        //     cube.add(cube.mesh);
-        // });
+        this.toggleMap = new Map();
 
         this.canvasTexture = new THREE.CanvasTexture(skincanvas);
         this.canvasTexture.colorSpace = THREE.SRGBColorSpace;
@@ -29,13 +19,13 @@ export class Player extends THREE.Object3D {
         var body = new THREE.Object3D();
         body.position.set(0, 6 + 12, 0);
         var rightLeg = new THREE.Object3D();
-        rightLeg.position.set(2, 6, 0);
+        rightLeg.position.set(-2, 6, 0);
         var leftLeg = new THREE.Object3D();
-        leftLeg.position.set(-2, 6, 0);
+        leftLeg.position.set(2, 6, 0);
         var rightArm = new THREE.Object3D();
-        rightArm.position.set(6, 6 + 12, 0);
+        rightArm.position.set(-6, 6 + 12, 0);
         var leftArm = new THREE.Object3D();
-        leftArm.position.set(-6, 6 + 12, 0);
+        leftArm.position.set(6, 6 + 12, 0);
         
         var headPart = new PlayerPart(8, 8, 8, this.material);
         headPart.addUVmapping(64, 64, 0, 48);
@@ -44,6 +34,8 @@ export class Player extends THREE.Object3D {
         hat.scale.set(1.1, 1.1, 1.1);
         head.add(headPart);
         head.add(hat);
+        this.toggleMap.set('hat-part', hat);
+        this.toggleMap.set('head-part', headPart);
         
         var bodyPart = new PlayerPart(8, 12, 4, this.material);
         bodyPart.addUVmapping(64, 64, 16, 32);
@@ -52,38 +44,48 @@ export class Player extends THREE.Object3D {
         jacket.scale.set(1.1, 1.1, 1.1);
         body.add(bodyPart);
         body.add(jacket);
+        this.toggleMap.set('jacket-part', jacket);
+        this.toggleMap.set('body-part', bodyPart);
         
         var rightLegPart = new PlayerPart(4, 12, 4, this.material);
-        rightLegPart.addUVmapping(64, 64, 16, 0);
+        rightLegPart.addUVmapping(64, 64, 0, 32);
         var rightPants = new PlayerPart(4, 12, 4, this.material);
-        rightPants.addUVmapping(64, 64, 0, 0);
+        rightPants.addUVmapping(64, 64, 0, 16);
         rightPants.scale.set(1.1, 1.1, 1.1);
         rightLeg.add(rightLegPart);
         rightLeg.add(rightPants);
+        this.toggleMap.set('right-leg-part', rightLegPart);
+        this.toggleMap.set('right-pants-part', rightPants);
         
         var leftLegPart = new PlayerPart(4, 12, 4, this.material);
-        leftLegPart.addUVmapping(64, 64, 0, 32);
+        leftLegPart.addUVmapping(64, 64, 16, 0);
         var leftPants = new PlayerPart(4, 12, 4, this.material);
-        leftPants.addUVmapping(64, 64, 0, 16);
+        leftPants.addUVmapping(64, 64, 0, 0);
         leftPants.scale.set(1.1, 1.1, 1.1);
         leftLeg.add(leftLegPart);
         leftLeg.add(leftPants);
+        this.toggleMap.set('left-leg-part', leftLegPart);
+        this.toggleMap.set('left-pants-part', leftPants);
         
         var rightArmPart = new PlayerPart(4, 12, 4, this.material);
-        rightArmPart.addUVmapping(64, 64, 32, 0);
+        rightArmPart.addUVmapping(64, 64, 16+24, 32);
         var rightSleeve = new PlayerPart(4, 12, 4, this.material);
-        rightSleeve.addUVmapping(64, 64, 48, 0);
+        rightSleeve.addUVmapping(64, 64, 16+24, 16);
         rightSleeve.scale.set(1.1, 1.1, 1.1);
         rightArm.add(rightArmPart);
         rightArm.add(rightSleeve);
+        this.toggleMap.set('right-arm-part', rightArmPart);
+        this.toggleMap.set('right-sleeve-part', rightSleeve);
         
         var leftArmPart = new PlayerPart(4, 12, 4, this.material);
-        leftArmPart.addUVmapping(64, 64, 16+24, 32);
+        leftArmPart.addUVmapping(64, 64, 32, 0);
         var leftSleeve = new PlayerPart(4, 12, 4, this.material);
-        leftSleeve.addUVmapping(64, 64, 16+24, 16);
+        leftSleeve.addUVmapping(64, 64, 48, 0);
         leftSleeve.scale.set(1.1, 1.1, 1.1);
         leftArm.add(leftArmPart);
         leftArm.add(leftSleeve);
+        this.toggleMap.set('left-arm-part', leftArmPart);
+        this.toggleMap.set('left-sleeve-part', leftSleeve);
         
         var player = new THREE.Object3D();
         
@@ -99,6 +101,11 @@ export class Player extends THREE.Object3D {
         player.position.set(0, -6 - 12, 0);
         
         // this.position.set(0, 0, 0);
+    }
+
+    togglePart(part) {
+        var toggle = this.toggleMap.get(part);
+        toggle.visible = !toggle.visible;
     }
 
     updateTexture() {

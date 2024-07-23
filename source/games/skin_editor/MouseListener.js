@@ -35,7 +35,14 @@ export class MouseListener {
 			// var sphere = new THREE.Mesh(new THREE.SphereGeometry(0.1), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
 			// sphere.position.set(intersects[0].point.x, intersects[0].point.y, intersects[0].point.z);
 			// this.world.add(sphere);
-            var point = intersects[0].uv;
+            var i = 0;
+            for (; i < intersects.length; i++) {
+                if (intersects[i].object.parent.visible == false) {
+                    continue;
+                }
+                break;
+            }
+            var point = intersects[i].uv;
             point.x = Math.floor(point.x * 64);
             point.y = 63 - Math.floor(point.y * 64);
             var g2d = $('#skin')[0].getContext('2d');
