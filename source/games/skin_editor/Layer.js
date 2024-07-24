@@ -2,6 +2,7 @@ export class LayerList {
     constructor() {
         this.layers = [];
         this.layerList = $('#layer-list-content');
+        this.currentLayer = null;
 
         let temp = this;
         $('#add-layer').click(() => {
@@ -28,12 +29,16 @@ export class LayerList {
         let layer = new Layer(this);
         this.layers.push(layer);
         this.layerList.append(layer.element);
+        this.currentLayer = layer;
         return layer;
     }
 
     removeLayer(layer) {
         this.layers.splice(this.layers.indexOf(layer), 1);
         layer.element.remove();
+        if (this.currentLayer === layer) {
+            this.currentLayer = this.layers[this.layers.length - 1];
+        }
         this.onLayerUdated();
     }
 

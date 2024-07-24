@@ -42,7 +42,7 @@ export class MouseListener {
             var point = intersects[i].uv;
             point.x = Math.floor(point.x * 64);
             point.y = 63 - Math.floor(point.y * 64);
-            this.tool.click(point);
+            this.tool.click(point, event.ctrlKey);
 		}
 	}
 }
