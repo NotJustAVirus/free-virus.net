@@ -1,60 +1,31 @@
-import { SkinMapper } from "./SkinMapper.js";
+import { SkinMapper } from "../SkinMapper.js";
+import { SelectTool } from "./SelectTool.js";
 
-export class SelectTool {
+export class MagicWand extends SelectTool{
+
     constructor(layerList) {
-        this.layerList = layerList;
-        this.selection = document.getElementById('selection');
-        this.magicWand = new MagicWand(this.selection, this.layerList);
-    }
-
-    clear() {
-        var g2d = this.selection.getContext('2d');
-        g2d.clearRect(0, 0, this.selection.width, this.selection.height);
-        this.layerList.onLayerUdated();
-    }
-
-    click(point, ctrlDown) {
-        this.magicWand.click(point, ctrlDown);
-        return;
-        if (!ctrlDown) {
-            this.clear();
-        }
-        var g2d = this.selection.getContext('2d');
-        if (g2d.getImageData(point.x, point.y, 1, 1).data[3] > 0) {
-            g2d.clearRect(point.x, point.y, 1, 1);
-        } else {
-            g2d.fillStyle = '#37c4f2';
-            g2d.fillRect(point.x, point.y, 1, 1);
-        }
-        this.layerList.onLayerUdated();
-    }
-}
-
-class MagicWand {
-    tolerance = 0.10;
-    foodGlobal = true;
-
-    constructor(selection, layerList) {
-        this.selection = selection;
-        this.layerList = layerList;
+        super(layerList);
         this.skinMapper = new SkinMapper();
         this.selectedColor = [0, 0, 0, 0];
+        this.addOption('tolerance', 0.10);
+        this.addOption('floodMode', "global");
     }
 
     click(point, ctrlDown) {
         if (!ctrlDown) {
-            this.clear();
+            this.clearSelection();
         }
         var g2d = this.layerList.currentLayer.canvas.getContext('2d');
         this.data = g2d.getImageData(0, 0, 64, 64).data;
         this.selectedColor = this.getColor(point.x, point.y);
-        if (this.foodGlobal) {
+        if (this.getOption('floodMode') === "global") {
             for (let i = 0; i < 64; i++) {
                 for (let j = 0; j < 64; j++) {
                     if (!this.skinMapper.onSkin({ x: i, y: j })) {
                         continue;
                     }
-                    if (this.colorDistance(this.getColor(i, j), this.selectedColor) > this.tolerance) {
+                    if (this.colorDistance(this.getColor(i, j), this.selectedColor) > this.getOption('tolerance')) {
+
                         continue;
                     }
                     var g2d = this.selection.getContext('2d');
@@ -68,18 +39,12 @@ class MagicWand {
         this.layerList.onLayerUdated();
     }
 
-    clear() {
-        var g2d = this.selection.getContext('2d');
-        g2d.clearRect(0, 0, this.selection.width, this.selection.height);
-        this.layerList.onLayerUdated();
-    }
-
     floodFill(x, y) {
         if (this.isSelection(x, y)) {
             return;
         }
         var color = this.getColor(x, y);
-        if (this.colorDistance(color, this.selectedColor) > this.tolerance) {
+        if (this.colorDistance(color, this.selectedColor) > this.getOption('tolerance')) {
             return;
         }
         var g2d = this.selection.getContext('2d');

@@ -19,6 +19,36 @@
         </div>
     </div>
 </div>
+<div class="toolbar">
+    <div class="toolbar-section" id="selectedTool">
+        <label for="selectedToolValue">Tool: </label>
+        <select class="value" name="tool" id="selectedToolValue">
+            <option value="select">Select</option>
+            <option value="magicWand">Magic Wand</option>
+            <option disabled value="pen">Pen</option>
+            <option disabled value="fill">Fill</option>
+            <option disabled value="erase">Erase</option>
+        </select>
+    </div>
+    <div class="toolseparator"></div>
+    <div class="toolbar-section" id="selectedColor">
+        <label for="selectedColorValue">Color: </label>
+        <input class="value" type="color" value="#ffffff" id="selectedColorValue">
+    </div>
+    <div class="toolbar-section" id="floodMode">
+        <label for="floodModeValue">Flood Mode: </label>
+        <select class="value" name="floodMode" id="floodModeValue">
+            <option value="contiguous">Contiguous</option>
+            <option disabled value="partglobal">Part Global</option>
+            <option value="global">Global</option>
+        </select>
+    </div>
+    <div class="toolbar-section" id="tolerance">
+        <label for="toleranceValue">Tolerance: </label>
+        <input class="value" type="number" value="0.1" min="0" max="1" step="0.01" id="toleranceValue">
+        %
+    </div>
+</div>
 <div id="container">
     <div id="game"></div>
     <div class="overlay">
