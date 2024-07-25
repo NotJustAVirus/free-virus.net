@@ -1,3 +1,5 @@
+import { Pen } from './tools/Pen.js';
+import { Eraser } from './tools/Eraser.js';
 import { SelectTool } from './tools/SelectTool.js';
 import { MagicWand } from './tools/MagicWand.js';
 import { LayerList } from './Layer.js';
@@ -5,6 +7,8 @@ import { LayerList } from './Layer.js';
 
 export class ToolController {
     tools = {
+        pen: Pen,
+        erase: Eraser,
         select: SelectTool,
         magicWand: MagicWand,
     };
