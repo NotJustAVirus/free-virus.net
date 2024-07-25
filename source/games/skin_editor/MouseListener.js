@@ -2,15 +2,15 @@ import * as THREE from 'three';
 
 
 export class MouseListener {
-	constructor(window, camera, world, tool) {
+	constructor(window, camera, world) {
 		this.window = window;
 		this.camera = camera;
 		this.world = world;
-        this.tool = tool;
 		this.raycaster = new THREE.Raycaster();
 		this.mouse = new THREE.Vector2();
 		this.window.addEventListener('click', this.click.bind(this));
 		this.window.addEventListener('mousedown', this.mouseDown.bind(this));
+        this.callback = null;
 	}
 
 	mouseDown(event) {
@@ -42,7 +42,14 @@ export class MouseListener {
             var point = intersects[i].uv;
             point.x = Math.floor(point.x * 64);
             point.y = 63 - Math.floor(point.y * 64);
-            this.tool.click(point, event.ctrlKey);
+            if (this.callback) {
+                this.callback(point, event.ctrlKey);
+            }
 		}
 	}
+
+    setCallback(callback) {
+        this.callback = callback;
+    }
+
 }
