@@ -12,6 +12,10 @@ export class MagicWand extends SelectTool{
     }
 
     click(point, ctrlDown) {
+        if (point == null) {
+            this.clearSelection();
+            return;
+        }
         if (!ctrlDown) {
             this.clearSelection();
         }

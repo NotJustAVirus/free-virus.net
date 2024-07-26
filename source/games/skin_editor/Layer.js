@@ -5,6 +5,23 @@ export class LayerList {
         this.currentLayer = null;
 
         let temp = this;
+        $('#add-layer-from-selection').click(() => {
+            let canvas = $('#selection')[0];
+            let data = canvas.getContext('2d').getImageData(0, 0, 64, 64).data;
+            let data2 = temp.currentLayer.canvas.getContext('2d').getImageData(0, 0, 64, 64).data;
+            for (let i = 0; i < data.length; i += 4) {
+                if (data[i + 3] > 0) {
+                    data[i] = data2[i];
+                    data[i + 1] = data2[i + 1];
+                    data[i + 2] = data2[i + 2];
+                    data[i + 3] = data2[i + 3];
+                }
+            }
+            var promise = createImageBitmap(new ImageData(data, 64, 64));
+            promise.then(function(img) {
+                temp.addLayer().setImage(img);
+            });
+        });
         $('#add-layer').click(() => {
             let input = document.createElement('input');
             input.type = 'file';
@@ -25,11 +42,19 @@ export class LayerList {
         });
     }
 
+    setCurrentLayer(layer) {
+        if (this.currentLayer) {
+            this.currentLayer.element.removeClass('selected');
+        }
+        this.currentLayer = layer;
+        layer.element.addClass('selected');
+    }
+
     addLayer() {
         let layer = new Layer(this);
         this.layers.push(layer);
         this.layerList.append(layer.element);
-        this.currentLayer = layer;
+        this.setCurrentLayer(layer);
         return layer;
     }
 
@@ -37,7 +62,7 @@ export class LayerList {
         this.layers.splice(this.layers.indexOf(layer), 1);
         layer.element.remove();
         if (this.currentLayer === layer) {
-            this.currentLayer = this.layers[this.layers.length - 1];
+            this.setCurrentLayer(this.layers[this.layers.length - 1]);
         }
         this.onLayerUdated();
     }
@@ -51,7 +76,7 @@ export class LayerList {
         g2d.globalAlpha = 1;
         g2d.clearRect(0, 0, 64, 64);
         this.layers.forEach(layer => {
-            g2d.drawImage(layer.canvas, 0, 0);
+            layer.drawImage(g2d);
         });
         g2d.globalAlpha = 0.2;
         g2d.drawImage($('#selection')[0], 0, 0);
@@ -66,12 +91,29 @@ export class Layer {
         this.layerList = layerList;
         // create html element
         this.element = $('#dummy').find('.layer').clone();
-        this.element.find('.layer-name').text('Layer ' + ($('#layer-list-content').children().length + 1));
         let temp = this;
         this.element.find('.delete-layer').click(function() {
             layerList.removeLayer(temp);
         });
+        this.element.click(function() {
+            layerList.setCurrentLayer(temp);
+        });
+        this.visibleCheckbox = this.element.find('#layer-visibility');
+        this.opacitySlider = this.element.find('#layer-opacity');
+        this.visibleCheckbox.change(() => {
+            layerList.onLayerUdated();
+        });
+        this.opacitySlider.change(() => {
+            layerList.onLayerUdated();
+        });
         this.canvas = this.element.find('canvas')[0];
+    }
+
+    drawLayer(ctx) {
+        if (this.visibleCheckbox.prop('checked')) {
+            ctx.globalAlpha = this.opacitySlider.val();
+            ctx.drawImage(this.canvas, 0, 0);
+        }
     }
 
     setImage(img) {

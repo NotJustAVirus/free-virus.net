@@ -13,6 +13,10 @@ export class SelectTool extends Tool {
     }
 
     click(point, ctrlDown) {
+        if (point == null) {
+            this.clearSelection();
+            return;
+        }
         if (!ctrlDown) {
             this.clearSelection();
         }

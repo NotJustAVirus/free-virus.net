@@ -41,6 +41,10 @@
 .layer {
     border: 1px solid #ccc;
 }
+.layer.selected {
+    border-color: #c22222;
+    border-width: 2px;
+}
 .layer-canvas {
     transform-origin: 0 0;
     transform: scale(2);

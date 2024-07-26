@@ -45,7 +45,9 @@ export class MouseListener {
             if (this.callback) {
                 this.callback(point, event.ctrlKey);
             }
-		}
+		} else {
+            this.callback(null, event.ctrlKey);
+        }
 	}
 
     setCallback(callback) {
