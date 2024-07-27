@@ -76,7 +76,7 @@ export class LayerList {
         g2d.globalAlpha = 1;
         g2d.clearRect(0, 0, 64, 64);
         this.layers.forEach(layer => {
-            layer.drawImage(g2d);
+            layer.drawLayer(g2d);
         });
         g2d.globalAlpha = 0.2;
         g2d.drawImage($('#selection')[0], 0, 0);
