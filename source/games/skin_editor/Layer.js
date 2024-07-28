@@ -40,6 +40,15 @@ export class LayerList {
                 reader.readAsDataURL(file);
             };
         });
+        $('#add-layer-by-username').click(() => {
+            let username = $('#username').val();
+            let img = new Image();
+            img.src = 'https://crafthead.net/skin/' + username;
+            img.crossOrigin = 'Anonymous';
+            img.onload = function() {
+                temp.addLayer().setImage(img);
+            };
+        });
     }
 
     setCurrentLayer(layer) {
