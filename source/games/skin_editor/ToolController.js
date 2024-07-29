@@ -16,12 +16,12 @@ export class ToolController {
     constructor(mouseListener) {
         this.mouseListener = mouseListener;
         this.layerList = new LayerList();
-        this.setTool(new SelectTool(this.layerList));
+        this.setTool("select");
         this.mouseListener.setCallback((point, ctrlDown) => {
             this.selectedTool.click(point, ctrlDown);
         });
         $('#selectedTool').find('.value').change(() => {
-            this.setTool(new this.tools[$('#selectedTool').find('.value').val()](this.layerList));
+            this.setTool($('#selectedTool').find('.value').val());
         });
         $('.toolbar-section').find('.value').change((event) => {
             var option = $(event.target).attr('id');
@@ -34,12 +34,23 @@ export class ToolController {
     }
 
     setTool(tool) {
-        this.selectedTool = tool;
+        // if (this.selectedTool != null) {
+        //     this.selectedTool.onDeselect();
+        // }
+        if (this.tools[tool] instanceof Function) {
+            this.tools[tool] = new this.tools[tool](this.layerList);
+        }
+        this.selectedTool = this.tools[tool];
         $('.toolbar-section').hide();
+        $('.toolbar-section:not(#selectedTool)').find('.value').off('change');
         $('#selectedTool').show();
-        for (let option of tool.options.keys()) {
+        for (let option of this.selectedTool.options.keys()) {
             $('#' + option).show();
-            $('#' + option + 'Value').val(tool.options.get(option));
+            $('#' + option + 'Value').val(this.selectedTool.options.get(option));
+            $('#' + option + 'Value').on('change', (event) => {
+                console.log(event);
+                this.selectedTool.options.set(option, $('#' + option + 'Value').val());
+            });
         }
     }
 }
