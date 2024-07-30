@@ -21,7 +21,7 @@ camera.position.z = 40;
 const player = new Player(skincanvas);
 scene.add(player);
 
-const mouseListener = new MouseListener(renderer.domElement, camera, scene);
+const mouseListener = new MouseListener(renderer.domElement, camera, scene, controls);
 
 const toolController = new ToolController(mouseListener);
 
