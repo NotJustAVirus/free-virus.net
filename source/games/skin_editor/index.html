@@ -1,19 +1,25 @@
 <div id="dummy">
     <div class="layer">
-        <div class="layer-header">
-            <button class="button delete-layer">Delete</button>
+        <div class="layer-column">
+            <button class="arrow-button up-layer">^</button>
+            <button class="arrow-button down-layer">v</button>
         </div>
-        <div class="canvas-container">
-            <canvas class="layer-canvas" height="64" width="64"></canvas>
-        </div>
-        <div class="layer-content">
-            <div class="layer-content-row">
-                <label for="layer-opacity">Opacity</label>
-                <input type="range" id="layer-opacity" min="0" max="1" step="0.01" value="1">
+        <div class="layer-column">
+            <div class="layer-header">
+                <button class="button delete-layer">Delete</button>
             </div>
-            <div class="layer-content-row">
-                <label for="layer-visibility">Visibility</label>
-                <input type="checkbox" id="layer-visibility" checked>
+            <div class="canvas-container">
+                <canvas class="layer-canvas" height="64" width="64"></canvas>
+            </div>
+            <div class="layer-content">
+                <div class="layer-content-row">
+                    <label for="layer-opacity">Opacity</label>
+                    <input type="range" id="layer-opacity" min="0" max="1" step="0.01" value="1">
+                </div>
+                <div class="layer-content-row">
+                    <label for="layer-visibility">Visibility</label>
+                    <input type="checkbox" id="layer-visibility" checked>
+                </div>
             </div>
         </div>
     </div>

@@ -50,6 +50,12 @@
     transform: scale(2);
     image-rendering: pixelated;
 }
+.layer-column {
+    display: inline-block;
+}
+.arrow-button {
+    display: block;
+}
 .canvas-container {
     height: 128px;
 }

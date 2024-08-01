@@ -62,7 +62,7 @@ export class LayerList {
     addLayer() {
         let layer = new Layer(this);
         this.layers.push(layer);
-        this.layerList.append(layer.element);
+        this.layerList.prepend(layer.element);
         this.setCurrentLayer(layer);
         return layer;
     }
@@ -74,6 +74,34 @@ export class LayerList {
             this.setCurrentLayer(this.layers[this.layers.length - 1]);
         }
         this.onLayerUdated();
+    }
+
+    moveLayerUp(layer) {
+        let index = this.layers.indexOf(layer);
+        if (index === this.layers.length - 1) {
+            return;
+        }
+        this.layers.splice(index, 1);
+        this.layers.splice(index + 1, 0, layer);
+        this.reorderLayers();
+        this.onLayerUdated();
+    }
+
+    moveLayerDown(layer) {
+        let index = this.layers.indexOf(layer);
+        if (index === 0) {
+            return;
+        }
+        this.layers.splice(index, 1);
+        this.layers.splice(index - 1, 0, layer);
+        this.reorderLayers();
+        this.onLayerUdated();
+    }
+
+    reorderLayers() {
+        this.layers.forEach(layer => {
+            this.layerList.prepend(layer.element);
+        });
     }
 
     setCallOnUpdate(callback) {
@@ -109,11 +137,19 @@ export class Layer {
         });
         this.visibleCheckbox = this.element.find('#layer-visibility');
         this.opacitySlider = this.element.find('#layer-opacity');
+        this.upButton = this.element.find('.up-layer');
+        this.downButton = this.element.find('.down-layer');
         this.visibleCheckbox.change(() => {
             layerList.onLayerUdated();
         });
         this.opacitySlider.change(() => {
             layerList.onLayerUdated();
+        });
+        this.upButton.click(() => {
+            layerList.moveLayerUp(this);
+        });
+        this.downButton.click(() => {
+            layerList.moveLayerDown(this);
         });
         this.canvas = this.element.find('canvas')[0];
     }
