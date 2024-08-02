@@ -5,23 +5,6 @@ export class LayerList {
         this.currentLayer = null;
 
         let temp = this;
-        $('#add-layer-from-selection').click(() => {
-            let canvas = $('#selection')[0];
-            let data = canvas.getContext('2d').getImageData(0, 0, 64, 64).data;
-            let data2 = temp.currentLayer.canvas.getContext('2d').getImageData(0, 0, 64, 64).data;
-            for (let i = 0; i < data.length; i += 4) {
-                if (data[i + 3] > 0) {
-                    data[i] = data2[i];
-                    data[i + 1] = data2[i + 1];
-                    data[i + 2] = data2[i + 2];
-                    data[i + 3] = data2[i + 3];
-                }
-            }
-            var promise = createImageBitmap(new ImageData(data, 64, 64));
-            promise.then(function(img) {
-                temp.addLayer().setImage(img);
-            });
-        });
         $('#add-layer').click(() => {
             let input = document.createElement('input');
             input.type = 'file';
@@ -139,6 +122,7 @@ export class Layer {
         this.opacitySlider = this.element.find('#layer-opacity');
         this.upButton = this.element.find('.up-layer');
         this.downButton = this.element.find('.down-layer');
+        this.element.find('#layer-basecolor').hide();
         this.visibleCheckbox.change(() => {
             layerList.onLayerUdated();
         });
@@ -165,5 +149,38 @@ export class Layer {
         let ctx = this.canvas.getContext('2d');
         ctx.drawImage(img, 0, 0);
         this.layerList.onLayerUdated();
+    }
+
+    setTemplate(data, baseColor) {
+        console.log('setTemplate', data, baseColor);
+        this.templateData = data;
+        this.baseColor = baseColor;
+        this.element.find('#layer-basecolor').show();
+        this.element.find('#layer-basecolor').on('change', () => {
+            var g2d = this.canvas.getContext('2d');
+            var color = this.element.find('#layer-basecolor').val();
+            color = color.substring(0, 7) + 'ff';
+            color = this.hexColorToColor(color);
+            g2d.clearRect(0, 0, 64, 64);
+            for (let i = 0; i < data.length; i += 4) {
+                var opacity = color[3] + data[i + 3];
+                if (opacity === 255 + 69) {
+                    continue;
+                }
+                g2d.fillStyle = 'rgb(' + (color[0] + data[i]) + ',' + (color[1] + data[i + 1]) + ',' + (color[2] + data[i + 2]) + ')';
+                var pixel = i / 4;
+                g2d.fillRect(pixel % 64, Math.floor(pixel / 64), 1, 1);
+            }
+            this.layerList.onLayerUdated();
+        });
+        this.element.find('#layer-basecolor').val(this.colorToHex(baseColor).substring(0, 7));
+    }
+
+    colorToHex(color) {
+        return '#' + color[0].toString(16).padStart(2, '0') + color[1].toString(16).padStart(2, '0') + color[2].toString(16).padStart(2, '0') + color[3].toString(16).padStart(2, '0');
+    }
+
+    hexColorToColor(hex) {
+        return [parseInt(hex.substring(1, 3), 16), parseInt(hex.substring(3, 5), 16), parseInt(hex.substring(5, 7), 16), parseInt(hex.substring(7, 9), 16)];
     }
 }

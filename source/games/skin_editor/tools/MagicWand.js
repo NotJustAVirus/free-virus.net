@@ -64,6 +64,10 @@ export class MagicWand extends SelectTool{
         this.floodFill(point.x, point.y);
     }
 
+    getBaseColor() {
+        return this.selectedColor;
+    }
+
     colorDistance(color1, color2) {
         var diff = Math.sqrt(Math.pow(color1[0] - color2[0], 2) + Math.pow(color1[1] - color2[1], 2) + Math.pow(color1[2] - color2[2], 2));
         return diff / 441.6729559300637;

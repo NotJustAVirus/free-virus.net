@@ -10,6 +10,7 @@
             </div>
             <div class="canvas-container">
                 <canvas class="layer-canvas" height="64" width="64"></canvas>
+                <input type="color" name="basecolor" id="layer-basecolor">
             </div>
             <div class="layer-content">
                 <div class="layer-content-row">
@@ -53,6 +54,9 @@
         <input class="value" type="number" value="0.1" min="0" max="1" step="0.01" id="toleranceValue">
         %
     </div>
+    <div class="toolbar-section" id="addTemplateLayer">
+        <button class="button value" id="addTemplateLayerValue">Add Template Layer From Selection</button>
+    </div>
 </div>
 <div id="container">
     <div id="game"></div>
@@ -94,7 +98,6 @@
             <div class="panel-header">
                 <h2>Layers</h2>
                 <button class="button" id="add-layer">Add Layer</button>
-                <button class="button" id="add-layer-from-selection">Add Layer from Selection</button>
                 <button class="button" id="add-layer-by-username">Add Layer By Username</button>
                 <input type="text" id="username">
             </div>

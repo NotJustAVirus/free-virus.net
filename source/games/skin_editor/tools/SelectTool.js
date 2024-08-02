@@ -4,6 +4,7 @@ export class SelectTool extends Tool {
     constructor(layerList) {
         super(layerList);
         this.selection = document.getElementById('selection');
+        this.addOption('addTemplateLayer', null);
     }
 
     clearSelection() {
@@ -28,5 +29,36 @@ export class SelectTool extends Tool {
             g2d.fillRect(point.x, point.y, 1, 1);
         }
         this.layerList.onLayerUdated();
+    }
+
+    getBaseColor() {
+        let data = this.selection.getContext('2d').getImageData(0, 0, 64, 64).data;
+        for (let i = 0; i < data.length; i += 4) {
+            if (data[i + 3] > 0) {
+                return [data[i], data[i + 1], data[i + 2], data[i + 3]];
+            }
+        }
+        return null;
+    }
+
+    addTemplateLayer() {
+        let data = this.selection.getContext('2d').getImageData(0, 0, 64, 64).data;
+        let data2 = this.layerList.currentLayer.canvas.getContext('2d').getImageData(0, 0, 64, 64).data;
+
+        var baseColor = this.getBaseColor();
+        for (let i = 0; i < data.length; i += 4) {
+            if (data[i + 3] > 0) {
+                data[i] = data2[i] - baseColor[0];
+                data[i + 1] = data2[i + 1] - baseColor[1];
+                data[i + 2] = data2[i + 2] - baseColor[2];
+                data[i + 3] = data2[i + 3] - baseColor[3];
+            } else {
+                data[i] = 0;
+                data[i + 1] = 0;
+                data[i + 2] = 0;
+                data[i + 3] = 69; //-baseColor[3];
+            }
+        }
+        this.layerList.addLayer().setTemplate(data, baseColor);
     }
 }

@@ -43,6 +43,7 @@ export class ToolController {
         this.selectedTool = this.tools[tool];
         $('.toolbar-section').hide();
         $('.toolbar-section:not(#selectedTool)').find('.value').off('change');
+        $('button.value').off('click');
         $('#selectedTool').show();
         for (let option of this.selectedTool.options.keys()) {
             $('#' + option).show();
@@ -51,6 +52,11 @@ export class ToolController {
                 console.log(event);
                 this.selectedTool.options.set(option, $('#' + option + 'Value').val());
             });
+            if ($('#' + option + 'Value').is('button')) {
+                $('#' + option + 'Value').click(() => {
+                    this.selectedTool[option]();
+                });
+            }
         }
     }
 }
