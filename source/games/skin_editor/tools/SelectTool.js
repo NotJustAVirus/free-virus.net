@@ -45,20 +45,23 @@ export class SelectTool extends Tool {
         let data = this.selection.getContext('2d').getImageData(0, 0, 64, 64).data;
         let data2 = this.layerList.currentLayer.canvas.getContext('2d').getImageData(0, 0, 64, 64).data;
 
+        var templateData = new Array(64 * 64 * 4);
+
+        var diff = function (a, b) {
+            return (a - b) / b;
+        };
+
         var baseColor = this.getBaseColor();
         for (let i = 0; i < data.length; i += 4) {
             if (data[i + 3] > 0) {
-                data[i] = data2[i] - baseColor[0];
-                data[i + 1] = data2[i + 1] - baseColor[1];
-                data[i + 2] = data2[i + 2] - baseColor[2];
-                data[i + 3] = data2[i + 3] - baseColor[3];
+                templateData[i] = diff(data2[i], baseColor[0]);
+                templateData[i + 1] = diff(data2[i + 1], baseColor[1]);
+                templateData[i + 2] = diff(data2[i + 2], baseColor[2]);
+                templateData[i + 3] = diff(data2[i + 3], baseColor[3]);
             } else {
-                data[i] = 0;
-                data[i + 1] = 0;
-                data[i + 2] = 0;
-                data[i + 3] = 69; //-baseColor[3];
+                templateData[i + 3] = -1;
             }
         }
-        this.layerList.addLayer().setTemplate(data, baseColor);
+        this.layerList.addLayer().setTemplate(templateData, baseColor);
     }
 }

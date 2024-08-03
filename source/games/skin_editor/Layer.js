@@ -162,12 +162,19 @@ export class Layer {
             color = color.substring(0, 7) + 'ff';
             color = this.hexColorToColor(color);
             g2d.clearRect(0, 0, 64, 64);
+            var calcNewColor = function (a, b) {
+                return a + a * b;
+            }
             for (let i = 0; i < data.length; i += 4) {
-                var opacity = color[3] + data[i + 3];
-                if (opacity === 255 + 69) {
+                var opacity = calcNewColor(color[3], data[i + 3]);
+                if (opacity === 0) {
                     continue;
                 }
-                g2d.fillStyle = 'rgb(' + (color[0] + data[i]) + ',' + (color[1] + data[i + 1]) + ',' + (color[2] + data[i + 2]) + ')';
+                g2d.globalAlpha = opacity / 255;
+                g2d.fillStyle = 'rgb(' + 
+                    calcNewColor(color[0], data[i]) + ',' + 
+                    calcNewColor(color[1], data[i + 1]) + ',' + 
+                    calcNewColor(color[2], data[i + 2]) + ')';
                 var pixel = i / 4;
                 g2d.fillRect(pixel % 64, Math.floor(pixel / 64), 1, 1);
             }
