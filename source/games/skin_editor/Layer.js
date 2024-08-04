@@ -32,6 +32,15 @@ export class LayerList {
                 temp.addLayer().setImage(img);
             };
         });
+        $('#download').click(() => {
+            var canvas = document.createElement('canvas');
+            var g2d = canvas.getContext('2d');
+            this.layers.forEach(layer => {
+                layer.drawLayer(g2d);
+            });
+            $('#download')[0].href = canvas.toDataURL('image/png');
+            $('#download')[0].download = $('#download-name').val();
+        });
     }
 
     setCurrentLayer(layer) {
