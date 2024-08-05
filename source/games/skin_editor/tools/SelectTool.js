@@ -48,6 +48,9 @@ export class SelectTool extends Tool {
         var templateData = new Array(64 * 64 * 4);
 
         var diff = function (a, b) {
+            if (b === 0) {
+                return 0;
+            }
             return (a - b) / b;
         };
 

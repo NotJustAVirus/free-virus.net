@@ -190,6 +190,7 @@ export class Layer {
             this.layerList.onLayerUdated();
         });
         this.element.find('#layer-basecolor').val(this.colorToHex(baseColor).substring(0, 7));
+        this.element.find('#layer-basecolor').change();
     }
 
     colorToHex(color) {
