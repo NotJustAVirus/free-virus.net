@@ -47,6 +47,7 @@ export class MouseListener {
             if (this.lastPoint && point.x == this.lastPoint.x && point.y == this.lastPoint.y) {
                 return;
             }
+            this.lastPoint = point;
             if (this.callback) {
                 this.callback(point, event.ctrlKey);
             }

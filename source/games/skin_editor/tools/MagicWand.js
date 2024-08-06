@@ -32,28 +32,24 @@ export class MagicWand extends SelectTool{
 
                         continue;
                     }
-                    var g2d = this.selection.getContext('2d');
-                    g2d.fillStyle = '#37c4f2';
-                    g2d.fillRect(i, j, 1, 1);
+                    this.layerList.selection[i + j * 64] = true;
                 }
             }
         } else {
             this.floodFill(point.x, point.y);
         }
-        this.layerList.onLayerUdated();
+        this.updateSelectionCanvas();
     }
 
     floodFill(x, y) {
-        if (this.isSelection(x, y)) {
+        if (this.layerList.selection[x + y * 64]) {
             return;
         }
         var color = this.getColor(x, y);
         if (this.colorDistance(color, this.selectedColor) > this.getOption('tolerance')) {
             return;
         }
-        var g2d = this.selection.getContext('2d');
-        g2d.fillStyle = '#37c4f2';
-        g2d.fillRect(x, y, 1, 1);
+        this.layerList.selection[x + y * 64] = true;
         var point = this.skinMapper.moveX({ x: x, y: y }, false);
         this.floodFill(point.x, point.y);
         point = this.skinMapper.moveX({ x: x, y: y }, true);
@@ -71,10 +67,6 @@ export class MagicWand extends SelectTool{
     colorDistance(color1, color2) {
         var diff = Math.sqrt(Math.pow(color1[0] - color2[0], 2) + Math.pow(color1[1] - color2[1], 2) + Math.pow(color1[2] - color2[2], 2));
         return diff / 441.6729559300637;
-    }
-
-    isSelection(x, y) {
-        return this.selection.getContext('2d').getImageData(x, y, 1, 1).data[3] > 0;
     }
 
     getColor(x, y) {

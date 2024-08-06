@@ -1,4 +1,6 @@
 export class LayerList {
+    selection = new Array(64 * 64).fill(false);
+
     constructor() {
         this.layers = [];
         this.layerList = $('#layer-list-content');
@@ -107,7 +109,6 @@ export class LayerList {
         this.layers.forEach(layer => {
             layer.drawLayer(g2d);
         });
-        g2d.globalAlpha = 0.2;
         g2d.drawImage($('#selection')[0], 0, 0);
         if (this.callOnUpdate) {
             this.callOnUpdate();
