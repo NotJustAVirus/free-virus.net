@@ -19,9 +19,8 @@
     pointer-events: none;
 }
 .panel {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    position: relative;
+    margin: 10px;
     width: 300px;
     height: fit-content;
     background-color: rgb(0, 0, 0);
@@ -30,8 +29,9 @@
     padding: 10px;
 }
 .right-panel {
-    right: 10px;
-    left: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 .panel-content {
     overflow: auto;
@@ -51,8 +51,12 @@
     image-rendering: pixelated;
     margin-right: 64px;
 }
-.layer-column {
+.column {
     display: inline-block;
+}
+.half {
+    width: 50%;
+    overflow: hidden;
 }
 .arrow-button {
     display: block;
@@ -127,4 +131,7 @@
     position: relative;
     display: inline-block;
     height: 30%;
+}
+input[type="text"] {
+    width: attr(data-length px, 100%);
 }
