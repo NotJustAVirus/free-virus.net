@@ -3,6 +3,8 @@ import { Eraser } from './tools/Eraser.js';
 import { SelectTool } from './tools/SelectTool.js';
 import { MagicWand } from './tools/MagicWand.js';
 import { LayerList } from './Layer.js';
+import { ColorPicker } from './tools/ColorPicker.js';
+import { ColorSelector } from './ColorSelector.js';
 
 
 export class ToolController {
@@ -11,6 +13,7 @@ export class ToolController {
         erase: Eraser,
         select: SelectTool,
         magicWand: MagicWand,
+        colorPicker: ColorPicker
     };
     
     constructor(mouseListener) {
@@ -31,6 +34,7 @@ export class ToolController {
                 this.selectedTool.options.set(option, value);
             }
         });
+        this.colorSelector = new ColorSelector();
     }
 
     setTool(tool) {
@@ -38,7 +42,11 @@ export class ToolController {
         //     this.selectedTool.onDeselect();
         // }
         if (this.tools[tool] instanceof Function) {
-            this.tools[tool] = new this.tools[tool](this.layerList);
+            if (this.tools[tool] === ColorPicker) {
+                this.tools[tool] = new this.tools[tool](this.layerList, this.colorSelector);
+            } else {
+                this.tools[tool] = new this.tools[tool](this.layerList);
+            }
         }
         this.selectedTool = this.tools[tool];
         $('.toolbar-section').hide();
