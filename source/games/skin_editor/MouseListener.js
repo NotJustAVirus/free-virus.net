@@ -44,6 +44,9 @@ export class MouseListener {
 
         if (intersects.length > 0) {
             var point = this.getIntersectPoint(intersects);
+            if (point == null) {
+                return;
+            }
             if (this.lastPoint && point.x == this.lastPoint.x && point.y == this.lastPoint.y) {
                 return;
             }
@@ -86,15 +89,23 @@ export class MouseListener {
 
     getIntersectPoint(intersects) {
         var i = 0;
+        let targetMethod = $('#target').val();
         for (; i < intersects.length; i++) {
-            if (intersects[i].object.parent.visible == false) {
+            if (targetMethod != 'all' && intersects[i].object.parent.visible == false) {
                 continue;
             }
-            break;
+            var point = intersects[i].uv;
+            point.x = Math.floor(point.x * 64);
+            point.y = 63 - Math.floor(point.y * 64);
+            if (targetMethod == 'noneTransparent') {
+                var g2d = $('#skin').get(0).getContext('2d');
+                var data = g2d.getImageData(point.x, point.y, 1, 1).data;
+                if (data[3] == 0) {
+                    continue;
+                }
+            }
+            return point;
         }
-        var point = intersects[i].uv;
-        point.x = Math.floor(point.x * 64);
-        point.y = 63 - Math.floor(point.y * 64);
-        return point;
+        return null;
     }
 }
