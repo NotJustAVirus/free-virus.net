@@ -25,8 +25,7 @@ export class MouseListener {
         var intersects = this.raycast();
         
         if (intersects.length > 0) {
-            this.controls.enabled = false;
-            this.drawing = true;        
+            this.setDrawing(true);
             var point = this.getIntersectPoint(intersects);
             this.lastPoint = point;
             if (this.callback) {
@@ -58,17 +57,25 @@ export class MouseListener {
     }
 
     mouseUp(event) {
-        this.drawing = false;
         var mouse = this.getMouseCoords(event);
         var intersects = this.raycast();
 
-        if (intersects.length == 0) {
+        if (this.drawing == false && intersects.length == 0) {
             if (mouse.x == this.mouse.x || mouse.y == this.mouse.y) {
                 this.callback(null, event.ctrlKey);
             }
         }
 
-        this.controls.enabled = true
+        this.setDrawing(false);
+    }
+
+    setDrawing(drawing) {
+        this.drawing = drawing;
+        if (drawing == false) {
+            this.controls.enabled = true;
+        } else {
+            this.controls.enabled = false;
+        }
     }
 
     getMouseCoords(event) {
