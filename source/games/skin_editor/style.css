@@ -54,6 +54,9 @@
 .column {
     display: inline-block;
 }
+.row {
+    display: block;
+}
 .half {
     width: 50%;
     overflow: hidden;
@@ -134,4 +137,12 @@
 }
 input[type="text"] {
     width: attr(data-length px, 100%);
+}
+.recentColor {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    margin: 2px;
+    cursor: pointer;
 }
