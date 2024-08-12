@@ -44,6 +44,45 @@ export class SkinMapper {
         }
         throw new Error('Point not on any part');
     }
+
+    pointOnOppositeLayer(point) {
+        for (let part of this.parts) {
+            if (part.onPart(point)) {
+                var opposite;
+                if (part == this.head) {
+                    opposite = this.hat;
+                } else if (part == this.hat) {
+                    opposite = this.head;
+                } else if (part == this.body) {
+                    opposite = this.jacket;
+                } else if (part == this.jacket) {
+                    opposite = this.body;
+                } else if (part == this.rightLeg) {
+                    opposite = this.rightPants;
+                } else if (part == this.rightPants) {
+                    opposite = this.rightLeg;
+                } else if (part == this.leftLeg) {
+                    opposite = this.leftPants;
+                } else if (part == this.leftPants) {
+                    opposite = this.leftLeg;
+                } else if (part == this.rightArm) {
+                    opposite = this.rightSleeve;
+                } else if (part == this.rightSleeve) {
+                    opposite = this.rightArm;
+                } else if (part == this.leftArm) {
+                    opposite = this.leftSleeve;
+                } else if (part == this.leftSleeve) {
+                    opposite = this.leftArm;
+                }
+                var partPoint = { x: part.x, y: part.y };
+                var oppositePoint = { x: opposite.x, y: opposite.y };
+                point.x = oppositePoint.x + (point.x - partPoint.x);
+                point.y = oppositePoint.y + (point.y - partPoint.y);
+                return point;
+            }
+        }
+
+    }
 }
 
 

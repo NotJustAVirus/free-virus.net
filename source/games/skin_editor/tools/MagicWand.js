@@ -58,6 +58,8 @@ export class MagicWand extends SelectTool{
         this.floodFill(point.x, point.y);
         point = this.skinMapper.moveY({ x: x, y: y }, true);
         this.floodFill(point.x, point.y);
+        point = this.skinMapper.pointOnOppositeLayer({ x: x, y: y });
+        this.floodFill(point.x, point.y);
     }
 
     getBaseColor() {
