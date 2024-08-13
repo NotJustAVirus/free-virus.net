@@ -39,7 +39,7 @@ export class FloodFiller {
         if (this.colorDistance(color, this.selectedColor) > this.tolerance) {
             return;
         }
-        this.layerList.selection[x + y * 64] = true;
+        this.selection[x + y * 64] = true;
         var point = this.skinMapper.moveX({ x: x, y: y }, false);
         this.floodFill(point.x, point.y);
         point = this.skinMapper.moveX({ x: x, y: y }, true);

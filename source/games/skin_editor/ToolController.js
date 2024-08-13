@@ -4,6 +4,7 @@ import { SelectTool } from './tools/SelectTool.js';
 import { MagicWand } from './tools/MagicWand.js';
 import { LayerList } from './Layer.js';
 import { ColorPicker } from './tools/ColorPicker.js';
+import { FillTool } from './tools/FillTool.js';
 import { ColorSelector } from './ColorSelector.js';
 
 
@@ -13,7 +14,8 @@ export class ToolController {
         erase: Eraser,
         select: SelectTool,
         magicWand: MagicWand,
-        colorPicker: ColorPicker
+        colorPicker: ColorPicker,
+        fill: FillTool,
     };
     
     constructor(mouseListener) {
