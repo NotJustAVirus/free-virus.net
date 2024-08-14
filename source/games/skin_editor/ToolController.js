@@ -22,9 +22,9 @@ export class ToolController {
         this.mouseListener = mouseListener;
         this.layerList = new LayerList();
         this.setTool("select");
-        this.mouseListener.setCallback((point, ctrlDown) => {
-            this.selectedTool.click(point, ctrlDown);
-        });
+        this.mouseListener.callback = (type, point, event) => {
+            this.selectedTool[type](point, event);
+        };
         $('#selectedTool').find('.value').change(() => {
             this.setTool($('#selectedTool').find('.value').val());
         });

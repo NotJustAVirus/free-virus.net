@@ -13,7 +13,15 @@ export class Tool {
         return this.options.get(name);
     }
 
-    click(point, ctrlDown) {
+    click(point, event) {
+        throw new Error('Not implemented');
+    }
+
+    drag(point, event) {
+        throw new Error('Not implemented');
+    }
+
+    release(point, event) {
         throw new Error('Not implemented');
     }
 }

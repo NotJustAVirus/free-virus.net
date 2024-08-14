@@ -28,9 +28,7 @@ export class MouseListener {
             this.setDrawing(true);
             var point = this.getIntersectPoint(intersects);
             this.lastPoint = point;
-            if (this.callback) {
-                this.callback(point, event.ctrlKey);
-            }
+            this.announce('click', point, event);
         }
 	}
 
@@ -50,9 +48,7 @@ export class MouseListener {
                 return;
             }
             this.lastPoint = point;
-            if (this.callback) {
-                this.callback(point, event.ctrlKey);
-            }
+            this.announce('drag', point, event);
         }
     }
 
@@ -62,11 +58,23 @@ export class MouseListener {
 
         if (this.drawing == false && intersects.length == 0) {
             if (mouse.x == this.mouse.x || mouse.y == this.mouse.y) {
-                this.callback(null, event.ctrlKey);
+                this.announce('click', null, event);
             }
+        } else if (this.drawing == true) {
+            this.announce('release', this.lastPoint, event);
         }
 
         this.setDrawing(false);
+    }
+
+    announce(type, point, event) {
+        if (this.callback) {
+            try {
+                this.callback(type, point, event);
+            } catch (e) {
+                console.error(e);
+            }
+        }
     }
 
     setDrawing(drawing) {
@@ -88,10 +96,6 @@ export class MouseListener {
         this.raycaster.setFromCamera(this.mouse, this.camera);
 
 		return this.raycaster.intersectObjects(this.world.children);
-    }
-
-    setCallback(callback) {
-        this.callback = callback;
     }
 
     getIntersectPoint(intersects) {

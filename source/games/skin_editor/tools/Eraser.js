@@ -5,9 +5,27 @@ export class Eraser extends Tool {
         super(layerList);
     }
 
-    click(point, ctrlDown) {
+    erase(point) {
         var g2d = this.layerList.currentLayer.canvas.getContext('2d');
         g2d.clearRect(point.x, point.y, 1, 1);
         this.layerList.onLayerUdated();
+    }
+
+    click(point, event) {
+        if (point == null) {
+            return;
+        }
+        this.erase(point);
+    }
+
+    drag(point, event) {
+        if (point == null) {
+            return;
+        }
+        this.erase(point);
+    }
+
+    release(point, event) {
+        // TODO Set save point
     }
 }

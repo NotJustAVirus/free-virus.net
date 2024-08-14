@@ -9,7 +9,7 @@ export class FillTool extends Tool{
         this.addOption('floodMode', "contiguous");
     }
 
-    click(point, ctrlDown) {
+    click(point, event) {
         if (point == null) {
             return;
         }
@@ -29,5 +29,13 @@ export class FillTool extends Tool{
         }
 
         this.layerList.onLayerUdated();
+    }
+
+    drag(point, event) {
+        // do nothing
+    }
+
+    release(point, event) {
+        // TODO Set save point
     }
 }

@@ -7,7 +7,7 @@ export class ColorPicker extends Tool {
         this.addOption('sampling', 'layer');
     }
 
-    click(point, ctrlDown) {
+    click(point, evnet) {
         if (point == null) {
             return;
         }
@@ -19,5 +19,13 @@ export class ColorPicker extends Tool {
         var data = g2d.getImageData(point.x, point.y, 1, 1).data;
         this.colorSelector.setColorFromRGBA(data[0], data[1], data[2], data[3]);
         this.layerList.onLayerUdated();
+    }
+
+    drag(point, event) {
+        // do nothing
+    }
+
+    release(point, event) {
+        // do nothing
     }
 }

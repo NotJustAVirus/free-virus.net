@@ -27,16 +27,28 @@ export class SelectTool extends Tool {
         this.layerList.onLayerUdated();
     }
 
-    click(point, ctrlDown) {
+    click(point, event) {
         if (point == null) {
             this.clearSelection();
             return;
         }
-        if (!ctrlDown) {
+        if (!event.ctrlKey) {
             this.clearSelection();
         }
         this.layerList.selection[point.x + point.y * 64] = !this.layerList.selection[point.x + point.y * 64];
         this.updateSelectionCanvas();
+    }
+
+    drag(point, event) {
+        if (point == null) {
+            return;
+        }
+        this.layerList.selection[point.x + point.y * 64] = true;
+        this.updateSelectionCanvas();
+    }
+
+    release(point, event) {
+        // TODO Set save point
     }
 
     getBaseColor() {
