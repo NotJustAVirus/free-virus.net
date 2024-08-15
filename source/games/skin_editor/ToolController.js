@@ -55,6 +55,7 @@ export class ToolController {
         $('.toolbar-section:not(#selectedTool)').find('.value').off('change');
         $('button.value').off('click');
         $('#selectedTool').show();
+        $('#undo-section').show(); // TODO: fix this
         for (let option of this.selectedTool.options.keys()) {
             $('#' + option).show();
             $('#' + option + 'Value').val(this.selectedTool.options.get(option));

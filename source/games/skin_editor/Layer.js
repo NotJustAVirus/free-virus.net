@@ -43,6 +43,10 @@ export class LayerList {
             $('#download')[0].href = canvas.toDataURL('image/png');
             $('#download')[0].download = $('#download-name').val();
         });
+        $('#undo').click(() => {
+            this.currentLayer.loadLastHistory();
+            this.onLayerUdated();
+        });
     }
 
     setCurrentLayer(layer) {
@@ -119,6 +123,7 @@ export class LayerList {
 export class Layer {
     constructor(layerList) {
         this.layerList = layerList;
+        this.history = [];
         // create html element
         this.element = $('#dummy').find('.layer').clone();
         let temp = this;
@@ -155,9 +160,21 @@ export class Layer {
         }
     }
 
+    saveToHistory() {
+        let g2d = this.canvas.getContext('2d');
+        this.history.push(g2d.getImageData(0, 0, 64, 64));
+    }
+
+    loadLastHistory() {
+        let g2d = this.canvas.getContext('2d');
+        this.history.pop();
+        g2d.putImageData(this.history[this.history.length - 1], 0, 0);
+    }
+
     setImage(img) {
         let ctx = this.canvas.getContext('2d');
         ctx.drawImage(img, 0, 0);
+        this.saveToHistory();
         this.layerList.onLayerUdated();
     }
 
@@ -188,6 +205,7 @@ export class Layer {
                 var pixel = i / 4;
                 g2d.fillRect(pixel % 64, Math.floor(pixel / 64), 1, 1);
             }
+            saveToHistory();
             this.layerList.onLayerUdated();
         });
         this.element.find('#layer-basecolor').val(this.colorToHex(baseColor).substring(0, 7));

@@ -26,6 +26,6 @@ export class Eraser extends Tool {
     }
 
     release(point, event) {
-        // TODO Set save point
+        this.layerList.currentLayer.saveToHistory();
     }
 }
