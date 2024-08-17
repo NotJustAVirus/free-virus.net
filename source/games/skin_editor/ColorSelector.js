@@ -1,6 +1,7 @@
 export class ColorSelector {
 	constructor() {
-		this.recentColors = new Array(5).fill([0, 0, 0, 255]);
+		this.recentColors = new Array(5).fill([0, 0, 0, 0]);
+		this.paletteColors = new Array(5).fill([0, 0, 0, 0]);
 		this.setColorFromRGBA(0, 0, 0, 255);
 		let temp = this;
 		$('.color-input').change(function () {
@@ -11,6 +12,18 @@ export class ColorSelector {
 			let index = $(this).attr('id').substring(12);
 			temp.setColorFromRGBA(temp.recentColors[index][0], temp.recentColors[index][1], temp.recentColors[index][2], temp.recentColors[index][3]);
 		});
+		$('.paletteColor').click(function (event) {
+			let index = $(this).attr('id').substring(13);
+			let color = temp.paletteColors[index];
+			temp.setColorFromRGBA(color[0], color[1], color[2], color[3]);
+		});
+		$('.paletteColor').contextmenu(function () {
+			let index = $(this).attr('id').substring(13);
+			temp.paletteColors[index] = [temp.color[0], temp.color[1], temp.color[2], temp.opacity];
+			temp.updatePaletteColors();
+			return false;
+		});
+
 	}
 
 	addRecentColor() {
@@ -30,7 +43,15 @@ export class ColorSelector {
 
 	updateRecentColors() {
 		for (let i = 0; i < 5; i++) {
-			$('#recentColor-' + i).css('background-color', 'rgba(' + this.recentColors[i].join(',') + ')');
+			let color = this.recentColors[i];
+			$('#recentColor-' + i + ' .color').css('background-color', 'rgba(' + color[0] + ',' + color[1] + ',' + color[2] + ',' + color[3] / 255 + ')');
+		}
+	}
+
+	updatePaletteColors() {
+		for (let i = 0; i < 5; i++) {
+			let color = this.paletteColors[i];
+			$('#paletteColor-' + i + ' .color').css('background-color', 'rgba(' + color[0] + ',' + color[1] + ',' + color[2] + ',' + color[3] / 255 + ')');
 		}
 	}
 
