@@ -2,6 +2,8 @@ import * as THREE from 'three';
 
 
 export class Player extends THREE.Object3D {
+    #hatScale = Math.cbrt(1.5);
+    #bodyScale = Math.cbrt(1.25);
 
     constructor(skincanvas) {
         super();
@@ -31,7 +33,7 @@ export class Player extends THREE.Object3D {
         headPart.addUVmapping(64, 64, 0, 48);
         var hat = new PlayerPart(8, 8, 8, this.material);
         hat.addUVmapping(64, 64, 32, 48);
-        hat.scale.set(1.1, 1.1, 1.1);
+        hat.scale.set(this.#hatScale, this.#hatScale, this.#hatScale);
         head.add(headPart);
         head.add(hat);
         this.toggleMap.set('hat-part', hat);
@@ -41,7 +43,7 @@ export class Player extends THREE.Object3D {
         bodyPart.addUVmapping(64, 64, 16, 32);
         var jacket = new PlayerPart(8, 12, 4, this.material);
         jacket.addUVmapping(64, 64, 16, 16);
-        jacket.scale.set(1.1, 1.1, 1.1);
+        jacket.scale.set(this.#bodyScale, this.#bodyScale, this.#bodyScale);
         body.add(bodyPart);
         body.add(jacket);
         this.toggleMap.set('jacket-part', jacket);
@@ -51,7 +53,7 @@ export class Player extends THREE.Object3D {
         rightLegPart.addUVmapping(64, 64, 0, 32);
         var rightPants = new PlayerPart(4, 12, 4, this.material);
         rightPants.addUVmapping(64, 64, 0, 16);
-        rightPants.scale.set(1.1, 1.1, 1.1);
+        rightPants.scale.set(this.#bodyScale, this.#bodyScale, this.#bodyScale);
         rightLeg.add(rightLegPart);
         rightLeg.add(rightPants);
         this.toggleMap.set('right-leg-part', rightLegPart);
@@ -61,7 +63,7 @@ export class Player extends THREE.Object3D {
         leftLegPart.addUVmapping(64, 64, 16, 0);
         var leftPants = new PlayerPart(4, 12, 4, this.material);
         leftPants.addUVmapping(64, 64, 0, 0);
-        leftPants.scale.set(1.1, 1.1, 1.1);
+        leftPants.scale.set(this.#bodyScale, this.#bodyScale, this.#bodyScale);
         leftLeg.add(leftLegPart);
         leftLeg.add(leftPants);
         this.toggleMap.set('left-leg-part', leftLegPart);
@@ -71,7 +73,7 @@ export class Player extends THREE.Object3D {
         rightArmPart.addUVmapping(64, 64, 16+24, 32);
         var rightSleeve = new PlayerPart(4, 12, 4, this.material);
         rightSleeve.addUVmapping(64, 64, 16+24, 16);
-        rightSleeve.scale.set(1.1, 1.1, 1.1);
+        rightSleeve.scale.set(this.#bodyScale, this.#bodyScale, this.#bodyScale);
         rightArm.add(rightArmPart);
         rightArm.add(rightSleeve);
         this.toggleMap.set('right-arm-part', rightArmPart);
@@ -81,7 +83,7 @@ export class Player extends THREE.Object3D {
         leftArmPart.addUVmapping(64, 64, 32, 0);
         var leftSleeve = new PlayerPart(4, 12, 4, this.material);
         leftSleeve.addUVmapping(64, 64, 48, 0);
-        leftSleeve.scale.set(1.1, 1.1, 1.1);
+        leftSleeve.scale.set(this.#bodyScale, this.#bodyScale, this.#bodyScale);
         leftArm.add(leftArmPart);
         leftArm.add(leftSleeve);
         this.toggleMap.set('left-arm-part', leftArmPart);

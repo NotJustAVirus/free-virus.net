@@ -36,6 +36,8 @@ export class LayerList {
         });
         $('#download').click(() => {
             var canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 64;
             var g2d = canvas.getContext('2d');
             this.layers.forEach(layer => {
                 layer.drawLayer(g2d);
