@@ -6,6 +6,7 @@ import { LayerList } from './Layer.js';
 import { ColorPicker } from './tools/ColorPicker.js';
 import { FillTool } from './tools/FillTool.js';
 import { ColorSelector } from './ColorSelector.js';
+import { KeyListner } from './KeyListner.js';
 
 
 export class ToolController {
@@ -37,6 +38,20 @@ export class ToolController {
             }
         });
         this.colorSelector = new ColorSelector();
+        this.keyListner = new KeyListner();
+        this.setToolShortCut('pen', 'p');
+        this.setToolShortCut('erase', 'e');
+        this.setToolShortCut('select', 's');
+        this.setToolShortCut('magicWand', 'm');
+        this.setToolShortCut('colorPicker', 'c');
+        this.setToolShortCut('fill', 'f');
+    }
+
+    setToolShortCut(tool, key) {
+        this.keyListner.addListener(key, () => {
+            $('#selectedTool').find('.value').val(tool);
+            this.setTool(tool);
+        });
     }
 
     setTool(tool) {
