@@ -9,7 +9,7 @@ export class KeyListner {
         document.addEventListener('keydown', e => {
             this.keys.add(e.key);
             if (this.listeners.has(e.key)) {
-                this.listeners.get(e.key)();
+                this.listeners.get(e.key)(e);
             }
         });
         document.addEventListener('keyup', e => {
@@ -19,6 +19,14 @@ export class KeyListner {
 
     addListener(key, callback) {
         this.listeners.set(key, callback);
+    }
+
+    addShortCutListener(key, callback) {
+        this.addListener(key, (event) => {
+            if (event.ctrlKey) {
+                callback();
+            }
+        });
     }
 
     removeListener(key) {

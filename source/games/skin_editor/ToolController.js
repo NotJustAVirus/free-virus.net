@@ -45,6 +45,9 @@ export class ToolController {
         this.setToolShortCut('magicWand', 'm');
         this.setToolShortCut('colorPicker', 'c');
         this.setToolShortCut('fill', 'f');
+        this.keyListner.addShortCutListener('z', () => {
+            $('#undo').click();
+        });
     }
 
     setToolShortCut(tool, key) {
