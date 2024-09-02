@@ -54,9 +54,9 @@ export class FloodFiller {
 
     colorDistance(color1, color2) {
         var diff = Math.sqrt(Math.pow(color1[0] - color2[0], 2) + Math.pow(color1[1] - color2[1], 2) + Math.pow(color1[2] - color2[2], 2));
-        var opacityDiff = 1 - Math.abs(color1[3] - color2[3]) / 255;
+        var opacityDiff = Math.abs(color1[3] - color2[3]) / 255;
         diff /= 441.6729559300637;
-        diff /= opacityDiff;
+        diff += opacityDiff;
         return diff;
     }
 
