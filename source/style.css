@@ -1,9 +1,13 @@
 :root {
     --main-red: #ec0006;
 }
+@font-face {
+    font-family: 'MainFont';
+    src: url('/hack.regular.ttf') format('truetype');
+}
 *{
-    font-family: Consolas;
-    color:#FFFFFF;   
+    font-family: Consolas, "MainFont";
+    color:#FFFFFF;
 }
 body {
     margin: 0px;

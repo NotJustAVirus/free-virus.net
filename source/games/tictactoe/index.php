@@ -145,7 +145,7 @@ if (isset($_POST["value"])) {
     saveboard($board,$fileplace);            
 }
 ?>
-<p style = "font-family:Consolas;">
+<p>
 <pre><?php printboard(); ?></pre>
 </p>
 <?php
