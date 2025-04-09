@@ -130,7 +130,7 @@ include_once $index;
     <h1>Free-Virus.net</h1>
     <h3>By JustAVirus</h3>
     <div class="contact">
-        <span><a href="https://github.com/ActuallyJustAVirus/free-virus.net"><img height="40" src="Images/github/github-mark-white.png" srcset="/Images/github/github-mark-white.svg" alt="github logo"></a></span>
+        <span><a href="https://github.com/NotJustAVirus/free-virus.net"><img height="40" src="Images/github/github-mark-white.png" srcset="/Images/github/github-mark-white.svg" alt="github logo"></a></span>
     </div>
 </footer>
 </body>

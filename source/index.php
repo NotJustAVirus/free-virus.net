@@ -40,7 +40,7 @@ $sites = [
         <a href="https://docs.emmet.io/cheat-sheet/" target="_blank" rel="noopener noreferrer">cheat-sheet</a>
     </div>
     <div class="corner">
-        <a href="https://github.com/ActuallyJustAVirus/free-virus.net/">View source code</a>
+        <a href="https://github.com/NotJustAVirus/free-virus.net/">View source code</a>
     </div> -->
     <div class="center">
         <br>
