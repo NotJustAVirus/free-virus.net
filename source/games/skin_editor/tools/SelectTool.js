@@ -24,7 +24,7 @@ export class SelectTool extends Tool {
                 }
             }
         }
-        this.layerList.onLayerUdated();
+        this.layerList.onLayerUpdated();
     }
 
     click(point, event) {

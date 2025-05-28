@@ -8,7 +8,7 @@ export class Eraser extends Tool {
     erase(point) {
         var g2d = this.layerList.currentLayer.canvas.getContext('2d');
         g2d.clearRect(point.x, point.y, 1, 1);
-        this.layerList.onLayerUdated();
+        this.layerList.onLayerUpdated();
     }
 
     click(point, event) {

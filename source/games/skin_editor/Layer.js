@@ -47,7 +47,7 @@ export class LayerList {
         });
         $('#undo').click(() => {
             this.currentLayer.loadLastHistory();
-            this.onLayerUdated();
+            this.onLayerUpdated();
         });
     }
 
@@ -73,7 +73,7 @@ export class LayerList {
         if (this.currentLayer === layer) {
             this.setCurrentLayer(this.layers[this.layers.length - 1]);
         }
-        this.onLayerUdated();
+        this.onLayerUpdated();
     }
 
     moveLayerUp(layer) {
@@ -84,7 +84,7 @@ export class LayerList {
         this.layers.splice(index, 1);
         this.layers.splice(index + 1, 0, layer);
         this.reorderLayers();
-        this.onLayerUdated();
+        this.onLayerUpdated();
     }
 
     moveLayerDown(layer) {
@@ -95,7 +95,7 @@ export class LayerList {
         this.layers.splice(index, 1);
         this.layers.splice(index - 1, 0, layer);
         this.reorderLayers();
-        this.onLayerUdated();
+        this.onLayerUpdated();
     }
 
     reorderLayers() {
@@ -108,7 +108,7 @@ export class LayerList {
         this.callOnUpdate = callback;
     }
 
-    onLayerUdated() {
+    onLayerUpdated() {
         var g2d = $('#skin')[0].getContext('2d');
         g2d.globalAlpha = 1;
         g2d.clearRect(0, 0, 64, 64);
@@ -141,10 +141,10 @@ export class Layer {
         this.downButton = this.element.find('.down-layer');
         this.element.find('#layer-basecolor').hide();
         this.visibleCheckbox.change(() => {
-            layerList.onLayerUdated();
+            layerList.onLayerUpdated();
         });
         this.opacitySlider.change(() => {
-            layerList.onLayerUdated();
+            layerList.onLayerUpdated();
         });
         this.upButton.click(() => {
             layerList.moveLayerUp(this);
@@ -177,7 +177,7 @@ export class Layer {
         let ctx = this.canvas.getContext('2d');
         ctx.drawImage(img, 0, 0);
         this.saveToHistory();
-        this.layerList.onLayerUdated();
+        this.layerList.onLayerUpdated();
     }
 
     setTemplate(data, baseColor) {
@@ -207,8 +207,8 @@ export class Layer {
                 var pixel = i / 4;
                 g2d.fillRect(pixel % 64, Math.floor(pixel / 64), 1, 1);
             }
-            saveToHistory();
-            this.layerList.onLayerUdated();
+            this.saveToHistory();
+            this.layerList.onLayerUpdated();
         });
         this.element.find('#layer-basecolor').val(this.colorToHex(baseColor).substring(0, 7));
         this.element.find('#layer-basecolor').change();

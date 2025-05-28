@@ -10,7 +10,7 @@ export class Pen extends Tool {
         g2d.globalAlpha = $('#A').val() / 255;
         g2d.fillStyle = $('#color').val();
         g2d.fillRect(point.x, point.y, 1, 1);
-        this.layerList.onLayerUdated();
+        this.layerList.onLayerUpdated();
     }
 
     click(point, event) {

@@ -18,7 +18,7 @@ export class ColorPicker extends Tool {
         }
         var data = g2d.getImageData(point.x, point.y, 1, 1).data;
         this.colorSelector.setColorFromRGBA(data[0], data[1], data[2], data[3]);
-        this.layerList.onLayerUdated();
+        this.layerList.onLayerUpdated();
     }
 
     drag(point, event) {

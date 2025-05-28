@@ -28,7 +28,7 @@ export class FillTool extends Tool{
             }
         }
 
-        this.layerList.onLayerUdated();
+        this.layerList.onLayerUpdated();
     }
 
     drag(point, event) {
