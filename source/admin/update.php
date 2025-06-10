@@ -54,6 +54,10 @@ switch ($_GET['type']) {
         
         $name = $_POST['name'];
         $color = $_POST['color'];
+        // remove # from color if it exists
+        if (strpos($color, '#') === 0) {
+            $color = substr($color, 1);
+        }
         
         $sql = "INSERT INTO tags (name, color) VALUES (?, ?)";
         $conn->execute_query($sql, [$name, $color]);
