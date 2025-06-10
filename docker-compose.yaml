@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: dockerfile
     ports:
-      - '8080:80'
+      - '9164:80'
   db:
     image: mysql:latest
     environment:
@@ -13,6 +13,6 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - '8081:80'
+      - '9165:80'
     environment:
       PMA_HOST: db
