@@ -85,6 +85,8 @@ function readFileRoot($url){
     } else {
         echo "File not found";
         header("HTTP/1.0 404 Not Found");
+        header("Content-Type: text/plain");
+        exit();
     }
 }
 ?>
