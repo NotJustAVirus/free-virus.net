@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: sql104.infinityfree.com
--- Generation Time: May 17, 2024 at 04:01 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.2.22
+-- Host: db
+-- Generation Time: Jun 10, 2025 at 08:09 PM
+-- Server version: 9.3.0
+-- PHP Version: 8.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `epiz_30852052_games`
+-- Database: `mydatabase`
 --
 
 -- --------------------------------------------------------
@@ -29,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `casino_user` (
-  `id` int(11) NOT NULL,
-  `money` int(11) NOT NULL DEFAULT 500
+  `id` int NOT NULL,
+  `money` int NOT NULL DEFAULT '500'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -53,11 +52,38 @@ INSERT INTO `casino_user` (`id`, `money`) VALUES
 (13, 450),
 (14, 500),
 (15, 150),
-(16, 500),
+(16, 400),
 (17, 400),
 (18, 500),
 (19, 550),
-(20, 500);
+(20, 500),
+(21, 500),
+(22, 500),
+(23, 500),
+(24, 800),
+(25, 500),
+(26, 500),
+(27, 700),
+(28, 650),
+(29, -400),
+(30, 450),
+(31, 650),
+(32, 550),
+(33, 500),
+(34, 500),
+(35, 300),
+(36, 650),
+(37, 650),
+(38, 500),
+(39, 500),
+(40, 500),
+(41, 300),
+(42, 400),
+(43, 600),
+(44, 100),
+(45, -800),
+(46, 500),
+(47, 400);
 
 -- --------------------------------------------------------
 
@@ -66,7 +92,7 @@ INSERT INTO `casino_user` (`id`, `money`) VALUES
 --
 
 CREATE TABLE `games` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(255) NOT NULL,
   `path` varchar(255) NOT NULL,
   `description` text NOT NULL
@@ -83,7 +109,8 @@ INSERT INTO `games` (`id`, `title`, `path`, `description`) VALUES
 (5, 'Coin Flip', 'coin_flip', ''),
 (6, 'Game of Life', 'game_of_life', ''),
 (12, 'Slot', 'slot', ''),
-(13, 'Lucky Wheel', 'luckywheel', '');
+(13, 'Lucky Wheel', 'luckywheel', ''),
+(18, 'Skin Editor', 'skin_editor', '');
 
 -- --------------------------------------------------------
 
@@ -92,8 +119,8 @@ INSERT INTO `games` (`id`, `title`, `path`, `description`) VALUES
 --
 
 CREATE TABLE `game_tags` (
-  `game_id` int(11) NOT NULL,
-  `tag_id` int(11) NOT NULL
+  `game_id` int NOT NULL,
+  `tag_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -110,7 +137,9 @@ INSERT INTO `game_tags` (`game_id`, `tag_id`) VALUES
 (12, 5),
 (13, 5),
 (13, 4),
-(13, 1);
+(13, 1),
+(18, 1),
+(18, 7);
 
 -- --------------------------------------------------------
 
@@ -119,7 +148,7 @@ INSERT INTO `game_tags` (`game_id`, `tag_id`) VALUES
 --
 
 CREATE TABLE `tags` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `color` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -132,7 +161,8 @@ INSERT INTO `tags` (`id`, `name`, `color`) VALUES
 (1, 'Javascript', 'eee170'),
 (3, 'Scratch', 'f2a01c'),
 (4, 'PHP', '7377ad'),
-(5, 'Casino', '006300');
+(5, 'Casino', '006300'),
+(7, 'Minecraft', '52a535');
 
 -- --------------------------------------------------------
 
@@ -141,10 +171,10 @@ INSERT INTO `tags` (`id`, `name`, `color`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `authLevel` int(11) NOT NULL DEFAULT 0
+  `authLevel` int NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -200,25 +230,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `casino_user`
 --
 ALTER TABLE `casino_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
