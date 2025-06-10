@@ -1,16 +1,22 @@
 services:
   apache:
+    container_name: free-virus-apache
+    restart: unless-stopped
     build:
       context: .
       dockerfile: dockerfile
     ports:
       - '9164:80'
   db:
+    container_name: free-virus-db
+    restart: unless-stopped
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
   phpmyadmin:
+    container_name: free-virus-myadmin
+    restart: unless-stopped
     image: phpmyadmin/phpmyadmin
     ports:
       - '9165:80'
