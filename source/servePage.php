@@ -88,7 +88,7 @@ if (file_exists($path."config")) {
         echo "$h\n";
     }
     ?>
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
 </head>
 <body>
 <ul>
