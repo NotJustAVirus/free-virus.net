@@ -8,4 +8,4 @@ COPY source/ .
 RUN chmod -R 777 .
 
 COPY ApacheConf/httpd.conf /etc/apache2/sites-available/000-default.conf
-COPY ApacheConf/testserver.htaccess .htaccess
+COPY ApacheConf/main.htaccess .htaccess
