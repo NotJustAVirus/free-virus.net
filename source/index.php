@@ -11,6 +11,10 @@ function get_title($url){
 }
 
 $sites = [
+    "pawzd.net",
+    "itnerd.dk",
+    "suoweb.net",
+    "itnerd.net",
     "the-web.42web.io",
     // "torweb.dk",
     // "tvs2.dk",
