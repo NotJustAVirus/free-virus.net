@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <?php
 
 if (!isset($path)) {
@@ -67,10 +67,14 @@ if (file_exists($path."config")) {
 ?>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free-virus.net is a website made by JustAVirus. It is a place where you can find games, websites, and other fun stuff.">
+    <meta name="keywords" content="free-virus, free-virus.net, JustAVirus">
+    <meta name="author" content="JustAVirus">
+    <meta name="theme-color" content="#000000">
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <?php
-    // <meta charset="utf-8">
-    // <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     echo "<title>$title</title>\n";
     echo "<link rel=\"icon\" href=\"$icon\" type=\"image/png\">\n";

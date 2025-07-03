@@ -45,6 +45,7 @@ switch ($fileExt) {
         break;
     case 'css':
         header("Content-Type: text/css");
+        header("Cache-Control: max-age=31536000");
         break;
     case 'js':
         header("Content-Type: text/javascript");
@@ -63,6 +64,7 @@ switch ($fileExt) {
         break;
     case 'svg':
         header("Content-Type: image/svg+xml");
+        header("Cache-Control: max-age=31536000");
         break;
     case 'ico':
         header("Content-Type: image/x-icon");
@@ -70,6 +72,10 @@ switch ($fileExt) {
         break;
     case 'json':
         header("Content-Type: application/json");
+        break;
+    case 'ttf':
+        header("Content-Type: font/ttf");
+        header("Cache-Control: max-age=31536000");
         break;
     default:
         header("Content-Type: text/plain");
