@@ -27,37 +27,45 @@ $sites = [
 ];
 ?>
 <div class="main">
-    <!-- <div>
-        <span>Links to other awsome sites:</span><br>
-        <?php
-        for ($i=0; $i < count($sites); $i++) { 
-            $url = "http://".$sites[$i];
-            $title = get_title($url);
-            if (!$title || $title == "") $title = $sites[$i];
-            echo "<a href='$url' target='_blank' rel='noopener noreferrer'>$title</a><br>\n";
-        }
-        ?>
-        <br>
-    </div>
-    <div>
-        <span>psst do you want to know how to use vs code to make html</span><br>
-        <a href="https://docs.emmet.io/cheat-sheet/" target="_blank" rel="noopener noreferrer">cheat-sheet</a>
-    </div>
-    <div class="corner">
-        <a href="https://github.com/NotJustAVirus/free-virus.net/">View source code</a>
-    </div> -->
-    <div class="center">
-        <br>
+    <div class="center-text">
         <h1>hi o/</h1>
         <!-- <h1>hi :D</h1> -->
         <!-- <h1>hi :)</h1> -->
-        <div class="skull-container">
-            <div class="top-skull">
-                <img class="skull-img" src="Images/redskull.png" alt="skull logo">
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="text">
+                <p>This website is a test ground for me to make whatever I want. Which means random games and tools.</p>
+                <br>
+                <p>Here are some of my other websites:</p>
+                <a href="http://brick.free-virus.net" target="_blank" rel="noopener noreferrer">Brick Simulator</a>
+                <br>
+                <p>Other websites made by other cool people i know:</p>
+                <a href="http://pawzd.net" target="_blank" rel="noopener noreferrer">Pawzd</a><br>
+                <a href="http://itnerd.dk" target="_blank" rel="noopener noreferrer">ITNerd.dk</a><br>
+                <a href="http://suoweb.net" target="_blank" rel="noopener noreferrer">suoweb.net</a><br>
+                <a href="http://itnerd.net" target="_blank" rel="noopener noreferrer">itnerd.net</a><br>
+                <a href="http://the-web.42web.io" target="_blank" rel="noopener noreferrer">The-Web</a><br>
+                <?php
+                // for ($i=0; $i < count($sites); $i++) { 
+                //     $url = "http://".$sites[$i];
+                //     $title = get_title($url);
+                //     if (!$title || $title == "") $title = $sites[$i];
+                //     echo "<a href='$url' target='_blank' rel='noopener noreferrer'>$title</a><br>\n";
+                // }
+                ?>
             </div>
-            <div class="skull">
-                <img class="skull-img" src="Images/redskull.png" alt="skull logo">
-                <div class="shadow"></div>
+        </div>
+        <div class="column">
+            <br>
+            <div class="skull-container">
+                <div class="top-skull">
+                    <img class="skull-img" src="Images/redskull.png" alt="skull logo">
+                </div>
+                <div class="skull">
+                    <img class="skull-img" src="Images/redskull.png" alt="skull logo">
+                    <div class="shadow"></div>
+                </div>
             </div>
         </div>
     </div>

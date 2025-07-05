@@ -10,6 +10,26 @@
     transform: translateY(0);
 }
 
+/* column */
+.columns {
+    display: flex;
+    justify-content: center;
+}
+.column {
+    float: left;
+    width: 50%;
+    text-align: -moz-center;
+    text-align: -webkit-center;
+}
+.center-text {
+    padding-top: 15px;
+    text-align: center;
+}
+.text {
+    padding: 10%;
+    text-align: left;
+}
+
 /* skull */
 .skull-container {
     top: -100px;
