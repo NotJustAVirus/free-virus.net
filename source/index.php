@@ -28,9 +28,22 @@ $sites = [
 ?>
 <div class="main">
     <div class="center-text">
-        <h1>hi o/</h1>
-        <!-- <h1>hi :D</h1> -->
-        <!-- <h1>hi :)</h1> -->
+        <?php
+        $greetMessages = [
+            "hi",
+            "hello",
+            "hey",
+            "welcome",
+        ];
+        $greetSmiles = [
+            ":D",
+            ":)",
+            "o/",
+        ];
+        $greet = $greetMessages[array_rand($greetMessages)];
+        $smile = $greetSmiles[array_rand($greetSmiles)];
+        echo "<h1>$greet $smile</h1>";
+        ?>
     </div>
     <div class="columns">
         <div class="column">
