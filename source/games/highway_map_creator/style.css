@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+}
+
+#mapCanvas {
+    border: 1px solid black;
+}
+
+#objectList {
+    margin-left: 20px;
+    border: 1px solid black;
+    padding: 10px;
+    width: 100%;
+    background-color: darkblue;
+}
+
+.poi-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-obj {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.banner-icon {
+    display: flex;
+    align-items: center;
+    background-color: gainsboro;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.banner-icon img {
+    width: 40px;
+    height: 40px;
+    image-rendering: pixelated;
+}
+
+.obj-x,
+.obj-y {
+    width: 50px;
+    text-align: center;
+}
+
+.remove-obj {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+}
