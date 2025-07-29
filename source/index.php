@@ -53,7 +53,7 @@ $sites = [
                 <p>Here are some of my other websites:</p>
                 <a href="http://brick.free-virus.net" target="_blank" rel="noopener noreferrer">Brick Simulator</a>
                 <br>
-                <p>Other websites made by other cool people i know:</p>
+                <p>Websites made by cool people i know:</p>
                 <a href="http://pawzd.net" target="_blank" rel="noopener noreferrer">Pawzd</a><br>
                 <a href="http://itnerd.dk" target="_blank" rel="noopener noreferrer">ITNerd.dk</a><br>
                 <a href="http://suoweb.net" target="_blank" rel="noopener noreferrer">suoweb.net</a><br>
