@@ -1,14 +1,38 @@
 .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    min-height: calc(100vh - 46px);
 }
 
-#mapCanvas {
-    border: 1px solid black;
+.map-area {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    image-rendering: pixelated;
+}
+
+#backgroundCanvas {
+    position: absolute;
+    scale: calc(64/58 * 8);
+}
+
+#mainCanvas {
+    position: absolute;
+    scale: 4;
+    background-color: white;
+}
+
+#poiCanvas {
+    position: absolute;
+    scale: 1;
 }
 
 #objectList {
-    margin-left: 20px;
-    border: 1px solid black;
+    box-sizing: border-box;
     padding: 10px;
     width: 100%;
     background-color: darkblue;
