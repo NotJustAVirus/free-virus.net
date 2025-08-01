@@ -66,22 +66,25 @@ $(document).ready(function(){
             this.listElement.find('.obj-name').val(name);
             this.listElement.find('.obj-x').val(x);
             this.listElement.find('.obj-y').val(y);
-            this.listElement.find('.obj-name').on('change', (e) => {
-                this.setName(e.target.value);
-                updatePOIMap();
-            });
-            this.listElement.find('.obj-x').on('change', (e) => {
-                this.setPosition(parseInt(e.target.value, 10), this.y);
-                updatePOIMap();
-            });
-            this.listElement.find('.obj-y').on('change', (e) => {
-                this.setPosition(this.x, parseInt(e.target.value, 10));
-                updatePOIMap();
-            });
+            this.listElement.find('.obj-name').on('input', this.updateValues.bind(this));
+            this.listElement.find('.obj-name').on('change', this.updateValues.bind(this));
+            this.listElement.find('.obj-x').on('input', this.updateValues.bind(this));
+            this.listElement.find('.obj-x').on('change', this.updateValues.bind(this));
+            this.listElement.find('.obj-y').on('input', this.updateValues.bind(this));
+            this.listElement.find('.obj-y').on('change', this.updateValues.bind(this));
             this.setBanner(banner);
             $('.poi-list').append(this.listElement);
             this.listElement.show();
             POI.POIS.push(this);
+        }
+
+        updateValues() {
+            this.setName(this.listElement.find('.obj-name').val());
+            this.setPosition(
+                parseInt(this.listElement.find('.obj-x').val(), 10),
+                parseInt(this.listElement.find('.obj-y').val(), 10)
+            );
+            updatePOIMap();
         }
         
         setName(name) {
@@ -89,8 +92,8 @@ $(document).ready(function(){
         }
 
         setPosition(x, y) {
-            this.x = x;
-            this.y = y;
+            this.x = x || 0;
+            this.y = y || 0;
         }
 
         setBanner(banner) {
@@ -106,6 +109,15 @@ $(document).ready(function(){
                 poiCtx.save();
                 poiCtx.translate(this.x * 4, this.y * 4);
                 poiCtx.drawImage(img, -16, -16, 32, 32);
+                if (this.name && this.name.length > 0) {
+                    poiCtx.fillStyle = '#444444aa';
+                    let textWidth = poiCtx.measureText(this.name).width;
+                    poiCtx.fillRect(-textWidth / 2 - 3, 18, textWidth + 6, 16);
+                    poiCtx.fillStyle = 'white';
+                    // poiCtx.font = '12px Arial';
+                    poiCtx.textAlign = 'center';
+                    poiCtx.fillText(this.name, 0, 30);
+                }
                 poiCtx.restore();
             };
         }
