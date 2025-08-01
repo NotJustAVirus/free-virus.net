@@ -57,21 +57,21 @@ $(document).ready(function(){
     class POI {
         static POIS = [];
 
-        constructor(name, x, y, banner) {
+        constructor(name, x, z, banner) {
             this.name = name;
             this.x = x;
-            this.y = y;
+            this.z = z;
             this.banner = banner;
             this.listElement = poiListElement.clone();
             this.listElement.find('.obj-name').val(name);
             this.listElement.find('.obj-x').val(x);
-            this.listElement.find('.obj-y').val(y);
+            this.listElement.find('.obj-z').val(z);
             this.listElement.find('.obj-name').on('input', this.updateValues.bind(this));
             this.listElement.find('.obj-name').on('change', this.updateValues.bind(this));
             this.listElement.find('.obj-x').on('input', this.updateValues.bind(this));
             this.listElement.find('.obj-x').on('change', this.updateValues.bind(this));
-            this.listElement.find('.obj-y').on('input', this.updateValues.bind(this));
-            this.listElement.find('.obj-y').on('change', this.updateValues.bind(this));
+            this.listElement.find('.obj-z').on('input', this.updateValues.bind(this));
+            this.listElement.find('.obj-z').on('change', this.updateValues.bind(this));
             this.setBanner(banner);
             $('.poi-list').append(this.listElement);
             this.listElement.show();
@@ -82,7 +82,7 @@ $(document).ready(function(){
             this.setName(this.listElement.find('.obj-name').val());
             this.setPosition(
                 parseInt(this.listElement.find('.obj-x').val(), 10),
-                parseInt(this.listElement.find('.obj-y').val(), 10)
+                parseInt(this.listElement.find('.obj-z').val(), 10)
             );
             updatePOIMap();
         }
@@ -91,9 +91,9 @@ $(document).ready(function(){
             this.name = name;
         }
 
-        setPosition(x, y) {
+        setPosition(x, z) {
             this.x = x || 0;
-            this.y = y || 0;
+            this.z = z || 0;
         }
 
         setBanner(banner) {
@@ -107,7 +107,7 @@ $(document).ready(function(){
             img.onload = () => {
                 poiCtx.imageSmoothingEnabled = false;
                 poiCtx.save();
-                poiCtx.translate(this.x * 4, this.y * 4);
+                poiCtx.translate(this.x * 4, this.z * 4);
                 poiCtx.drawImage(img, -16, -16, 32, 32);
                 if (this.name && this.name.length > 0) {
                     poiCtx.fillStyle = '#444444aa';

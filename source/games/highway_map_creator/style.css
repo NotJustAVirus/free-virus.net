@@ -65,7 +65,7 @@ canvas {
 }
 
 .obj-x,
-.obj-y {
+.obj-z {
     width: 50px;
     text-align: center;
 }
