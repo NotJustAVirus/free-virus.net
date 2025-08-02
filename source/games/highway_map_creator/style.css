@@ -11,6 +11,7 @@
     align-items: center;
 }
 
+img,
 canvas {
     image-rendering: pixelated;
 }
@@ -29,6 +30,15 @@ canvas {
 #poiCanvas {
     position: absolute;
     scale: 1;
+}
+
+@font-face {
+    font-family: 'unifont';
+    src: url('unifont-16.0.04.woff2') format('woff2');
+}
+
+#objectList * {
+    font-family: 'unifont', MainFont;
 }
 
 #objectList {
