@@ -101,13 +101,13 @@ $(document).ready(function(){
             this.listElement.find('.banner-icon img').attr('src', `images/banners/${banner}.png`);
         }
 
-        drawPOI() {
+        drawPOI(scale, bounds) {
             let img = new Image();
             img.src = `images/banners/${this.banner}.png`;
             img.onload = () => {
                 poiCtx.imageSmoothingEnabled = false;
                 poiCtx.save();
-                poiCtx.translate(this.x * 4, this.z * 4);
+                poiCtx.translate((this.x - bounds.minX) * 4 * scale, (this.z - bounds.minZ) * 4 * scale);
                 poiCtx.drawImage(img, -16, -16, 32, 32);
                 if (this.name && this.name.length > 0) {
                     poiCtx.fillStyle = '#444444aa';
@@ -126,10 +126,34 @@ $(document).ready(function(){
     
     function updatePOIMap() {
         poiCtx.clearRect(0, 0, poiCanvas.width, poiCanvas.height);
-        POI.POIS.forEach(poi => poi.drawPOI());
+        let poiBounds = {
+            minX: Infinity,
+            maxX: -Infinity,
+            minZ: Infinity,
+            maxZ: -Infinity
+        }
+        POI.POIS.forEach(poi => {
+            poiBounds.minX = Math.min(poiBounds.minX, poi.x);
+            poiBounds.maxX = Math.max(poiBounds.maxX, poi.x);
+            poiBounds.minZ = Math.min(poiBounds.minZ, poi.z);
+            poiBounds.maxZ = Math.max(poiBounds.maxZ, poi.z);
+        });
+        let mapX = mainCanvas.width;
+        let mapZ = mainCanvas.height;
+        let edgePadding = 8;
+        let scaleX = (mapX - 2 * edgePadding) / (poiBounds.maxX - poiBounds.minX);
+        let scaleZ = (mapZ - 2 * edgePadding) / (poiBounds.maxZ - poiBounds.minZ);
+        let scale = Math.min(scaleX, scaleZ);
+        poiBounds.minX -= edgePadding / scale;
+        poiBounds.maxX += edgePadding / scale;
+        poiBounds.minZ -= edgePadding / scale;
+        poiBounds.maxZ += edgePadding / scale;
+        POI.POIS.forEach(poi => poi.drawPOI(scale, poiBounds));
     }
     
     new POI('Start', 64, 64, 'green_banner');
+    new POI('End', 32, 96, 'red_banner');
+    new POI('Checkpoint', 96, 64, 'blue_banner');
     updatePOIMap();
 });
 
