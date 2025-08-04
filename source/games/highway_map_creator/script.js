@@ -143,11 +143,22 @@ $(document).ready(function(){
         let edgePadding = 8;
         let scaleX = (mapX - 2 * edgePadding) / (poiBounds.maxX - poiBounds.minX);
         let scaleZ = (mapZ - 2 * edgePadding) / (poiBounds.maxZ - poiBounds.minZ);
-        let scale = Math.min(scaleX, scaleZ);
-        poiBounds.minX -= edgePadding / scale;
-        poiBounds.maxX += edgePadding / scale;
-        poiBounds.minZ -= edgePadding / scale;
-        poiBounds.maxZ += edgePadding / scale;
+        let scale;
+        if (scaleX < scaleZ) {
+            scale = scaleX;
+            poiBounds.minX -= edgePadding / scale;
+            poiBounds.maxX += edgePadding / scale;
+            let zFreeSpace = ((mapZ / scale) - (poiBounds.maxZ - poiBounds.minZ)) / 2;
+            poiBounds.minZ -= zFreeSpace;
+            poiBounds.maxZ += zFreeSpace;
+        } else {
+            scale = scaleZ;
+            poiBounds.minZ -= edgePadding / scale;
+            poiBounds.maxZ += edgePadding / scale;
+            let x = ((mapX / scale) - (poiBounds.maxX - poiBounds.minX)) / 2;
+            poiBounds.minX -= x;
+            poiBounds.maxX += x;
+        }
         POI.POIS.forEach(poi => poi.drawPOI(scale, poiBounds));
     }
     
