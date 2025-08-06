@@ -72,6 +72,11 @@ $(document).ready(function(){
             this.listElement.find('.obj-x').on('change', this.updateValues.bind(this));
             this.listElement.find('.obj-z').on('input', this.updateValues.bind(this));
             this.listElement.find('.obj-z').on('change', this.updateValues.bind(this));
+            this.listElement.find('.remove-obj').on('click', () => {
+                this.listElement.remove();
+                POI.POIS = POI.POIS.filter(p => p !== this);
+                updatePOIMap();
+            });
             this.setBanner(banner);
             $('.poi-list').append(this.listElement);
             this.listElement.show();
@@ -125,7 +130,6 @@ $(document).ready(function(){
 
     
     function updatePOIMap() {
-        poiCtx.clearRect(0, 0, poiCanvas.width, poiCanvas.height);
         let poiBounds = {
             minX: Infinity,
             maxX: -Infinity,
@@ -159,8 +163,14 @@ $(document).ready(function(){
             poiBounds.minX -= x;
             poiBounds.maxX += x;
         }
+        poiCtx.clearRect(0, 0, poiCanvas.width, poiCanvas.height);
         POI.POIS.forEach(poi => poi.drawPOI(scale, poiBounds));
     }
+
+    $('#addObjectButton').on('click', function() {
+        new POI('', 0, 0, 'white_banner');
+        updatePOIMap();
+    });
     
     new POI('Start', 64, 64, 'green_banner');
     new POI('End', 32, 96, 'red_banner');
