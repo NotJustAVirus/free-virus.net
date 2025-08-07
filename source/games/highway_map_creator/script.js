@@ -27,6 +27,19 @@ $(document).ready(function(){
         "yellow_banner"
     ];
 
+    const bannerSelector = $('#bannerSelector');
+    banners.forEach(banner => {
+        const img = $('<img>', {
+            src: `images/banners/${banner}.png`,
+            alt: banner,
+        });
+        const button = $('<button>', {
+            class: 'banner-icon',
+        }).append(img);
+        bannerSelector.append(button);
+    });
+    bannerSelector.hide();
+
     // draw checkered background on main canvas
     function drawCheckeredBackground() {
         const size = 1; // size of each square
@@ -77,6 +90,15 @@ $(document).ready(function(){
                 POI.POIS = POI.POIS.filter(p => p !== this);
                 updatePOIMap();
             });
+            this.listElement.find('.banner-icon').on('click', () => {
+                bannerSelector.show();
+                bannerSelector.off('click').on('click', 'button', (e) => {
+                    const selectedBanner = $(e.currentTarget).find('img').attr('alt');
+                    bannerSelector.hide();
+                    this.setBanner(selectedBanner);
+                    updatePOIMap();
+                });
+            });
             this.setBanner(banner);
             $('.poi-list').append(this.listElement);
             this.listElement.show();
@@ -104,6 +126,7 @@ $(document).ready(function(){
         setBanner(banner) {
             this.banner = banner;
             this.listElement.find('.banner-icon img').attr('src', `images/banners/${banner}.png`);
+            this.listElement.find('.banner-icon img').attr('alt', banner);
         }
 
         drawPOI(scale, bounds) {

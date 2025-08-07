@@ -86,3 +86,26 @@ canvas {
     color: red;
     cursor: pointer;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bannerSelector {
+    pointer-events: all;
+    background-color: blueviolet;
+    display: flex;
+    flex-wrap: wrap;
+    width: 247px;
+    gap: 10px;
+    padding: 10px;
+}
