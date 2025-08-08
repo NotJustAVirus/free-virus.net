@@ -14,6 +14,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
+    volumes:
+      - database-data:/var/lib/mysql
   phpmyadmin:
     container_name: free-virus-myadmin
     restart: unless-stopped
@@ -22,3 +24,7 @@ services:
       - '9165:80'
     environment:
       PMA_HOST: db
+
+volumes:
+  database-data:
+    name: free-virus-db
