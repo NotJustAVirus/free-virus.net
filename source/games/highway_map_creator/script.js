@@ -40,6 +40,8 @@ $(document).ready(function(){
     });
     bannerSelector.hide();
 
+    $('.poi-list').sortable({});
+
     // draw checkered background on main canvas
     function drawCheckeredBackground() {
         const size = 1; // size of each square
