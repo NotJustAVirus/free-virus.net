@@ -42,6 +42,14 @@ $(document).ready(function(){
 
     $('.poi-list').sortable({});
 
+    $('#editMode').on('change', function() {
+        let val = $(this).val();
+        $('.toolSection').hide();
+        $(`.${val}`).show();
+    });
+
+    $('#editMode').trigger('change');
+
     // draw checkered background on main canvas
     function drawCheckeredBackground() {
         const size = 1; // size of each square
