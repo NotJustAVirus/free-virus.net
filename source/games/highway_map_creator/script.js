@@ -50,6 +50,47 @@ $(document).ready(function(){
 
     $('#editMode').trigger('change');
 
+    $('#poiCanvas').on('mousemove', function(event) {
+        let x = event.offsetX;
+        let z = event.offsetY;
+        let foundPOI = null;
+        for (let poi of POI.POIS) {
+            if (poi.xOnMap + 16 > x && poi.xOnMap < x + 16
+                && poi.zOnMap < z + 16 && poi.zOnMap + 16 > z) {
+                foundPOI = poi;
+            }
+        }
+        if (foundPOI) {
+            $(this).css('cursor', 'pointer');
+        } else {
+            $(this).css('cursor', 'default');
+        }
+    });
+
+    $('#poiCanvas').on('click', function(event) {
+        let x = event.offsetX;
+        let z = event.offsetY;
+
+        let foundPOI = null;
+        let distance = Infinity;
+        for (let poi of POI.POIS) {
+            if (poi.xOnMap + 16 > x && poi.xOnMap < x + 16
+                && poi.zOnMap < z + 16 && poi.zOnMap + 16 > z) {
+                let dx = poi.xOnMap - x;
+                let dz = poi.zOnMap - z;
+                let dist = Math.sqrt(dx * dx + dz * dz);
+                if (dist < distance) {
+                    distance = dist;
+                    foundPOI = poi;
+                }
+            }
+        }
+        if (foundPOI) {
+            console.log(`Found POI: ${foundPOI.name}`);
+            // TODO: Implement POI selection
+        }
+    });
+
     // draw checkered background on main canvas
     function drawCheckeredBackground() {
         const size = 1; // size of each square
@@ -145,7 +186,9 @@ $(document).ready(function(){
             img.onload = () => {
                 poiCtx.imageSmoothingEnabled = false;
                 poiCtx.save();
-                poiCtx.translate((this.x - bounds.minX) * 4 * scale, (this.z - bounds.minZ) * 4 * scale);
+                this.xOnMap = (this.x - bounds.minX) * 4 * scale;
+                this.zOnMap = (this.z - bounds.minZ) * 4 * scale;
+                poiCtx.translate(this.xOnMap, this.zOnMap);
                 poiCtx.drawImage(img, -16, -16, 32, 32);
                 if (this.name && this.name.length > 0) {
                     poiCtx.fillStyle = '#444444aa';
