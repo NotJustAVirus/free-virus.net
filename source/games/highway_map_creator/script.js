@@ -87,7 +87,7 @@ $(document).ready(function(){
         }
         if (foundPOI) {
             console.log(`Found POI: ${foundPOI.name}`);
-            // TODO: Implement POI selection
+            ToolController.clickPOI(foundPOI);
         }
     });
 
@@ -189,6 +189,13 @@ $(document).ready(function(){
                 this.xOnMap = (this.x - bounds.minX) * 4 * scale;
                 this.zOnMap = (this.z - bounds.minZ) * 4 * scale;
                 poiCtx.translate(this.xOnMap, this.zOnMap);
+                if (this.selected) {
+                    poiCtx.save();
+                    poiCtx.scale(1.2, 1.2);
+                    poiCtx.filter = 'invert(100%)';
+                    poiCtx.drawImage(img, -16, -16, 32, 32);
+                    poiCtx.restore();
+                }
                 poiCtx.drawImage(img, -16, -16, 32, 32);
                 if (this.name && this.name.length > 0) {
                     poiCtx.fillStyle = '#444444aa';
@@ -252,5 +259,48 @@ $(document).ready(function(){
     new POI('End', 32, 96, 'red_banner');
     new POI('Checkpoint', 96, 64, 'blue_banner');
     updatePOIMap();
+
+
+    class ToolController {
+        static currentTool = "auto";
+        static selectedPOI = null;
+
+        static clickPOI(poi) {
+            if (this.currentTool === "auto") {
+                if (!this.selectedPOI) {
+                    this.selectedPOI = poi;
+                    poi.selected = true;
+                    updatePOIMap();
+                } else {
+                    if (this.selectedPOI !== poi) {
+                        // draw line between this.selectedPOI and poi
+                        let direction = "bottomLeft"; // TODO: get from toolbar
+                        let x1 = this.selectedPOI.xOnMap / 4;
+                        let z1 = this.selectedPOI.zOnMap / 4;
+                        let x2 = poi.xOnMap / 4;
+                        let z2 = poi.zOnMap / 4;
+                        let lineColor = "blue"; // TODO: get from toolbar
+                        mainCtx.strokeStyle = lineColor;
+                        mainCtx.lineWidth = 1;
+                        mainCtx.beginPath();
+                        mainCtx.moveTo(x1, z1);
+                        mainCtx.lineTo(x1, z2);
+                        mainCtx.lineTo(x2, z2);
+                        mainCtx.stroke();
+                        console.log(`Drawn line from ${this.selectedPOI.name} to ${poi.name}`);
+                        console.log(x1, z1, x2, z2);
+                    }
+                    // Deselect the currently selected POI
+                    this.selectedPOI.selected = false;
+                    this.selectedPOI = null;
+                    poi.selected = false;
+                    updatePOIMap();
+                    return;
+                }
+            } else if (this.currentTool === "select") {
+                // Select tool behavior
+            }
+        }
+    }
 });
 
