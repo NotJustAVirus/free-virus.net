@@ -50,6 +50,11 @@ $(document).ready(function(){
 
     $('#editMode').trigger('change');
 
+    $('.dirButton').on('click', function() {
+        $('.dirButton').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
     $('#poiCanvas').on('mousemove', function(event) {
         let x = event.offsetX;
         let z = event.offsetY;
@@ -273,18 +278,21 @@ $(document).ready(function(){
                     updatePOIMap();
                 } else {
                     if (this.selectedPOI !== poi) {
-                        // draw line between this.selectedPOI and poi
-                        let direction = "bottomLeft"; // TODO: get from toolbar
+                        let direction = $('.dirButton.selected').attr('id');
                         let x1 = this.selectedPOI.xOnMap / 4;
                         let z1 = this.selectedPOI.zOnMap / 4;
                         let x2 = poi.xOnMap / 4;
                         let z2 = poi.zOnMap / 4;
-                        let lineColor = "blue"; // TODO: get from toolbar
+                        let lineColor = $('#colorPicker').val();
                         mainCtx.strokeStyle = lineColor;
                         mainCtx.lineWidth = 1;
                         mainCtx.beginPath();
                         mainCtx.moveTo(x1, z1);
-                        mainCtx.lineTo(x1, z2);
+                        if (direction === "horizontal") {
+                            mainCtx.lineTo(x2, z1);
+                        } else {
+                            mainCtx.lineTo(x1, z2);
+                        }
                         mainCtx.lineTo(x2, z2);
                         mainCtx.stroke();
                         console.log(`Drawn line from ${this.selectedPOI.name} to ${poi.name}`);

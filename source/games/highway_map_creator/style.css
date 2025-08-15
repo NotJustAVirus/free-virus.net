@@ -31,6 +31,10 @@
     gap: 5px;
 }
 
+.dirButton.selected {
+    background: darkred;
+}
+
 img,
 canvas {
     image-rendering: pixelated;
