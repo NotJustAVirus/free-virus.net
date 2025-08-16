@@ -7,6 +7,7 @@ $(document).ready(function(){
     const poiCanvas = document.getElementById('poiCanvas');
     const poiCtx = poiCanvas.getContext('2d');
     const poiList = document.getElementById('objectList').querySelector('.poi-list');
+    poiCtx.imageSmoothingEnabled = false;
 
     const banners = [
         "black_banner",
@@ -188,11 +189,10 @@ $(document).ready(function(){
         drawPOI(scale, bounds) {
             let img = new Image();
             img.src = `images/banners/${this.banner}.png`;
+            this.xOnMap = (this.x - bounds.minX) * 4 * scale;
+            this.zOnMap = (this.z - bounds.minZ) * 4 * scale;
             img.onload = () => {
-                poiCtx.imageSmoothingEnabled = false;
                 poiCtx.save();
-                this.xOnMap = (this.x - bounds.minX) * 4 * scale;
-                this.zOnMap = (this.z - bounds.minZ) * 4 * scale;
                 poiCtx.translate(this.xOnMap, this.zOnMap);
                 if (this.selected) {
                     poiCtx.save();
@@ -213,6 +213,37 @@ $(document).ready(function(){
                 }
                 poiCtx.restore();
             };
+        }
+    }
+
+    class Path {
+        static PATHS = [];
+        
+        constructor(color, direction, startPOI, endPOI) {
+            this.color = color;
+            this.direction = direction;
+            this.startPOI = startPOI;
+            this.endPOI = endPOI;
+            Path.PATHS.push(this);
+        }
+
+        drawPath() {
+            if (!this.startPOI || !this.endPOI) return;
+            let x1 = this.startPOI.xOnMap / 4;
+            let z1 = this.startPOI.zOnMap / 4;
+            let x2 = this.endPOI.xOnMap / 4;
+            let z2 = this.endPOI.zOnMap / 4;
+            mainCtx.strokeStyle = this.color;
+            mainCtx.lineWidth = 1;
+            mainCtx.beginPath();
+            mainCtx.moveTo(x1, z1);
+            if (this.direction === "horizontal") {
+                mainCtx.lineTo(x2, z1);
+            } else {
+                mainCtx.lineTo(x1, z2);
+            }
+            mainCtx.lineTo(x2, z2);
+            mainCtx.stroke();
         }
     }
 
@@ -253,6 +284,9 @@ $(document).ready(function(){
         }
         poiCtx.clearRect(0, 0, poiCanvas.width, poiCanvas.height);
         POI.POIS.forEach(poi => poi.drawPOI(scale, poiBounds));
+        mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+        drawCheckeredBackground();
+        Path.PATHS.forEach(path => path.drawPath());
     }
 
     $('#addObjectButton').on('click', function() {
@@ -279,24 +313,8 @@ $(document).ready(function(){
                 } else {
                     if (this.selectedPOI !== poi) {
                         let direction = $('.dirButton.selected').attr('id');
-                        let x1 = this.selectedPOI.xOnMap / 4;
-                        let z1 = this.selectedPOI.zOnMap / 4;
-                        let x2 = poi.xOnMap / 4;
-                        let z2 = poi.zOnMap / 4;
                         let lineColor = $('#colorPicker').val();
-                        mainCtx.strokeStyle = lineColor;
-                        mainCtx.lineWidth = 1;
-                        mainCtx.beginPath();
-                        mainCtx.moveTo(x1, z1);
-                        if (direction === "horizontal") {
-                            mainCtx.lineTo(x2, z1);
-                        } else {
-                            mainCtx.lineTo(x1, z2);
-                        }
-                        mainCtx.lineTo(x2, z2);
-                        mainCtx.stroke();
-                        console.log(`Drawn line from ${this.selectedPOI.name} to ${poi.name}`);
-                        console.log(x1, z1, x2, z2);
+                        new Path(lineColor, direction, this.selectedPOI, poi);
                     }
                     // Deselect the currently selected POI
                     this.selectedPOI.selected = false;
@@ -311,4 +329,3 @@ $(document).ready(function(){
         }
     }
 });
-
