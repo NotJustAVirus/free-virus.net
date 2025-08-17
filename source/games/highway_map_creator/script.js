@@ -42,6 +42,7 @@ $(document).ready(function(){
     bannerSelector.hide();
 
     $('.poi-list').sortable({});
+    $('.path-list').sortable({});
 
     $('#editMode').on('change', function() {
         let val = $(this).val();
@@ -119,11 +120,14 @@ $(document).ready(function(){
 
     drawMap();
 
-    const poiListElement = $('.list-obj.dummy');
+    const poiListElement = $('.list-obj.poi-element.dummy');
     poiListElement.removeClass('dummy');
     poiListElement.hide();
 
-    
+    const pathListElement = $('.list-obj.path-element.dummy');
+    pathListElement.removeClass('dummy');
+    pathListElement.hide();
+
     class POI {
         static POIS = [];
 
@@ -224,7 +228,35 @@ $(document).ready(function(){
             this.direction = direction;
             this.startPOI = startPOI;
             this.endPOI = endPOI;
+            this.listElement = pathListElement.clone();
+            this.listElement.find('.path-color').val(color);
+            this.listElement.find('.startPOI').val(startPOI.name);
+            this.listElement.find('.endPOI').val(endPOI.name);
+            this.listElement.find('.path-color').on('input', () => {
+                this.color = this.listElement.find('.path-color').val();
+                updatePOIMap();
+            });
+            this.listElement.find('.direction-icon').on('click', () => {
+                this.setDirection(this.direction === "horizontal" ? "vertical" : "horizontal");
+            });
+            this.listElement.find('.remove-obj').on('click', () => {
+                this.listElement.remove();
+                Path.PATHS.splice(Path.PATHS.indexOf(this), 1);
+                updatePOIMap();
+            });
+            $('.path-list').append(this.listElement);
+            this.listElement.show();
             Path.PATHS.push(this);
+        }
+
+        setDirection(direction) {
+            this.direction = direction
+            if (direction == "horizontal") {
+                this.listElement.find('.direction-icon').text('−');
+            } else {
+                this.listElement.find('.direction-icon').text('│');
+            }
+            updatePOIMap();
         }
 
         drawPath() {

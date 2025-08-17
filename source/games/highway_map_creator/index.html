@@ -35,7 +35,7 @@
             <button id="addObjectButton">Add Object</button>
         </div>
         <div class="poi-list">
-            <div class="list-obj dummy">
+            <div class="list-obj poi-element dummy">
                 <div class="drag-icon">
                     <img src="images/drag_handle.png" alt="Drag">
                 </div>
@@ -50,6 +50,24 @@
                 <button class="remove-obj">Remove</button>
             </div>
             <!-- Object list will be populated here -->
+        </div>
+        <div class="list-header">
+            <h2>Paths</h2>
+        </div>
+        <div class="path-list">
+            <div class="list-obj path-element dummy">
+                <div class="drag-icon">
+                    <img src="images/drag_handle.png" alt="Drag">
+                </div>
+                <input type="color" name="pathColor" class="path-color">
+                <button class="direction-icon">-</button>
+                <label for="startPOI">Start POI:</label>
+                <select class="startPOI"></select>
+                <label for="endPOI">End POI:</label>
+                <select class="endPOI"></select>
+                <button class="remove-obj">Remove</button>
+            </div>
+            <!-- Path list will be populated here -->
         </div>
     </div>
 </div>
