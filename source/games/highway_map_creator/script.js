@@ -62,8 +62,8 @@ $(document).ready(function(){
         let z = event.offsetY;
         let foundPOI = null;
         for (let poi of POI.POIS) {
-            if (poi.xOnMap + 16 > x && poi.xOnMap < x + 16
-                && poi.zOnMap < z + 16 && poi.zOnMap + 16 > z) {
+            if (poi.visualX + 16 > x && poi.visualX < x + 16
+                && poi.visualZ < z + 16 && poi.visualZ + 16 > z) {
                 foundPOI = poi;
             }
         }
@@ -81,10 +81,10 @@ $(document).ready(function(){
         let foundPOI = null;
         let distance = Infinity;
         for (let poi of POI.POIS) {
-            if (poi.xOnMap + 16 > x && poi.xOnMap < x + 16
-                && poi.zOnMap < z + 16 && poi.zOnMap + 16 > z) {
-                let dx = poi.xOnMap - x;
-                let dz = poi.zOnMap - z;
+            if (poi.visualX + 16 > x && poi.visualX < x + 16
+                && poi.visualZ < z + 16 && poi.visualZ + 16 > z) {
+                let dx = poi.visualX - x;
+                let dz = poi.visualZ - z;
                 let dist = Math.sqrt(dx * dx + dz * dz);
                 if (dist < distance) {
                     distance = dist;
@@ -193,11 +193,13 @@ $(document).ready(function(){
         drawPOI(scale, bounds) {
             let img = new Image();
             img.src = `images/banners/${this.banner}.png`;
-            this.xOnMap = (this.x - bounds.minX) * 4 * scale;
-            this.zOnMap = (this.z - bounds.minZ) * 4 * scale;
+            this.xOnMap = Math.round((this.x - bounds.minX) * scale);
+            this.zOnMap = Math.round((this.z - bounds.minZ) * scale);
+            this.visualX = this.xOnMap * 4;
+            this.visualZ = this.zOnMap * 4;
             img.onload = () => {
                 poiCtx.save();
-                poiCtx.translate(this.xOnMap, this.zOnMap);
+                poiCtx.translate(this.visualX, this.visualZ);
                 if (this.selected) {
                     poiCtx.save();
                     poiCtx.scale(1.2, 1.2);
@@ -261,10 +263,10 @@ $(document).ready(function(){
 
         drawPath() {
             if (!this.startPOI || !this.endPOI) return;
-            let x1 = this.startPOI.xOnMap / 4;
-            let z1 = this.startPOI.zOnMap / 4;
-            let x2 = this.endPOI.xOnMap / 4;
-            let z2 = this.endPOI.zOnMap / 4;
+            let x1 = this.startPOI.xOnMap + 0.5;
+            let z1 = this.startPOI.zOnMap + 0.5;
+            let x2 = this.endPOI.xOnMap + 0.5;
+            let z2 = this.endPOI.zOnMap + 0.5;
             mainCtx.strokeStyle = this.color;
             mainCtx.lineWidth = 1;
             mainCtx.beginPath();
