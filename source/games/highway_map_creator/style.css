@@ -124,6 +124,11 @@ canvas {
     text-align: center;
 }
 
+.startPOI,
+.endPOI {
+    width: 100px;
+}
+
 .remove-obj {
     background: none;
     border: none;
