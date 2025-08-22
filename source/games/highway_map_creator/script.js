@@ -7,7 +7,6 @@ $(document).ready(function(){
     const poiCanvas = document.getElementById('poiCanvas');
     const poiCtx = poiCanvas.getContext('2d');
     const poiList = document.getElementById('objectList').querySelector('.poi-list');
-    poiCtx.imageSmoothingEnabled = false;
 
     const banners = [
         "black_banner",
@@ -98,6 +97,52 @@ $(document).ready(function(){
         }
     });
 
+    $('#decreaseXSize').on('click', function() {
+        let currentSize = parseInt($('#xSize').val(), 10);
+        if (currentSize > 1) {
+            $('#xSize').val(currentSize - 1);
+            updateMapSize();
+        }
+    });
+
+    $('#increaseXSize').on('click', function() {
+        let currentSize = parseInt($('#xSize').val(), 10);
+        $('#xSize').val(currentSize + 1);
+        updateMapSize();
+    });
+
+    $('#decreaseYSize').on('click', function() {
+        let currentSize = parseInt($('#ySize').val(), 10);
+        if (currentSize > 1) {
+            $('#ySize').val(currentSize - 1);
+            updateMapSize();
+        }
+    });
+
+    $('#increaseYSize').on('click', function() {
+        let currentSize = parseInt($('#ySize').val(), 10);
+        $('#ySize').val(currentSize + 1);
+        updateMapSize();
+    });
+
+    function updateMapSize() {
+        let xSize = parseInt($('#xSize').val(), 10);
+        let ySize = parseInt($('#ySize').val(), 10);
+        backgroundCanvas.width = xSize * 58 + 6;
+        backgroundCanvas.height = ySize * 58 + 6;
+        mainCanvas.width = xSize * 128;
+        mainCanvas.height = ySize * 128;
+        poiCanvas.width = xSize * 512;
+        poiCanvas.height = ySize * 512;
+        drawMap();
+        updatePOIMap();
+        let scale = 1 / Math.max(xSize, ySize);
+        $('#poiCanvas').css('transform', `scale(${scale})`);
+        $('#mainCanvas').css('transform', `scale(${scale * 4})`);
+        let backgroundScale = (64 * Math.max(xSize, ySize)) / (58 * Math.max(xSize, ySize)) * 8 * scale;
+        $('#backgroundCanvas').css('transform', `scale(${backgroundScale})`);
+    }
+
     // draw checkered background on main canvas
     function drawCheckeredBackground() {
         const size = 1; // size of each square
@@ -114,7 +159,11 @@ $(document).ready(function(){
         const img = new Image();
         img.src = 'images/map_background.png';
         img.onload = function() {
-            backgroundCtx.drawImage(img, 0, 0, backgroundCanvas.width, backgroundCanvas.height);
+            for (let x = 0; x < backgroundCanvas.width - 6; x += 58) {
+                for (let y = 0; y < backgroundCanvas.height - 6; y += 58) {
+                    backgroundCtx.drawImage(img, x, y, img.width, img.height);
+                }
+            }
         };
     }
 
@@ -317,6 +366,7 @@ $(document).ready(function(){
             poiBounds.maxX += x;
         }
         poiCtx.clearRect(0, 0, poiCanvas.width, poiCanvas.height);
+        poiCtx.imageSmoothingEnabled = false;
         POI.POIS.forEach(poi => poi.drawPOI(scale, poiBounds));
         mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
         drawCheckeredBackground();
@@ -331,7 +381,7 @@ $(document).ready(function(){
     new POI('Start', 64, 64, 'green_banner');
     new POI('End', 32, 96, 'red_banner');
     new POI('Checkpoint', 96, 64, 'blue_banner');
-    updatePOIMap();
+    updateMapSize();
 
 
     class ToolController {

@@ -40,20 +40,60 @@ canvas {
     image-rendering: pixelated;
 }
 
+.mapBox {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+}
+
+.xSize {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.xSize input {
+    text-align: center;
+    width: 50px;
+    height: 18px;
+}
+
+.ySize {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.ySize input {
+    width: 18px;
+    height: 50px;
+    text-align: center;
+}
+
+#scaleMe {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #backgroundCanvas {
     position: absolute;
-    scale: calc(64/58 * 8);
 }
 
 #mainCanvas {
     position: absolute;
-    scale: 4;
     background-color: white;
 }
 
 #poiCanvas {
     position: absolute;
-    scale: 1;
 }
 
 @font-face {
