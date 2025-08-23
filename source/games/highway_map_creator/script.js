@@ -125,6 +125,22 @@ $(document).ready(function(){
         updateMapSize();
     });
 
+    $('#zoomIn').on('click', function() {
+        let currentZoom = parseFloat($('#zoomLevel').val());
+        currentZoom += 0.1;
+        $('#zoomLevel').val(parseFloat(currentZoom).toFixed(1));
+        $('.mapBox').css('transform', `scale(${currentZoom})`);
+    });
+
+    $('#zoomOut').on('click', function() {
+        let currentZoom = parseFloat($('#zoomLevel').val());
+        if (currentZoom > 0.1) {
+            currentZoom -= 0.1;
+            $('#zoomLevel').val(parseFloat(currentZoom).toFixed(1));
+            $('.mapBox').css('transform', `scale(${currentZoom})`);
+        }
+    });
+
     function updateMapSize() {
         let xSize = parseInt($('#xSize').val(), 10);
         let ySize = parseInt($('#ySize').val(), 10);
@@ -141,6 +157,8 @@ $(document).ready(function(){
         $('#mainCanvas').css('transform', `scale(${scale * 4})`);
         let backgroundScale = (64 * Math.max(xSize, ySize)) / (58 * Math.max(xSize, ySize)) * 8 * scale;
         $('#backgroundCanvas').css('transform', `scale(${backgroundScale})`);
+        $('.mapBox').css('width', `${xSize * 600 * scale}px`);
+        $('.mapBox').css('height', `${ySize * 600 * scale}px`);
     }
 
     // draw checkered background on main canvas
