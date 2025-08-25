@@ -161,6 +161,39 @@ $(document).ready(function(){
         $('.mapBox').css('height', `${ySize * 600 * scale}px`);
     }
 
+    $('#exportMap').on('click', function() {
+        let dataURL = exportTemplate();
+        let link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'map_template.png';
+        link.click();
+    });
+
+    function exportTemplate() {
+        let exportCanvas = document.createElement('canvas');
+        exportCanvas.width = mainCanvas.width;
+        exportCanvas.height = mainCanvas.height;
+        let exportCtx = exportCanvas.getContext('2d');
+        exportCtx.fillStyle = 'white';
+        exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+        exportCtx.drawImage(mainCanvas, 0, 0);
+        for (let x = 0; x < exportCanvas.width; x += 16) {
+            for (let y = 0; y < exportCanvas.height; y += 16) {
+                let color = (x + y) % 32 === 0 ? '#f0f0f055' : '#00000055';
+                exportCtx.fillStyle = color;
+                exportCtx.fillRect(x, y, 16, 16);
+            }
+        }
+        for (let x = 0; x < exportCanvas.width; x++) {
+            for (let y = 0; y < exportCanvas.height; y++) {
+                let color = (x + y) % 2 === 0 ? '#00000000' : '#00000044';
+                exportCtx.fillStyle = color;
+                exportCtx.fillRect(x, y, 1, 1);
+            }
+        }
+        return exportCanvas.toDataURL();
+    }
+
     // draw checkered background on main canvas
     function drawCheckeredBackground() {
         const size = 1; // size of each square
@@ -387,7 +420,7 @@ $(document).ready(function(){
         poiCtx.imageSmoothingEnabled = false;
         POI.POIS.forEach(poi => poi.drawPOI(scale, poiBounds));
         mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-        drawCheckeredBackground();
+        // drawCheckeredBackground();
         Path.PATHS.forEach(path => path.drawPath());
     }
 
