@@ -43,6 +43,37 @@ $(document).ready(function(){
     $('.poi-list').sortable({});
     $('.path-list').sortable({});
 
+    $('#load').on('click', function() {
+        let clipboardData = navigator.clipboard.readText();
+        clipboardData.then(text => {
+            let pois = JSON.parse(text);
+            if (POI.POIS.length > 0) {
+                if (!confirm("There are already loaded POIs. Do you want to replace them?")) {
+                    return;
+                }
+                POI.POIS = [];
+                $('.poi-list').empty();
+            }
+            pois.forEach(poiData => {
+                let poi = new POI(poiData.name, poiData.x, poiData.z, poiData.banner);
+            });
+            updatePOIMap();
+        });
+    });
+
+    $('#save').on('click', function() {
+        POI.POIS.sort((a, b) => {
+            let aIndex = Array.from(poiList.children).indexOf(a.listElement[0]);
+            let bIndex = Array.from(poiList.children).indexOf(b.listElement[0]);
+            return aIndex - bIndex;
+        });
+        console.log('Sorted POIs:', POI.POIS);
+        let sortedPOIs = POI.POIS.map(poi => poi.data());
+        navigator.clipboard.writeText(JSON.stringify(sortedPOIs)).then(() => {
+            console.log('Copied to clipboard');
+        });
+    });
+
     $('#editMode').on('change', function() {
         let val = $(this).val();
         $('.toolSection').hide();
@@ -264,6 +295,15 @@ $(document).ready(function(){
             $('.poi-list').append(this.listElement);
             this.listElement.show();
             POI.POIS.push(this);
+        }
+
+        data() {
+            return {
+                name: this.name,
+                x: this.x,
+                z: this.z,
+                banner: this.banner
+            };
         }
 
         updateValues() {
