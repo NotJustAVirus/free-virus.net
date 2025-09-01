@@ -7,6 +7,7 @@ $(document).ready(function(){
     const poiCanvas = document.getElementById('poiCanvas');
     const poiCtx = poiCanvas.getContext('2d');
     const poiList = document.getElementById('objectList').querySelector('.poi-list');
+    const pathList = document.getElementById('objectList').querySelector('.path-list');
 
     const banners = [
         "black_banner",
@@ -46,16 +47,25 @@ $(document).ready(function(){
     $('#load').on('click', function() {
         let clipboardData = navigator.clipboard.readText();
         clipboardData.then(text => {
-            let pois = JSON.parse(text);
-            if (POI.POIS.length > 0) {
-                if (!confirm("There are already loaded POIs. Do you want to replace them?")) {
+            let data = JSON.parse(text);
+            let pois = data.pois || [];
+            let paths = data.paths || [];
+            if (POI.POIS.length > 0 || Path.PATHS.length > 0) {
+                if (!confirm("There are already loaded POIs or Paths. Do you want to replace them?")) {
                     return;
                 }
                 POI.POIS = [];
                 $('.poi-list').empty();
+                Path.PATHS = [];
+                $('.path-list').empty();
             }
             pois.forEach(poiData => {
                 let poi = new POI(poiData.name, poiData.x, poiData.z, poiData.banner);
+            });
+            paths.forEach(pathData => {
+                let startPOI = POI.POIS.find(p => p.name === pathData.start);
+                let endPOI = POI.POIS.find(p => p.name === pathData.end);
+                let path = new Path(pathData.color, pathData.direction, startPOI, endPOI);
             });
             updatePOIMap();
         });
@@ -69,7 +79,17 @@ $(document).ready(function(){
         });
         console.log('Sorted POIs:', POI.POIS);
         let sortedPOIs = POI.POIS.map(poi => poi.data());
-        navigator.clipboard.writeText(JSON.stringify(sortedPOIs)).then(() => {
+        Path.PATHS.sort((a, b) => {
+            let aIndex = Array.from(pathList.children).indexOf(a.listElement[0]);
+            let bIndex = Array.from(pathList.children).indexOf(b.listElement[0]);
+            return aIndex - bIndex;
+        });
+        let sortedPaths = Path.PATHS.map(path => path.data());
+        let data = {
+            pois: sortedPOIs,
+            paths: sortedPaths
+        };
+        navigator.clipboard.writeText(JSON.stringify(data)).then(() => {
             console.log('Copied to clipboard');
         });
     });
@@ -389,6 +409,15 @@ $(document).ready(function(){
             $('.path-list').append(this.listElement);
             this.listElement.show();
             Path.PATHS.push(this);
+        }
+
+        data() {
+            return {
+                color: this.color,
+                direction: this.direction,
+                start: this.startPOI ? this.startPOI.name : null,
+                end: this.endPOI ? this.endPOI.name : null
+            };
         }
 
         setDirection(direction) {
