@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Jun 10, 2025 at 08:09 PM
--- Server version: 9.3.0
+-- Generation Time: Jun 02, 2026 at 07:46 PM
+-- Server version: 9.1.0
 -- PHP Version: 8.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -83,7 +83,84 @@ INSERT INTO `casino_user` (`id`, `money`) VALUES
 (44, 100),
 (45, -800),
 (46, 500),
-(47, 400);
+(47, 400),
+(48, 500),
+(49, 500),
+(50, 500),
+(51, 500),
+(52, 500),
+(53, -4100),
+(54, -1200),
+(55, -2900),
+(56, -16550),
+(57, 50),
+(58, 400),
+(59, 300),
+(60, 500),
+(61, 400),
+(62, 500),
+(63, 1550),
+(64, 500),
+(65, 1300),
+(66, 0),
+(67, 150),
+(68, 500),
+(69, 600),
+(70, 800),
+(71, 300),
+(72, 700),
+(73, -600),
+(74, 250),
+(75, -700),
+(76, -950),
+(77, 450),
+(78, 1500),
+(79, -350),
+(80, 450),
+(81, 100),
+(82, 1650),
+(83, 450),
+(84, 0),
+(85, 500),
+(86, 300),
+(87, 350),
+(88, 550),
+(89, 6450),
+(90, 1300),
+(91, -600),
+(92, 450),
+(93, 600),
+(94, 450),
+(95, -100),
+(96, 500),
+(97, 700),
+(98, -550),
+(99, 2300),
+(100, 1600),
+(101, 1150),
+(102, 150),
+(103, 500),
+(104, 500),
+(105, -50),
+(106, -1150),
+(107, 400),
+(108, -150),
+(109, -1200),
+(110, 650);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int NOT NULL,
+  `content` text NOT NULL,
+  `contact_method` enum('email','phone','discord','other','none') NOT NULL DEFAULT 'none',
+  `contact_method_value` varchar(255),
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -195,6 +272,12 @@ ALTER TABLE `casino_user`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `games`
 --
 ALTER TABLE `games`
@@ -230,7 +313,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `casino_user`
 --
 ALTER TABLE `casino_user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `games`
